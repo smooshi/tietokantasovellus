@@ -1,10 +1,6 @@
 WTF_CSRF_ENABLED = True
 SECRET_KEY = 'life-is-a-mystery'
 
-OPENID_PROVIDERS = [
-    {'name': 'Google', 'url': 'https://www.google.com/accounts/o8/id'}
-]
-
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
