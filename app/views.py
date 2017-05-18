@@ -6,13 +6,13 @@ from flask_login import login_user, logout_user, current_user, login_required
 #models
 from .models import User
 
-@app.route('/')
 @app.route('/index')
 @login_required
 def index():
 	user = g.user
 	return render_template('index.html', title='index', user=user)
 
+@app.route('/')
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 	if g.user is not None and g.user.is_authenticated:
