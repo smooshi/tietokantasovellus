@@ -19,7 +19,7 @@
                           <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ user.name }}<span class="caret"></span></a>
                               <ul class="dropdown-menu">
-                              <li><a href="#">Profile</a></li>
+                              <li><a href="{{ url_for('user', id=g.user.id) }}">Profile</a></li>
                               <li><a href="#">Settings</a></li>
                               <li><a href="#">Groups</a></li>
                             </ul>
@@ -37,7 +37,6 @@
 
         </div>
     </nav>
-    <hr>
     {% with messages = get_flashed_messages() %}
     {% if messages %}
         <ul>

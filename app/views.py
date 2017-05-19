@@ -102,3 +102,22 @@ def create():
 			flash("Account succefully created!")
 			return redirect(url_for('index'))
 	return render_template('create.html', form=form)
+
+@app.route('/user/<id>')
+def user(id):
+	user = User.query.filter_by(id=id).first()
+	if user == None or user.id != g.user.id:
+		flash('User not found. %s %s' %(id, g.user.id))
+		return redirect(url_for('index'))
+	return render_template('profile.html', user=user)
+
+@app.route('/user/edit/<id>')
+def user_edit(id):
+	user = User.query.filter_by(id=id).first()
+	if user == None or user.id != g.user.id:
+		flash('User not found. %s %s' %(id, g.user.id))
+		return redirect(url_for('index'))
+	form = CreateForm()
+	if form.validate_on_submit():
+		user = User(name=form.username.data, email=form.email.data, password=form.password.data)
+	return render_template('user_edit.html', user=user, form=form)
