@@ -1,5 +1,6 @@
-from flask import Flask, logging
+from flask import Flask
 import sys
+import logging
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
