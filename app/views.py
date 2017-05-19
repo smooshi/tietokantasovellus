@@ -16,7 +16,7 @@ def main():
 @app.route('/')
 @app.route('/index')
 def index():
-	if current_user.is_authenticated:
+	if current_user.is_authenticated and session['logged_in']:
 		return redirect(url_for('main'))
 	#if g.user is not None and g.user.is_authenticated:
 	#	return redirect(url_for('main'))
@@ -24,7 +24,7 @@ def index():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-	if current_user.is_authenticated:
+	if current_user.is_authenticated and session['logged_in']:
 		return redirect(url_for('main'))
 	#if g.user is not None and g.user.is_authenticated:
 	#	return redirect(url_for('main'))
