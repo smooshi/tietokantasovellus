@@ -34,7 +34,7 @@ def login():
 	#	return redirect(url_for('main'))
 	form = LoginForm()
 	if form.validate_on_submit():
-		session['remember_me'] = form.remember_me.data
+		#session['remember_me'] = form.remember_me.data
 		return try_login(form.username.data, form.password.data)
 	return render_template('login.html', form=form)
 
@@ -48,10 +48,10 @@ def try_login(username, password):
 		return redirect(url_for('login'))
 	else:
 		if (user.check_password(password)):
-			if 'remember_me' in session:
-				remember_me = session['remember_me']
-				session.pop('remember_me', None)
-				login_user(user, remember = remember_me)
+			#if 'remember_me' in session:
+			#	remember_me = session['remember_me']
+			#	session.pop('remember_me', None)
+			login_user(user)
 			return redirect(request.args.get('next') or url_for('main'))
 		else:
 			flash('Password is wrong. Please try again.')
