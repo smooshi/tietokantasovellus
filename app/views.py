@@ -6,8 +6,6 @@ from flask_login import login_user, logout_user, current_user, login_required
 #models
 from .models import User
 
-
-
 @app.route('/')
 @app.route('/index')
 @login_required
