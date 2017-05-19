@@ -6,12 +6,16 @@ from flask_login import login_user, logout_user, current_user, login_required
 #models
 from .models import User
 
+#@app.before_request
+#def before_request():
+#	g.user = current_user
+
 @app.route('/main')
 @login_required
 def main():
 	test = current_user
-	user = g.user
-	return render_template('main.html', title='MainPage', user=user, test=test)
+	#user = g.user
+	return render_template('main.html', title='MainPage', user=test, test=test)
 
 @app.route('/')
 @app.route('/index')
@@ -24,8 +28,8 @@ def index():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-	if current_user.is_authenticated and session['logged_in']:
-		return redirect(url_for('main'))
+	#if current_user.is_authenticated and session['logged_in']:
+	#	return redirect(url_for('main'))
 	#if g.user is not None and g.user.is_authenticated:
 	#	return redirect(url_for('main'))
 	form = LoginForm()
@@ -54,10 +58,6 @@ def try_login(username, password):
 			return redirect(url_for('login'))
 	#return render_template('login.html', form=form)
 
-@app.before_request
-def before_request():
-	g.user = current_user
-
 @lm.user_loader
 def load_user(id):
 	return User.query.get(int(id))
@@ -69,8 +69,8 @@ def logout():
 
 @app.route('/create', methods=['GET', 'POST'])
 def create():
-	if current_user.is_authenticated:
-		return redirect(url_for('main'))
+	#if current_user.is_authenticated:
+	#	return redirect(url_for('main'))
 	#if g.user is not None and g.user.is_authenticated:
 	#	return redirect(url_for('main'))
 	form = CreateForm()
