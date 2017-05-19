@@ -5,10 +5,15 @@
     <title>{{ title }}</title>
 </head>
 <body>
+
 {% extends "base.html" %}
 {% block content %}
-<h1>Index page</h1>
-    <h1>Terve {{ user.name }}</h1>
+    <h1>Index page</h1>
+    {% if g.user.is_authenticated %}
+        <h1>Terve {{ user.name }}</h1>
+    {% else %}
+        Please login to view: <a href="{{ url_for('login') }}">Login</a>
+    {% endif %}
 {% endblock %}
 </body>
 </html>
