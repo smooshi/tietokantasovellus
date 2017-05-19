@@ -20,16 +20,16 @@ def main():
 @app.route('/')
 @app.route('/index')
 def index():
-	#if current_user.is_authenticated and session['logged_in']:
-	#	return redirect(url_for('main'))
+	if current_user.is_authenticated and session['logged_in']:
+		return redirect(url_for('main'))
 	#if g.user is not None and g.user.is_authenticated:
 	#	return redirect(url_for('main'))
 	return render_template('index.html', title='index')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-	#if current_user.is_authenticated and session['logged_in']:
-	#	return redirect(url_for('main'))
+	if current_user.is_authenticated and session['logged_in']:
+		return redirect(url_for('main'))
 	#if g.user is not None and g.user.is_authenticated:
 	#	return redirect(url_for('main'))
 	form = LoginForm()
@@ -51,12 +51,14 @@ def try_login(username, password):
 			#if 'remember_me' in session:
 			#	remember_me = session['remember_me']
 			#	session.pop('remember_me', None)
+			user.authenticated = True
+			db.session.add(user)
+			db.session.commit()
 			login_user(user)
 			return redirect(request.args.get('next') or url_for('main'))
 		else:
 			flash('Password is wrong. Please try again.')
 			return redirect(url_for('login'))
-	#return render_template('login.html', form=form)
 
 @lm.user_loader
 def load_user(id):
@@ -64,13 +66,17 @@ def load_user(id):
 
 @app.route('/logout')
 def logout():
+	user = current_user
+	user.authenticated = False
+	db.session.add(user)
+	db.session.commit()
 	logout_user()
 	return redirect(url_for('index'))
 
 @app.route('/create', methods=['GET', 'POST'])
 def create():
-	#if current_user.is_authenticated:
-	#	return redirect(url_for('main'))
+	if current_user.is_authenticated:
+		return redirect(url_for('main'))
 	#if g.user is not None and g.user.is_authenticated:
 	#	return redirect(url_for('main'))
 	form = CreateForm()

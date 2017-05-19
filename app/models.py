@@ -7,6 +7,7 @@ class User(db.Model):
     email = db.Column(db.String(120), index=True, unique=True)
     #password = db.Column(db.String(120))
     salt = db.Column(db.String)
+    authenticated = db.Column(db.Boolean, default=False)
 
     def __init__(self, name, email, password):
         self.name = name
@@ -21,7 +22,7 @@ class User(db.Model):
 
     @property
     def is_authenticated(self):
-        return True
+        return self.authenticated
 
     @property
     def is_active(self):
