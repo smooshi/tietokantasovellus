@@ -21,8 +21,8 @@ def index():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-	if g.user is not None and g.user.is_authenticated:
-		return redirect(url_for('main'))
+	#if g.user is not None and g.user.is_authenticated:
+	#	return redirect(url_for('main'))
 	form = LoginForm()
 	if form.validate_on_submit():
 		session['remember_me'] = form.remember_me.data
@@ -64,8 +64,8 @@ def logout():
 
 @app.route('/create', methods=['GET', 'POST'])
 def create():
-	if g.user is not None and g.user.is_authenticated:
-		return redirect(url_for('main'))
+	#if g.user is not None and g.user.is_authenticated:
+	#	return redirect(url_for('main'))
 	form = CreateForm()
 	if form.validate_on_submit():
 		username = form.username.data
