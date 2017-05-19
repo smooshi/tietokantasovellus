@@ -6,17 +6,23 @@ from flask_login import login_user, logout_user, current_user, login_required
 #models
 from .models import User
 
+@app.route('/main')
+@login_required
+def main():
+	user = g.user
+	return render_template('main.html', title='MainPage', user=user)
+
 @app.route('/')
 @app.route('/index')
-@login_required
 def index():
-	user = g.user
-	return render_template('index.html', title='index', user=user)
+	if g.user is not None and g.user.is_authenticated:
+		return redirect(url_for('main'))
+	return render_template('index.html', title='index')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 	if g.user is not None and g.user.is_authenticated:
-		return redirect(url_for('index'))
+		return redirect(url_for('main'))
 	form = LoginForm()
 	if form.validate_on_submit():
 		session['remember_me'] = form.remember_me.data
@@ -37,7 +43,7 @@ def try_login(username, password):
 				remember_me = session['remember_me']
 				session.pop('remember_me', None)
 				login_user(user, remember = remember_me)
-			return redirect(request.args.get('next') or url_for('index'))
+			return redirect(request.args.get('next') or url_for('main'))
 		else:
 			flash('Password is wrong. Please try again.')
 			return redirect(url_for('login'))
@@ -59,7 +65,7 @@ def logout():
 @app.route('/create', methods=['GET', 'POST'])
 def create():
 	if g.user is not None and g.user.is_authenticated:
-		return redirect(url_for('index'))
+		return redirect(url_for('main'))
 	form = CreateForm()
 	if form.validate_on_submit():
 		username = form.username.data
