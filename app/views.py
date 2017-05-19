@@ -9,18 +9,23 @@ from .models import User
 @app.route('/main')
 @login_required
 def main():
+	test = current_user
 	user = g.user
-	return render_template('main.html', title='MainPage', user=user)
+	return render_template('main.html', title='MainPage', user=user, test=test)
 
 @app.route('/')
 @app.route('/index')
 def index():
+	if current_user.is_authenticated:
+		return redirect(url_for('main'))
 	#if g.user is not None and g.user.is_authenticated:
 	#	return redirect(url_for('main'))
 	return render_template('index.html', title='index')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+	if current_user.is_authenticated:
+		return redirect(url_for('main'))
 	#if g.user is not None and g.user.is_authenticated:
 	#	return redirect(url_for('main'))
 	form = LoginForm()
@@ -64,6 +69,8 @@ def logout():
 
 @app.route('/create', methods=['GET', 'POST'])
 def create():
+	if current_user.is_authenticated:
+		return redirect(url_for('main'))
 	#if g.user is not None and g.user.is_authenticated:
 	#	return redirect(url_for('main'))
 	form = CreateForm()
