@@ -1,9 +1,12 @@
-from flask import Flask
+from flask import Flask, logging
+import sys
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config.from_object('config')
 db = SQLAlchemy(app)
+app.logger.addHandler(logging.StreamHandler(sys.stdout))
+app.logger.setLevel(logging.ERROR)
 
 from flask.ext.login import LoginManager
 lm = LoginManager()

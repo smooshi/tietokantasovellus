@@ -20,16 +20,16 @@ def main():
 @app.route('/')
 @app.route('/index')
 def index():
-	if current_user.is_authenticated and session['logged_in']:
-		return redirect(url_for('main'))
+	#if current_user.is_authenticated and session['logged_in']:
+	#	return redirect(url_for('main'))
 	#if g.user is not None and g.user.is_authenticated:
 	#	return redirect(url_for('main'))
 	return render_template('index.html', title='index')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-	if current_user.is_authenticated and session['logged_in']:
-		return redirect(url_for('main'))
+	#if current_user.is_authenticated and session['logged_in']:
+	#	return redirect(url_for('main'))
 	#if g.user is not None and g.user.is_authenticated:
 	#	return redirect(url_for('main'))
 	form = LoginForm()
@@ -75,8 +75,8 @@ def logout():
 
 @app.route('/create', methods=['GET', 'POST'])
 def create():
-	if current_user.is_authenticated:
-		return redirect(url_for('main'))
+	#if current_user.is_authenticated:
+	#	return redirect(url_for('main'))
 	#if g.user is not None and g.user.is_authenticated:
 	#	return redirect(url_for('main'))
 	form = CreateForm()

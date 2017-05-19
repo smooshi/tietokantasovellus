@@ -13,6 +13,7 @@ class User(db.Model):
         self.name = name
         self.email = email
         self.set_password(password)
+        self.authenticated = False
 
     def set_password(self, password):
         self.salt = generate_password_hash(password)
