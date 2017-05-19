@@ -15,8 +15,8 @@ def main():
 @app.route('/')
 @app.route('/index')
 def index():
-	if g.user is not None and g.user.is_authenticated:
-		return redirect(url_for('main'))
+	#if g.user is not None and g.user.is_authenticated:
+	#	return redirect(url_for('main'))
 	return render_template('index.html', title='index')
 
 @app.route('/login', methods=['GET', 'POST'])
