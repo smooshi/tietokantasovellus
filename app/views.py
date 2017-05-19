@@ -6,32 +6,32 @@ from flask_login import login_user, logout_user, current_user, login_required
 #models
 from .models import User
 
-#@app.before_request
-#def before_request():
-#	g.user = current_user
+@app.before_request
+def before_request():
+	g.user = current_user
 
 @app.route('/main')
 @login_required
 def main():
-	test = current_user
-	#user = g.user
-	return render_template('main.html', title='MainPage', user=test, test=test)
+	#test = current_user
+	user = g.user
+	return render_template('main.html', title='MainPage', user=user)
 
 @app.route('/')
 @app.route('/index')
 def index():
-	#if current_user.is_authenticated and session['logged_in']:
+	#if current_user.is_authenticated and current_user is not None:
 	#	return redirect(url_for('main'))
-	#if g.user is not None and g.user.is_authenticated:
-	#	return redirect(url_for('main'))
+	if g.user is not None and g.user.is_authenticated:
+		return redirect(url_for('main'))
 	return render_template('index.html', title='index')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-	#if current_user.is_authenticated and session['logged_in']:
+	#if current_user.is_authenticated and current_user is not None:
 	#	return redirect(url_for('main'))
-	#if g.user is not None and g.user.is_authenticated:
-	#	return redirect(url_for('main'))
+	if g.user is not None and g.user.is_authenticated:
+		return redirect(url_for('main'))
 	form = LoginForm()
 	if form.validate_on_submit():
 		#session['remember_me'] = form.remember_me.data
