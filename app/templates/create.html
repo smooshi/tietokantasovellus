@@ -7,8 +7,9 @@
 <body>
     {% extends "base.html" %}
     {% block content %}
-    <h1>Create account:</h1>
-    <form action="" method="post" name="login">
+        <div class="container">
+            <h2>Create account:</h2>
+        <form action="" method="post" name="login">
         {{ form.hidden_tag() }}
         <p>
             Enter username:<br>
@@ -16,17 +17,19 @@
         </p>
         <p>
             Enter password:<br>
-            {{ form.password(size=120) }}<br>
+            {{ form.password(size=64) }}<br>
         </p>
 
         <p>
             Enter email:<br>
-            {{ form.email(size=120) }}<br>
+            {{ form.email(size=64) }}<br>
         </p>
         <p>
-            <input type="submit" value="Sign in">
+            <input class="btn btn-lg btn-primary" type="submit" value="Sign in">
         </p>
     </form>
+        </div>
+
     {% endblock %}
 </body>
 </html>

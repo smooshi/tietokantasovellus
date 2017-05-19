@@ -99,5 +99,6 @@ def create():
 			db.session.add(user)
 			db.session.commit()
 			login_user(user)
+			flash("Account succefully created!")
 			return redirect(url_for('index'))
 	return render_template('create.html', form=form)
