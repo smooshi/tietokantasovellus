@@ -1,30 +1,29 @@
-from flask import render_template, flash, redirect, session, url_for, request, g
-from app import app, db, lm
+from app import app,lm
+from flask import render_template, redirect, request, flash, g, session, url_for
 from .forms import LoginForm, CreateForm
 from flask_login import login_user, logout_user, current_user, login_required
 
-#models
-from .models import User
+#last
+from models import *
 
 @app.before_request
 def before_request():
 	g.user = current_user
-
+#
 @app.route('/main')
 @login_required
 def main():
-	#test = current_user
 	user = g.user
 	return render_template('main.html', title='MainPage', user=user)
-
+#
 @app.route('/')
 @app.route('/index')
 def index():
-	#if current_user.is_authenticated and current_user is not None:
-	#	return redirect(url_for('main'))
+ 	#if current_user.is_authenticated and current_user is not None:
+ 	#	return redirect(url_for('main'))
 	if g.user is not None and g.user.is_authenticated:
-		return redirect(url_for('main'))
-	return render_template('index.html', title='index')
+ 		return redirect(url_for('main'))
+ 	return render_template('index.html', title='index')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -42,7 +41,7 @@ def try_login(username, password):
 	if username is None or username =="":
 		flash('Invalid username. Please try again.')
 		return redirect(url_for('login'))
-	user = User.query.filter(User.name==username).first()
+	user = select_by_name_user(username)
 	if user is None:
 		flash('User does not exist. Please try again.')
 		return redirect(url_for('login'))
@@ -52,35 +51,43 @@ def try_login(username, password):
 			#	remember_me = session['remember_me']
 			#	session.pop('remember_me', None)
 			user.authenticated = True
-			db.session.add(user)
-			db.session.commit()
+			update_user_auth(user.id, True)
+			#db.session.add(user)
+			#db.session.commit()
+			#current_user = user
 			login_user(user)
+			#flash("??? %s %s" %(user.name, user.email))
 			return redirect(request.args.get('next') or url_for('main'))
 		else:
 			flash('Password is wrong. Please try again.')
 			return redirect(url_for('login'))
-
+#
 @lm.user_loader
 def load_user(id):
-	return User.query.get(int(id))
-
+	user = select_by_id_user(id)
+	if user != None:
+		return (user)
+	else:
+		return (None)
+#	return User.query.get(int(id))
+#
 @app.route('/logout')
 def logout():
 	user = current_user
 	user.authenticated = False
-	db.session.add(user)
-	db.session.commit()
+	update_user_auth(user.id, False)
 	logout_user()
 	return redirect(url_for('index'))
-
+#
 @app.route('/create', methods=['GET', 'POST'])
 def create():
 	#if current_user.is_authenticated:
 	#	return redirect(url_for('main'))
-	#if g.user is not None and g.user.is_authenticated:
-	#	return redirect(url_for('main'))
+	if g.user is not None and g.user.is_authenticated:
+		return redirect(url_for('main'))
 	form = CreateForm()
 	if form.validate_on_submit():
+		form.flash_errors()
 		username = form.username.data
 		password = form.password.data
 		email = form.email.data
@@ -94,30 +101,10 @@ def create():
 			flash('Invalid email. Please try again.')
 			return redirect(url_for('create'))
 
-		user = User(name=username, email=email, password=password)
-		if (user.check_password(password)):
-			db.session.add(user)
-			db.session.commit()
-			login_user(user)
-			flash("Account succefully created!")
-			return redirect(url_for('index'))
+		insert_user(username, email, password, True)
+			#db.session.add(user)
+			#db.session.commit()
+			#login_user(user)
+		flash("Account succefully created! Try logging in.")
+		return redirect(url_for('index'))
 	return render_template('create.html', form=form)
-
-@app.route('/user/<id>')
-def user(id):
-	user = User.query.filter_by(id=id).first()
-	if user == None or user.id != g.user.id:
-		flash('User not found. %s %s' %(id, g.user.id))
-		return redirect(url_for('index'))
-	return render_template('profile.html', user=user)
-
-@app.route('/user/edit/<id>')
-def user_edit(id):
-	user = User.query.filter_by(id=id).first()
-	if user == None or user.id != g.user.id:
-		flash('User not found. %s %s' %(id, g.user.id))
-		return redirect(url_for('index'))
-	form = CreateForm()
-	if form.validate_on_submit():
-		user = User(name=form.username.data, email=form.email.data, password=form.password.data)
-	return render_template('user_edit.html', user=user, form=form)

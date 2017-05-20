@@ -13,7 +13,7 @@
             <div class="navbar-header">
                 <a class="navbar-brand" href="{{ url_for('index') }}">Index</a>
             </div>
-                {% if g.user.is_authenticated %}
+                    {% if g.user.is_authenticated %}
 
                     <ul class="nav navbar-nav">
                           <li class="dropdown">
@@ -25,6 +25,7 @@
                             </ul>
                           </li>
                         </ul>
+
 
 
 

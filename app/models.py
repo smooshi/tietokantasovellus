@@ -1,19 +1,88 @@
-from app import db
 from werkzeug.security import generate_password_hash, check_password_hash
+import sqlite3 as sql
+from datetime import datetime
 
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(64), index=True, unique=True)
-    email = db.Column(db.String(120), index=True, unique=True)
-    #password = db.Column(db.String(120))
-    salt = db.Column(db.String)
-    authenticated = db.Column(db.Boolean, default=False)
+def insert_user(name, email, password, authenticated):
+    con = sql.connect("database.db")
+    cur = con.cursor()
+    salt = generate_password_hash(password)
+    cur.execute("INSERT INTO User (email, name, salt, authenticated) VALUES(?,?,?,?)", (email, name, salt, authenticated))
+    con.commit()
+    con.close()
 
-    def __init__(self, name, email, password):
+def update_user_auth(id, authenticated):
+    con = sql.connect("database.db")
+    cur = con.cursor()
+    cur.execute("UPDATE User SET authenticated = '%r' WHERE id='%d';" % (authenticated, id))
+    con.commit()
+    con.close()
+
+def update_user_no_pw(id, name, email):
+    con = sql.connect("database.db")
+    cur = con.cursor()
+    cur.execute("UPDATE User SET name = '%s', email= '%s' WHERE id='%d';" % (name, email, id))
+    con.commit()
+    con.close()
+
+def update_user_pw(id, name, email, password):
+    con = sql.connect("database.db")
+    cur = con.cursor()
+    salt = generate_password_hash(password)
+    cur.execute("UPDATE User SET salt='%s' WHERE id='%d';" % (salt, id))
+    con.commit()
+    con.close()
+
+def delete_user(id):
+    con = sql.connect("database.db")
+    cur = con.cursor()
+    cur.execute("UPDATE User SET salt='%s' WHERE id='%d';" % (salt, id))
+    con.commit()
+    con.close()
+
+def select_users(params=()):
+    con = sql.connect("database.db")
+    cur = con.cursor()
+    if params==():
+        cur.execute("select * from User")
+    else:
+        string = "select"
+        for i in xrange(len(params)-1):
+            string += "%s,"
+        string += "%s"
+        string += " from User"
+
+        result = cur.execute(string)
+        con.close()
+        return result.fetchall()
+
+def select_by_id_user(id):
+    with sql.connect("database.db") as con:
+        cur = con.cursor()
+        result = cur.execute("select * from User where id='%s';" % id).fetchall()
+        if len(result) > 0:
+            user = User(result[0][0], result[0][1], result[0][2], result[0][3], result[0][4])
+            return user
+        else:
+            return None
+
+def select_by_name_user(name):
+    with sql.connect("database.db") as con:
+        cur = con.cursor()
+        result = cur.execute("select * from User where name='%s';" % name).fetchall()
+        if len(result) > 0:
+            user = User(result[0][0], result[0][1], result[0][2], result[0][3], result[0][4])
+            return user
+        else:
+            return None
+
+class User():
+
+    def __init__(self, id, email, name, salt, authenticated):
+        self.id = id
         self.name = name
         self.email = email
-        self.set_password(password)
-        self.authenticated = False
+        self.salt = salt
+        self.authenticated = authenticated;
 
     def set_password(self, password):
         self.salt = generate_password_hash(password)
@@ -38,24 +107,3 @@ class User(db.Model):
 
     def __repr__(self):
         return '<User %r>' % (self.name)
-
-class Todo(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    text = db.Column(db.String(160))
-    isComplete = db.Column(db.Boolean)
-    date = db.Column(db.Date)
-
-    def __repr__(self):
-        return '<Todo %r>' %(self.text)
-
-class Note(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    text = db.Column(db.String(160))
-    isTimed = db.Column(db.Boolean)
-    time = db.Column(db.DateTime)
-    date = db.Column(db.Date)
-
-    def __repr__(self):
-        return '<Note %r>' %(self.text)

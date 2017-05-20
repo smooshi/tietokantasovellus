@@ -12,11 +12,19 @@
             <div class="row">
                 <div class="col-md-12 col-md-offset-3">
                  <h2>Your Profile:</h2>
-                <h3>name: {{ user.name }}</h3>
-                <p>email: {{ user.email }}</p>
+                 <h3>name: {{ user.name }}</h3>
+                    <p>email: {{ user.email }}</p>
+                    <p>
+                      <a class="btn btn-default" href="{{ url_for('user_edit', id=g.user.id) }}">Edit Profile</a>
+                    </p>
                     <h3>Your groups:</h3>
                     <h3>Groups you belong to:</h3>
+                    <br>
+                    <br>
+                    <br>
+                    <a class="btn btn-danger" href="{{ url_for('user_delete', id=g.user.id) }}">Delete Profile</a>
                 </div>
+
             </div>
         </div>
     {% endblock %}

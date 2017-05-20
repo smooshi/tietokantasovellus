@@ -1,0 +1,20 @@
+drop table if exists user;
+create table User(
+id integer primary key autoincrement,
+email text not null,
+name text not null,
+salt text not null,
+authenticated bool default false,
+created_at TIMESTAMP not null,
+edited_at TIMESTAMP not null
+);
+
+drop table if exists note;
+create table Note(
+id integer primary key autoincrement,
+user_id foreign key not null,
+text text not null,
+isTimed bool,
+time TIMESTAMP,
+date TIMESTAMP
+);
