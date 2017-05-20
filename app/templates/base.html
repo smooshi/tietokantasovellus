@@ -14,20 +14,26 @@
                 <a class="navbar-brand" href="{{ url_for('index') }}">Index</a>
             </div>
                     {% if g.user.is_authenticated %}
-
                     <ul class="nav navbar-nav">
                           <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ user.name }}<span class="caret"></span></a>
                               <ul class="dropdown-menu">
                               <li><a href="{{ url_for('user', id=g.user.id) }}">Profile</a></li>
                               <li><a href="#">Settings</a></li>
-                              <li><a href="#">Groups</a></li>
                             </ul>
                           </li>
                         </ul>
 
-
-
+                        <ul class="nav navbar-nav">
+                          <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Groups<span class="caret"></span></a>
+                              <ul class="dropdown-menu">
+                              <li><a href="#">Your groups</a></li>
+                              <li><a href="#">Browse</a></li>
+                              <li><a href="#">Create</a></li>
+                            </ul>
+                          </li>
+                        </ul>
 
                     <div class="navbar-right"><a class="navbar-brand" href="{{ url_for('logout') }}">Logout</a></div>
 
