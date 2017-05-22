@@ -1,21 +1,46 @@
 from app import app,lm
 from flask import render_template, redirect, request, flash, g, session, url_for
-from .forms import LoginForm, CreateForm
+from .forms import LoginForm, UserCreateForm
 from flask_login import login_user, logout_user, current_user, login_required
+from datetime import datetime, timedelta
 
-#last
+
 from models import *
+from notes import *
 
 @app.before_request
 def before_request():
 	g.user = current_user
-#
+
 @app.route('/main')
 @login_required
 def main():
 	user = g.user
-	return render_template('main.html', title='MainPage', user=user)
-#
+	days = set_days(datetime.today().date())
+	notes = select_note_by_user_id_and_date(g.user.id, days["today"])
+	return render_template('main.html', title='MainPage', user=user, notes=notes, days=days)
+
+@app.route('/timetravel/<date>')
+@login_required
+def timetravel(date):
+	user = g.user
+
+	#emt miksei toimi
+	#day = datetime.strptime(str(date),"Y%-%m-%d")
+	s = str(date)
+	d = datetime.strptime(s, "%Y-%m-%d")
+	days = set_days(d.date())
+
+	notes = select_note_by_user_id_and_date(g.user.id, days["today"])
+
+	return render_template('main.html', title='MainPage', user=user, notes=notes, days=days)
+
+def set_days(date):
+	t = date+timedelta(days=1)
+	y = date+timedelta(days=-1)
+	days = {"today":date, "tomorrow": t, "yesterday": y}
+	return(days)
+
 @app.route('/')
 @app.route('/index')
 def index():
@@ -85,7 +110,7 @@ def create():
 	#	return redirect(url_for('main'))
 	if g.user is not None and g.user.is_authenticated:
 		return redirect(url_for('main'))
-	form = CreateForm()
+	form = UserCreateForm()
 	if form.validate_on_submit():
 		form.flash_errors()
 		username = form.username.data

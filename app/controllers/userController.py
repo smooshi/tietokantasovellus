@@ -3,7 +3,7 @@ from app import app
 from flask_login import login_required
 
 #models
-from app.forms import EditForm
+from app.forms import UserEditForm
 from app.models import *
 
 @app.route('/user/<id>')
@@ -22,7 +22,7 @@ def user_edit(id):
 	if user == None or user.id != g.user.id:
 		flash('User not found.')
 		return redirect(url_for('index'))
-	form = EditForm(username=user.name, email=user.email)
+	form = UserEditForm(username=user.name, email=user.email)
 	if form.validate_on_submit():
 		form.flash_errors()
 #		if user.check_password(form.confirm.data):

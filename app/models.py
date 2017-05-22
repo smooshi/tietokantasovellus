@@ -6,7 +6,7 @@ def insert_user(name, email, password, authenticated):
     con = sql.connect("database.db")
     cur = con.cursor()
     salt = generate_password_hash(password)
-    cur.execute("INSERT INTO User (email, name, salt, authenticated) VALUES(?,?,?,?)", (email, name, salt, authenticated))
+    cur.execute("INSERT INTO User (email, name, salt, authenticated, created_at, edited_at) VALUES(?,?,?,?,?,?)", (email, name, salt, authenticated, datetime.now(), datetime.now()))
     con.commit()
     con.close()
 
@@ -35,25 +35,9 @@ def update_user_pw(id, name, email, password):
 def delete_user(id):
     con = sql.connect("database.db")
     cur = con.cursor()
-    cur.execute("UPDATE User SET salt='%s' WHERE id='%d';" % (salt, id))
+    cur.execute("DELETE FROM User WHERE id='%d';" % (id))
     con.commit()
     con.close()
-
-def select_users(params=()):
-    con = sql.connect("database.db")
-    cur = con.cursor()
-    if params==():
-        cur.execute("select * from User")
-    else:
-        string = "select"
-        for i in xrange(len(params)-1):
-            string += "%s,"
-        string += "%s"
-        string += " from User"
-
-        result = cur.execute(string)
-        con.close()
-        return result.fetchall()
 
 def select_by_id_user(id):
     with sql.connect("database.db") as con:

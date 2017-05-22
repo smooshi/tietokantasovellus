@@ -18,6 +18,7 @@ def connect_db():
 #            db.cursor().executescript(f.read())
 #        db.commit()
 
+app.static_folder = 'static'
 
 #Errors for Heroku
 app.logger.addHandler(logging.StreamHandler(sys.stdout))

@@ -1,4 +1,4 @@
-drop table if exists user;
+drop table if exists User;
 create table User(
 id integer primary key autoincrement,
 email text not null,
@@ -9,12 +9,13 @@ created_at TIMESTAMP not null,
 edited_at TIMESTAMP not null
 );
 
-drop table if exists note;
+drop table if exists Note;
 create table Note(
 id integer primary key autoincrement,
-user_id foreign key not null,
+user_id integer not null,
 text text not null,
-isTimed bool,
-time TIMESTAMP,
-date TIMESTAMP
+isTimed bool default false,
+time DATETIME,
+date DATE not null,
+FOREIGN KEY (user_id) REFERENCES User(id)
 );

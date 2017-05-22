@@ -1,0 +1,31 @@
+#main-container{
+  max-width: 1200px;
+  padding: 10px 25px;
+  margin: 0px auto;
+}
+
+.navbar .container-fluid{
+  max-width: 1200px;
+  margin: 0px auto;
+}
+
+.divbutton:hover button {
+    height: 25px;
+    display: inline-block;
+}
+
+button {
+    width: 50px;
+    display: none;
+    border: 2px solid;
+    border-radius: 7px;
+    background: wheat;
+}
+
+button_del {
+    width: 50px;
+    display: none;
+    border: 2px solid;
+    border-radius: 5px;
+    background: firebrick;
+}
