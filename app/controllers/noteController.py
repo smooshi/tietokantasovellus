@@ -33,12 +33,23 @@ def note_add(date):
     s = str(date)
     date = datetime.strptime(s, "%Y-%m-%d")
     if form.validate_on_submit():
-        insert_note(user.id,form.text.data,False,datetime.now(),date)
+        form.flash_errors()
+        #time:
+        if (form.isTimed.data):
+            time = form.time.data
+            time = datetime.combine(date, time)
+            insert_note(user.id,form.text.data,form.isTimed.data, time,date)
+        else:
+
+            insert_note(user.id, form.text.data, form.isTimed.data, None, date)
+
         flash('Succesfully created note!')
         if date.date() == datetime.today().date():
             return redirect(url_for('main'))
         else:
             return redirect(url_for('timetravel', date=date.date()))
+
+    form.flash_errors()
     return render_template('/note/add.html', user=user, form=form)
 
 @app.route('/note/delete/<id>', methods=['GET', 'POST'])

@@ -17,6 +17,14 @@
                     <p>
                       <a class="btn btn-default" href="{{ url_for('user_edit', id=g.user.id) }}">Edit Profile</a>
                     </p>
+                    <p>
+                        <h3>Points:</h3>
+                        {% for todos, goals, focus in points %}
+                            Todos completed: {{ todos }} <br>
+                            Goal points acquired: {{ goals }} <br>
+                            Focus points acquired: {{ focus }} <br>
+                        {% endfor %}
+                    </p>
                     <h3>Your groups:</h3>
                     <h3>Groups you belong to:</h3>
                     <br>

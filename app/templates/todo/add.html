@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Todo</title>
+</head>
+<body>
+
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+
+<h3>Create a new Todo:</h3>
+
+<form action="" method="post" name="edit">
+    {{ form.hidden_tag() }}
+    <p>
+        Note text:<br>
+        {{ form.text(size=64) }}
+    </p>
+    <input class="btn btn-lg btn-primary" type="submit" value="Submit">
+</form>
+
+</div>
+
+
+{% endblock %}
+
+</body>
+</html>

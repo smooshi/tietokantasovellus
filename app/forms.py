@@ -1,12 +1,37 @@
 from flask_wtf import Form
-from wtforms import StringField, BooleanField, PasswordField, DateTimeField
-from wtforms.validators import DataRequired, Length, EqualTo
+from wtforms import StringField, BooleanField, PasswordField, DateField
+from wtforms_components import TimeField
+from wtforms.validators import DataRequired, Length, EqualTo, Required
 from flask import flash
+from datetime import datetime
+
+class RequiredIf(Required):
+    # a validator which makes a field required if
+    # another field is set and has a truthy value
+
+    def __init__(self, other_field_name, *args, **kwargs):
+        self.other_field_name = other_field_name
+        super(RequiredIf, self).__init__(*args, **kwargs)
+
+    def __call__(self, form, field):
+        other_field = form._fields.get(self.other_field_name)
+        if other_field is None:
+            raise Exception('no field named "%s" in form' % self.other_field_name)
+        if bool(other_field.data):
+            super(RequiredIf, self).__call__(form, field)
 
 class LoginForm(Form):
     username = StringField('username', validators=[DataRequired()])
     password = PasswordField('password', validators=[DataRequired()])
     remember_me = BooleanField('remember_me', default=False)
+
+    def flash_errors(form):
+        for field, errors in form.errors.items():
+            for error in errors:
+                flash(u"Error in the %s field - %s" % (
+                    getattr(form, field).label.text,
+                    error
+                ))
 
 class UserCreateForm(Form):
     username = StringField('username', validators=[DataRequired(), Length(min=4, max=35)])
@@ -38,4 +63,19 @@ class UserEditForm(Form):
 
 class NoteEditForm(Form):
     text = StringField('text', validators=[DataRequired(message="Enter text")])
-    #date = DateTimeField('date', validators=[DataRequired()])
+    isTimed = BooleanField('isTimed', default=False)
+    time = TimeField('time', default=datetime.now().time())
+
+    def flash_errors(form):
+        for field, errors in form.errors.items():
+            for error in errors:
+                flash(u"Error in the %s field - %s" % (
+                    getattr(form, field).label.text,
+                    error
+                ))
+
+class TodoEditForm(Form):
+    text = StringField('text', validators=[DataRequired(message="Enter text")])
+
+class TodoCheckForm(Form):
+    isComplete = BooleanField('isComplete', default=False)

@@ -33,6 +33,12 @@ def update_note_text(id, text):
         cur.execute("UPDATE Note SET text = '%s' WHERE id='%d';" % (text, id))
         con.commit()
 
+def update_note_text_time(id, text, isTimed, time):
+    with sql.connect("database.db") as con:
+        cur = con.cursor()
+        cur.execute("UPDATE Note SET text = '%s', isTimed = '%d', DATETIME(time)='%s' WHERE id='%d';" % (text, isTimed, time, id))
+        con.commit()
+
 def delete_note(id):
     con = sql.connect("database.db")
     cur = con.cursor()

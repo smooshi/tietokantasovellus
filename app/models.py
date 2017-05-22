@@ -59,6 +59,21 @@ def select_by_name_user(name):
         else:
             return None
 
+def select_points_from_user(id):
+    with sql.connect("database.db") as con:
+        cur = con.cursor()
+        result = cur.execute("select todos, goals, focus from User where id='%s';" % id).fetchall()
+        return result
+
+def update_user_todo_points(id):
+    con = sql.connect("database.db")
+    cur = con.cursor()
+    cur.execute("UPDATE User SET todos = todos+1 WHERE id='%s';" % id).fetchall()
+    con.commit()
+    con.close()
+
+#def select_user_todo_points(id):
+
 class User():
 
     def __init__(self, id, email, name, salt, authenticated):

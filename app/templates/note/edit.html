@@ -12,11 +12,16 @@
 
     <form action="" method="post" name="edit">
     {{ form.hidden_tag() }}
-    {{ form.text(size=64) }}
+        <p>
+            Edit text:
+            {{ form.text(size=64) }}
+        </p>
     <input class="btn btn-lg btn-primary" type="submit" value="Edit">
 </form>
-
-     <a class="btn btn-danger" href="{{ url_for('note_delete', id=note[0][0]) }}">Delete Note</a>
+        <hr>
+        <p>
+             <a class="btn btn-danger" href="{{ url_for('note_delete', id=note[0][0]) }}">Delete Note</a>
+        </p>
 
     </div>
 

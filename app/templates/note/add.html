@@ -14,7 +14,19 @@
 
 <form action="" method="post" name="edit">
     {{ form.hidden_tag() }}
-    {{ form.text(size=64) }}
+    <p>
+        Note text:<br>
+        {{ form.text(size=64) }}
+    </p>
+    <p>
+        Is the note timed?
+        {{ form.isTimed }}
+    </p>
+    <p>
+        Enter time for Note:
+        {{ form.time }}
+    </p>
+
     <input class="btn btn-lg btn-primary" type="submit" value="Submit">
 </form>
 

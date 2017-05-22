@@ -37,9 +37,16 @@
 
     </div>
     <div class="col-md-6">
-        <h2> <a href="{{ url_for('timetravel', date=days["yesterday"]) }}"><</a>  {{ days["today"] }}  <a href="{{ url_for('timetravel', date=days["tomorrow"]) }}">></a>  </h2>
+        <h2> <a href="{{ url_for('timetravel', date=days["yesterday"]) }}"><</a>  {{ days["today"].strftime("%d %B %Y") }}  <a href="{{ url_for('timetravel', date=days["tomorrow"]) }}">></a>  </h2>
       <h3>Terve {{ user.name }}</h3>
         <h4>Notes <a href="{{ url_for('note_add', date=days["today"]) }}">(+)</a></h4>
+        {% for id, user_id, text, isTimed, time, date in tnotes %}
+            <p>
+            <div class="divbutton">{{ time.hour }}:{{ time.minute }} {{ text }} <a href="{{ url_for('note_edit',id=id) }}"><button type="button">Edit</button></a></div>
+            </p>
+
+        {% endfor %}
+
         {% for id, user_id, text, isTimed, time, date in notes %}
             <p>
             <div class="divbutton">{{ text }} <a href="{{ url_for('note_edit',id=id) }}"><button type="button">Edit</button></a></div>
@@ -47,6 +54,26 @@
 
         {% endfor %}
 
+        <h4>Todos <a href="{{ url_for('todo_add', date=days["today"]) }}">(+)</a></h4>
+         <form method="post">
+        {% for id, user_id, text, isComplete, date in todos %}
+
+            <p>
+
+            {% if not isComplete %}
+            <div class="divbutton">
+                <label><input type="checkbox" name='check' value={{ id }}  onclick="this.form.submit()"> {{ text }} </label>        <a href="{{ url_for('todo_edit',id=id) }}"><button type="button">Edit</button></a>
+            </div>
+            {% else %}
+               <div class="divbutton">
+                   <label><s><input type="checkbox" name='checked' checked> {{ text }} </s></label>      <a href="{{ url_for('todo_edit',id=id) }}"><button type="button">Edit</button></a>
+                </div>
+            {% endif %}
+
+
+            </p>
+        {% endfor %}
+        </form>
     </div>
   </div>
 </div>

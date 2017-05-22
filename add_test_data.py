@@ -11,7 +11,7 @@ insert_user("Tommi", "email2@email.com", "test", False)
 insert_user("Elina", "email3@email.com", "test", False)
 
 #Noteja def insert_note(user_id, text, isTimed, time, date):
-time = datetime.now()
+time = datetime.now().time()
 date = datetime.now().date()
 insert_note(1, "Millan eka", False, time, date)
 insert_note(1, "Millan toka", False, time, date)

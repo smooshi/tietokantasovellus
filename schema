@@ -2,11 +2,14 @@ drop table if exists User;
 create table User(
 id integer primary key autoincrement,
 email text not null,
-name text not null,
+name text not null unique,
 salt text not null,
 authenticated bool default false,
 created_at TIMESTAMP not null,
-edited_at TIMESTAMP not null
+edited_at TIMESTAMP not null,
+todos integer default 0,
+goals integer default 0,
+focus integer default 0
 );
 
 drop table if exists Note;
@@ -15,7 +18,37 @@ id integer primary key autoincrement,
 user_id integer not null,
 text text not null,
 isTimed bool default false,
-time DATETIME,
+time TIME,
 date DATE not null,
+FOREIGN KEY (user_id) REFERENCES User(id)
+);
+
+drop table if exists Todo;
+create table Todo(
+id integer PRIMARY key autoincrement,
+user_id integer not null,
+text text not null,
+isComplete bool default false,
+date DATE not null,
+FOREIGN KEY (user_id) REFERENCES User(id)
+);
+
+drop table if exists Goal;
+create table Goal(
+id integer PRIMARY key autoincrement,
+user_id integer not null,
+text text not null,
+points integer default 0,
+created_at DATETIME not null,
+FOREIGN KEY (user_id) REFERENCES User(id)
+);
+
+drop table if exists Focus;
+create table Focus(
+id integer PRIMARY key autoincrement,
+user_id integer not null,
+text text not null,
+points integer default 0,
+created_at DATETIME not null,
 FOREIGN KEY (user_id) REFERENCES User(id)
 );

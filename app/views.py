@@ -1,45 +1,77 @@
 from app import app,lm
 from flask import render_template, redirect, request, flash, g, session, url_for
-from .forms import LoginForm, UserCreateForm
+from .forms import LoginForm, UserCreateForm, TodoCheckForm
 from flask_login import login_user, logout_user, current_user, login_required
 from datetime import datetime, timedelta
-
+from operator import itemgetter
 
 from models import *
 from notes import *
+from todos import *
 
 @app.before_request
 def before_request():
 	g.user = current_user
 
-@app.route('/main')
+@app.route('/main', methods=['GET', 'POST'])
 @login_required
 def main():
 	user = g.user
 	days = set_days(datetime.today().date())
 	notes = select_note_by_user_id_and_date(g.user.id, days["today"])
-	return render_template('main.html', title='MainPage', user=user, notes=notes, days=days)
+	timed, notTimed = sort_notes(notes)
+	todos = select_todo_by_user_id_and_date(g.user.id, days["today"])
 
-@app.route('/timetravel/<date>')
+	if request.method == 'POST':
+		rq = request.form.getlist('check')
+		if (len(rq)>0):
+			update_todo_complete(int(rq[0]))
+			update_user_todo_points(g.user.id)
+			return redirect(url_for('main'))
+	return render_template('main.html', title='MainPage', user=user, tnotes= timed, notes=notTimed, days=days, todos=todos)
+
+@app.route('/timetravel/<date>', methods=['GET', 'POST'])
 @login_required
 def timetravel(date):
 	user = g.user
 
 	#emt miksei toimi
 	#day = datetime.strptime(str(date),"Y%-%m-%d")
+
 	s = str(date)
 	d = datetime.strptime(s, "%Y-%m-%d")
 	days = set_days(d.date())
-
 	notes = select_note_by_user_id_and_date(g.user.id, days["today"])
+	timed, notTimed = sort_notes(notes)
+	todos = select_todo_by_user_id_and_date(g.user.id, days["today"])
+	if request.method == 'POST':
+		flash("You can't complete that now, silly!")
 
-	return render_template('main.html', title='MainPage', user=user, notes=notes, days=days)
+	return render_template('main.html', title='MainPage', user=user, tnotes= timed, notes=notTimed, days=days, todos=todos)
 
 def set_days(date):
 	t = date+timedelta(days=1)
 	y = date+timedelta(days=-1)
 	days = {"today":date, "tomorrow": t, "yesterday": y}
 	return(days)
+
+def sort_notes(notes):
+	timed = list()
+	notTimed = list()
+	for i in range (0, len(notes)):
+		arr = list(notes[i])
+		if arr[3] == 1:
+			s = arr[4]
+			s = str(s)
+			d = datetime.strptime(s, "%Y-%m-%d %H:%M:%S")
+			t = d.time()
+			arr[4]=t
+			timed.append(arr)
+		else:
+			notTimed.append(arr)
+
+	timed = sorted(timed, key=itemgetter(4))
+	return timed, notTimed
 
 @app.route('/')
 @app.route('/index')
@@ -129,7 +161,8 @@ def create():
 		insert_user(username, email, password, True)
 			#db.session.add(user)
 			#db.session.commit()
-			#login_user(user)
-		flash("Account succefully created! Try logging in.")
+		#login_user(user)
+		#flash("Account succefully created! Try logging in.")
 		return redirect(url_for('index'))
+	form.flash_errors()
 	return render_template('create.html', form=form)
