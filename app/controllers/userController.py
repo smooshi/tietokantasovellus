@@ -25,7 +25,6 @@ def user_edit(id):
 		return redirect(url_for('index'))
 	form = UserEditForm(username=user.name, email=user.email)
 	if form.validate_on_submit():
-		form.flash_errors()
 #		if user.check_password(form.confirm.data):
 #			if form.password.data is not None or form.password.data != "":
 #				flash('User with pw --->  %s.' % (form.password.data))
@@ -35,7 +34,7 @@ def user_edit(id):
 		update_user_no_pw(user.id, form.username.data, form.email.data)
 		flash('Succefully edited user details!')
 		return redirect(url_for('user', id=g.user.id))
-
+	form.flash_errors()
 	return render_template('/user/edit.html', user=user, form=form)
 
 @app.route('/user_delete/<id>', methods=['GET', 'POST'])

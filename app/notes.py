@@ -12,47 +12,36 @@ def insert_note(user_id, text, isTimed, time, date):
 def select_note_by_user_id(user_id):
     with sql.connect("database.db") as con:
         cur = con.cursor()
-        result = cur.execute("SELECT * FROM Note WHERE user_id='%d';" % user_id).fetchall()
+        result = cur.execute("SELECT * FROM Note WHERE user_id=?;", user_id).fetchall()
     return result
 
 def select_note_by_user_id_and_date(user_id, date):
     with sql.connect("database.db") as con:
         cur = con.cursor()
-        result = cur.execute("SELECT * FROM Note WHERE user_id='%d' AND DATE(date)='%s';" % (user_id, date)).fetchall()
+        result = cur.execute("SELECT * FROM Note WHERE user_id=? AND DATE(date)=?;", (user_id, date)).fetchall()
     return result
 
 def select_note_by_id(id):
     with sql.connect("database.db") as con:
         cur = con.cursor()
-        result = cur.execute("SELECT * FROM Note WHERE id='%s';" % id).fetchall()
+        result = cur.execute("SELECT * FROM Note WHERE id=?;", id).fetchall()
     return result
 
 def update_note_text(id, text):
     with sql.connect("database.db") as con:
         cur = con.cursor()
-        cur.execute("UPDATE Note SET text = '%s' WHERE id='%d';" % (text, id))
+        cur.execute("UPDATE Note SET text = ? WHERE id=?;", (text, id))
         con.commit()
 
 def update_note_text_time(id, text, isTimed, time):
     with sql.connect("database.db") as con:
         cur = con.cursor()
-        cur.execute("UPDATE Note SET text = '%s', isTimed = '%d', DATETIME(time)='%s' WHERE id='%d';" % (text, isTimed, time, id))
+        cur.execute("UPDATE Note SET text = ?, isTimed = ?, DATETIME(time)=? WHERE id=?;", (text, isTimed, time, id))
         con.commit()
 
 def delete_note(id):
     con = sql.connect("database.db")
     cur = con.cursor()
-    cur.execute("DELETE FROM Note WHERE id='%d';" % (id))
+    cur.execute("DELETE FROM Note WHERE id=?;", (id,))
     con.commit()
     con.close()
-
-class Note:
-    def __init__(self, user_id, text, isTimed, time, date):
-        self.user_id = user_id
-        self.text = text
-        self.isTimed = isTimed
-        self.time = time
-        self.date = date
-
-    def __repr__(self):
-        return '<Note %r>' % (self.text)

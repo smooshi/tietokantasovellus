@@ -13,14 +13,16 @@ def insert_user(name, email, password, authenticated):
 def update_user_auth(id, authenticated):
     con = sql.connect("database.db")
     cur = con.cursor()
-    cur.execute("UPDATE User SET authenticated = '%r' WHERE id='%d';" % (authenticated, id))
+    com = "UPDATE User SET authenticated =? WHERE id=?;"
+    cur.execute(com, (authenticated, id))
     con.commit()
     con.close()
 
 def update_user_no_pw(id, name, email):
     con = sql.connect("database.db")
     cur = con.cursor()
-    cur.execute("UPDATE User SET name = '%s', email= '%s' WHERE id='%d';" % (name, email, id))
+    com = "UPDATE User SET name = ?, email= ? WHERE id=?;"
+    cur.execute(com, (name, email, id))
     con.commit()
     con.close()
 
@@ -28,21 +30,24 @@ def update_user_pw(id, name, email, password):
     con = sql.connect("database.db")
     cur = con.cursor()
     salt = generate_password_hash(password)
-    cur.execute("UPDATE User SET salt='%s' WHERE id='%d';" % (salt, id))
+    com = "UPDATE User SET salt='?'' WHERE id=?;"
+    cur.execute(com, (salt, id))
     con.commit()
     con.close()
 
 def delete_user(id):
     con = sql.connect("database.db")
     cur = con.cursor()
-    cur.execute("DELETE FROM User WHERE id='%d';" % (id))
+    com = "DELETE FROM User WHERE id=?;"
+    cur.execute(com, (id))
     con.commit()
     con.close()
 
 def select_by_id_user(id):
     with sql.connect("database.db") as con:
         cur = con.cursor()
-        result = cur.execute("select * from User where id='%s';" % id).fetchall()
+        com = "SELECT * FROM User WHERE id=?;"
+        result = cur.execute(com, (id)).fetchall()
         if len(result) > 0:
             user = User(result[0][0], result[0][1], result[0][2], result[0][3], result[0][4])
             return user
@@ -52,7 +57,8 @@ def select_by_id_user(id):
 def select_by_name_user(name):
     with sql.connect("database.db") as con:
         cur = con.cursor()
-        result = cur.execute("select * from User where name='%s';" % name).fetchall()
+        com = "select * from User where name=?;"
+        result = cur.execute(com, (name)).fetchall()
         if len(result) > 0:
             user = User(result[0][0], result[0][1], result[0][2], result[0][3], result[0][4])
             return user
@@ -62,13 +68,15 @@ def select_by_name_user(name):
 def select_points_from_user(id):
     with sql.connect("database.db") as con:
         cur = con.cursor()
-        result = cur.execute("select todos, goals, focus from User where id='%s';" % id).fetchall()
+        com = "select todos, goals, focus from User where id=?;"
+        result = cur.execute(com, (id)).fetchall()
         return result
 
 def update_user_todo_points(id):
     con = sql.connect("database.db")
     cur = con.cursor()
-    cur.execute("UPDATE User SET todos = todos+1 WHERE id='%s';" % id).fetchall()
+    com = "UPDATE User SET todos = todos+1 WHERE id=?;"
+    cur.execute(com, (id,)).fetchall()
     con.commit()
     con.close()
 

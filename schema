@@ -39,7 +39,10 @@ id integer PRIMARY key autoincrement,
 user_id integer not null,
 text text not null,
 points integer default 0,
+isActive bool default True,
 created_at DATETIME not null,
+edited_at DATETIME not null,
+end_date DATETIME,
 FOREIGN KEY (user_id) REFERENCES User(id)
 );
 
@@ -49,6 +52,9 @@ id integer PRIMARY key autoincrement,
 user_id integer not null,
 text text not null,
 points integer default 0,
+isActive bool default True,
 created_at DATETIME not null,
+edited_at DATETIME not null,
+end_date DATETIME,
 FOREIGN KEY (user_id) REFERENCES User(id)
 );

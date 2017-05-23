@@ -20,6 +20,15 @@ class RequiredIf(Required):
         if bool(other_field.data):
             super(RequiredIf, self).__call__(form, field)
 
+class FlashErrors():
+    def flash_errors(form):
+        for field, errors in form.errors.items():
+            for error in errors:
+                flash(u"Error in the %s field - %s" % (
+                    getattr(form, field).label.text,
+                    error
+                ))
+
 class LoginForm(Form):
     username = StringField('username', validators=[DataRequired()])
     password = PasswordField('password', validators=[DataRequired()])
@@ -77,5 +86,5 @@ class NoteEditForm(Form):
 class TodoEditForm(Form):
     text = StringField('text', validators=[DataRequired(message="Enter text")])
 
-class TodoCheckForm(Form):
-    isComplete = BooleanField('isComplete', default=False)
+class GoalEditForm(Form):
+    text = StringField('text', validators=[DataRequired(message="Enter text")])

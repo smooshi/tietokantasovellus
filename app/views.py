@@ -1,6 +1,6 @@
 from app import app,lm
 from flask import render_template, redirect, request, flash, g, session, url_for
-from .forms import LoginForm, UserCreateForm, TodoCheckForm
+from .forms import LoginForm, UserCreateForm
 from flask_login import login_user, logout_user, current_user, login_required
 from datetime import datetime, timedelta
 from operator import itemgetter
@@ -108,12 +108,8 @@ def try_login(username, password):
 			#	remember_me = session['remember_me']
 			#	session.pop('remember_me', None)
 			user.authenticated = True
-			update_user_auth(user.id, True)
-			#db.session.add(user)
-			#db.session.commit()
-			#current_user = user
+			update_user_auth(user.id, 1)
 			login_user(user)
-			#flash("??? %s %s" %(user.name, user.email))
 			return redirect(request.args.get('next') or url_for('main'))
 		else:
 			flash('Password is wrong. Please try again.')
@@ -126,13 +122,12 @@ def load_user(id):
 		return (user)
 	else:
 		return (None)
-#	return User.query.get(int(id))
-#
+
 @app.route('/logout')
 def logout():
 	user = current_user
 	user.authenticated = False
-	update_user_auth(user.id, False)
+	update_user_auth(user.id, 0)
 	logout_user()
 	return redirect(url_for('index'))
 #
@@ -159,10 +154,8 @@ def create():
 			return redirect(url_for('create'))
 
 		insert_user(username, email, password, True)
-			#db.session.add(user)
-			#db.session.commit()
 		#login_user(user)
-		#flash("Account succefully created! Try logging in.")
+		flash("Account succefully created! Try logging in.")
 		return redirect(url_for('index'))
 	form.flash_errors()
 	return render_template('create.html', form=form)

@@ -1,11 +1,9 @@
 from flask import render_template, flash, redirect, url_for, g
 from app import app
 from flask_login import login_required
-from datetime import datetime
 
 #models
 from app.forms import NoteEditForm
-from app.models import *
 from app.notes import *
 
 @app.route('/note/edit/<id>', methods=['GET', 'POST'])
