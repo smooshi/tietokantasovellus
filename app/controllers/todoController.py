@@ -33,7 +33,7 @@ def todo_add(date):
     s = str(date)
     date = datetime.strptime(s, "%Y-%m-%d")
     if form.validate_on_submit():
-        insert_todo(user.id,form.text.data, False, date)
+        insert_todo(user.id,form.text.data, date)
 
         flash('Succesfully created note!')
         if date.date() == datetime.today().date():

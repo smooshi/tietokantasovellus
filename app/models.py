@@ -58,7 +58,7 @@ def select_by_name_user(name):
     with sql.connect("database.db") as con:
         cur = con.cursor()
         com = "select * from User where name=?;"
-        result = cur.execute(com, (name)).fetchall()
+        result = cur.execute(com, (name,)).fetchall()
         if len(result) > 0:
             user = User(result[0][0], result[0][1], result[0][2], result[0][3], result[0][4])
             return user

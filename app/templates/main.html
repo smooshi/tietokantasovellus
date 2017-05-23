@@ -71,7 +71,7 @@
 
             <p>
 
-            {% if not isComplete %}
+            {% if isComplete == 0 %}
             <div class="divbutton">
                 <label><input type="checkbox" name='check' value={{ id }}  onclick="this.form.submit()"> {{ text }} </label>        <a href="{{ url_for('todo_edit',id=id) }}"><button type="button">Edit</button></a>
             </div>

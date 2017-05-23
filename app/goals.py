@@ -18,7 +18,7 @@ def select_goals_by_user_id(user_id):
 def select_current_goal_by_user_id(user_id):
     with sql.connect("database.db") as con:
         cur = con.cursor()
-        result = cur.execute("SELECT * FROM Goal WHERE user_id=? AND isActive=1;", (user_id,)).fetchall()
+        result = cur.execute("SELECT * FROM Goal WHERE user_id=? AND isActive;", (user_id,)).fetchall()
     return result
 
 def select_goal_by_id(id):
