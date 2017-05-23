@@ -15,8 +15,13 @@
 
         <div class="row">
             <div class="col-md-6">
-                <h2>Goal</h2><br>
-                Blaablaa
+                <h2>Goals <a href="{{ url_for('goal_add') }}">(+)</a></h2>
+
+                {% for id, user_id, text, points, isActive, created_at, edited_at, end_date in goals %}
+                    <p>
+                    <div class="divbutton">{{ text }} <a href="{{ url_for('goal_edit',id=id) }}"><button type="button">Edit</button></a></div>
+                    </p>
+                {% endfor %}
 
             </div>
 
@@ -42,7 +47,13 @@
         <h4>Notes <a href="{{ url_for('note_add', date=days["today"]) }}">(+)</a></h4>
         {% for id, user_id, text, isTimed, time, date in tnotes %}
             <p>
-            <div class="divbutton">{{ time.hour }}:{{ time.minute }} {{ text }} <a href="{{ url_for('note_edit',id=id) }}"><button type="button">Edit</button></a></div>
+            <div class="divbutton">{{ time.hour }} :
+                {% if (time.minute == 0) %}
+                        00
+                {% else %}
+                        {{ time.minute }}
+                {% endif %}
+                 {{ text }} <a href="{{ url_for('note_edit',id=id) }}"><button type="button">Edit</button></a></div>
             </p>
 
         {% endfor %}

@@ -11,22 +11,21 @@ def insert_goal(user_id, text, end_date):
 def select_goals_by_user_id(user_id):
     with sql.connect("database.db") as con:
         cur = con.cursor()
-        com = "SELECT * FROM Goal WHERE user_id=?"
-        result = cur.execute(com, (user_id)).fetchall()
+        com = "SELECT * FROM Goal WHERE user_id=?;"
+        result = cur.execute("SELECT * FROM Goal WHERE user_id=?;", (user_id,)).fetchall()
     return result
 
 def select_current_goal_by_user_id(user_id):
     with sql.connect("database.db") as con:
         cur = con.cursor()
-        com = "SELECT * FROM Goal WHERE user_id=?, isActive=1;"
-        result = cur.execute(com, (user_id)).fetchall()
+        result = cur.execute("SELECT * FROM Goal WHERE user_id=? AND isActive=1;", (user_id,)).fetchall()
     return result
 
 def select_goal_by_id(id):
     with sql.connect("database.db") as con:
         cur = con.cursor()
         com = "SELECT * FROM Goal WHERE id=?;"
-        result = cur.execute(com, id).fetchall()
+        result = cur.execute(com, (id,)).fetchall()
     return result
 
 def update_goal_text(id, text):
@@ -45,7 +44,7 @@ def delete_goal(id):
 def update_goal_active(id):
     with sql.connect("database.db") as con:
         cur = con.cursor()
-        cur.execute("UPDATE Goal SET isActive = 1 WHERE id=?;", (id))
+        cur.execute("UPDATE Goal SET isActive = 1 WHERE id=?;", (id,))
         con.commit()
 
 def update_goal_deactivate(id):

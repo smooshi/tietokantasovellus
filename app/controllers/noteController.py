@@ -31,14 +31,12 @@ def note_add(date):
     s = str(date)
     date = datetime.strptime(s, "%Y-%m-%d")
     if form.validate_on_submit():
-        form.flash_errors()
         #time:
         if (form.isTimed.data):
             time = form.time.data
             time = datetime.combine(date, time)
             insert_note(user.id,form.text.data,form.isTimed.data, time,date)
         else:
-
             insert_note(user.id, form.text.data, form.isTimed.data, None, date)
 
         flash('Succesfully created note!')

@@ -8,6 +8,7 @@ from operator import itemgetter
 from models import *
 from notes import *
 from todos import *
+from goals import *
 
 @app.before_request
 def before_request():
@@ -21,6 +22,7 @@ def main():
 	notes = select_note_by_user_id_and_date(g.user.id, days["today"])
 	timed, notTimed = sort_notes(notes)
 	todos = select_todo_by_user_id_and_date(g.user.id, days["today"])
+	goals = select_current_goal_by_user_id(g.user.id)
 
 	if request.method == 'POST':
 		rq = request.form.getlist('check')
@@ -28,7 +30,7 @@ def main():
 			update_todo_complete(int(rq[0]))
 			update_user_todo_points(g.user.id)
 			return redirect(url_for('main'))
-	return render_template('main.html', title='MainPage', user=user, tnotes= timed, notes=notTimed, days=days, todos=todos)
+	return render_template('main.html', title='MainPage', user=user, tnotes= timed, notes=notTimed, days=days, todos=todos, goals=goals)
 
 @app.route('/timetravel/<date>', methods=['GET', 'POST'])
 @login_required
@@ -45,6 +47,7 @@ def timetravel(date):
 	timed, notTimed = sort_notes(notes)
 	todos = select_todo_by_user_id_and_date(g.user.id, days["today"])
 	if request.method == 'POST':
+		#Todo complete estetty
 		flash("You can't complete that now, silly!")
 
 	return render_template('main.html', title='MainPage', user=user, tnotes= timed, notes=notTimed, days=days, todos=todos)

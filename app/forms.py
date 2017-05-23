@@ -1,7 +1,7 @@
 from flask_wtf import Form
-from wtforms import StringField, BooleanField, PasswordField, DateField
+from wtforms import StringField, BooleanField, PasswordField, DateField, DateTimeField
 from wtforms_components import TimeField
-from wtforms.validators import DataRequired, Length, EqualTo, Required
+from wtforms.validators import DataRequired, Length, EqualTo, Required, Optional
 from flask import flash
 from datetime import datetime
 
@@ -73,7 +73,7 @@ class UserEditForm(Form):
 class NoteEditForm(Form):
     text = StringField('text', validators=[DataRequired(message="Enter text")])
     isTimed = BooleanField('isTimed', default=False)
-    time = TimeField('time', default=datetime.now().time())
+    time = TimeField('time', validators=[Optional(), RequiredIf('isTimed')])
 
     def flash_errors(form):
         for field, errors in form.errors.items():
@@ -86,5 +86,27 @@ class NoteEditForm(Form):
 class TodoEditForm(Form):
     text = StringField('text', validators=[DataRequired(message="Enter text")])
 
+class GoalAddForm(Form):
+    text = StringField('text', validators=[DataRequired(message="Enter text")])
+    end_date = DateTimeField('end_date', validators=[Optional()])
+
+    def flash_errors(form):
+        for field, errors in form.errors.items():
+            for error in errors:
+                flash(u"Error in the %s field - %s" % (
+                    getattr(form, field).label.text,
+                    error
+                ))
+
 class GoalEditForm(Form):
     text = StringField('text', validators=[DataRequired(message="Enter text")])
+    end_date = DateTimeField('end_date', validators=[Optional()])
+    isActive = BooleanField('isActive')
+
+    def flash_errors(form):
+        for field, errors in form.errors.items():
+            for error in errors:
+                flash(u"Error in the %s field - %s" % (
+                    getattr(form, field).label.text,
+                    error
+                ))
