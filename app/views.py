@@ -4,7 +4,7 @@ from flask_login import login_user, logout_user, current_user, login_required
 from datetime import datetime, timedelta
 from operator import itemgetter
 
-from .forms import LoginForm, UserCreateForm, FlashErrors
+from .forms import LoginForm, UserCreateForm, flash_errors
 from models import *
 from notes import *
 from todos import *
@@ -115,7 +115,7 @@ def login():
 	if form.validate_on_submit():
 		#session['remember_me'] = form.remember_me.data
 		return try_login(form.username.data, form.password.data)
-	FlashErrors.flash_errors(form)
+	flash_errors(form)
 	return render_template('login.html', form=form)
 
 def try_login(username, password):
@@ -180,5 +180,5 @@ def create():
 		#login_user(user)
 		flash("Account succefully created! Try logging in.")
 		return redirect(url_for('index'))
-	FlashErrors.flash_errors(form)
+	flash_errors(form)
 	return render_template('create.html', form=form)

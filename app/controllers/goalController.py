@@ -4,7 +4,7 @@ from flask_login import login_required
 from datetime import datetime
 
 #models
-from app.forms import GoalAddForm, GoalEditForm, FlashErrors
+from app.forms import GoalAddForm, GoalEditForm, flash_errors
 from app.goals import *
 
 @app.route('/goal_edit/<id>', methods=['GET', 'POST'])
@@ -26,7 +26,7 @@ def goal_edit(id):
                 update_goal_deactivate(goal[0][0])
             update_goal_text(goal[0][0], form.text.data)
         return redirect(url_for('main'))
-    FlashErrors.flash_errors(form)
+    flash_errors(form)
     return render_template('/goal/edit.html', user=user, goal=goal, form=form)
 
 @app.route('/goal_add/', methods=['GET', 'POST'])
@@ -42,7 +42,7 @@ def goal_add():
             #Talla hetkella end_time ei tallennu ja sita ei kayteta
             insert_goal(g.user.id, form.text.data, None)
         return redirect(url_for('main'))
-    FlashErrors.flash_errors(form)
+    flash_errors(form)
     return render_template('/goal/add.html', user=user, form=form)
 
 @app.route('/goal/delete/<id>', methods=['GET', 'POST'])

@@ -20,14 +20,14 @@ class RequiredIf(Required):
         if other_field.data:
             super(RequiredIf, self).__call__(form, field)
 
-class FlashErrors():
-    def flash_errors(form):
-        for field, errors in form.errors.items():
-            for error in errors:
-                flash(u"Error in the %s field - %s" % (
-                    getattr(form, field).label.text,
-                    error
-                ))
+
+def flash_errors(form):
+    for field, errors in form.errors.items():
+        for error in errors:
+            flash(u"Error in the %s field - %s" % (
+            getattr(form, field).label.text,
+            error
+            ))
 
 class LoginForm(Form):
     username = StringField('username', validators=[DataRequired()])

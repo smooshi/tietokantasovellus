@@ -3,7 +3,7 @@ from app import app
 from flask_login import login_required
 
 #models
-from app.forms import NoteEditForm, FlashErrors
+from app.forms import NoteEditForm, flash_errors
 from app.notes import *
 
 @app.route('/note/edit/<id>', methods=['GET', 'POST'])
@@ -21,7 +21,7 @@ def note_edit(id):
         update_note_text(id, text)
         flash("Succefully edited note!")
         return redirect(url_for('main'))
-    FlashErrors.flash_errors(form)
+    flash_errors(form)
     return render_template('/note/edit.html', note=note, user=user, form=form)
 
 @app.route('/note/add/<date>', methods=['GET', 'POST'])
@@ -37,7 +37,7 @@ def note_add(date):
             if (form.time.data is not None):
                 time = form.time.data
                 time = datetime.combine(date, time)
-                insert_note(user.id,form.text.data,form.isTimed.data, time,date)
+                insert_note(user.id,form.text.data,form.isTimed.data, time, date)
             else:
                 flash('Add time if note is timed.')
                 return render_template('/note/add.html', user=user, form=form)
@@ -50,7 +50,7 @@ def note_add(date):
         else:
             return redirect(url_for('timetravel', date=date.date()))
 
-    FlashErrors.flash_errors(form)
+    flash_errors(form)
     return render_template('/note/add.html', user=user, form=form)
 
 @app.route('/note/delete/<id>', methods=['GET', 'POST'])

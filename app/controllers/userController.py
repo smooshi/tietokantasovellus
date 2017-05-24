@@ -3,7 +3,7 @@ from app import app
 from flask_login import login_required
 
 #models
-from app.forms import UserEditForm, FlashErrors
+from app.forms import UserEditForm, flash_errors
 from app.models import *
 from app.goals import *
 
@@ -16,7 +16,6 @@ def user(id):
 	if user == None or user.id != g.user.id:
 		flash('User not found or allowed.' %(id, g.user.id))
 		return redirect(url_for('index'))
-	FlashErrors.flash_errors(form)
 	return render_template('profile.html', user=user, points=points, goals=goals)
 
 @app.route('/user_edit/<id>', methods=['GET', 'POST'])
@@ -39,7 +38,7 @@ def user_edit(id):
 		return redirect(url_for('user', id=g.user.id))
 
 
-	FlashErrors.flash_errors(form)
+	flash_errors(form)
 	return render_template('/user/edit.html', user=user, form=form)
 
 @app.route('/user_delete/<id>', methods=['GET', 'POST'])
