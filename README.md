@@ -7,6 +7,9 @@ Dokumentaatio: https://github.com/smooshi/tietokantasovellus/blob/master/doc/Tod
 
 Host: https://todoappi.herokuapp.com
 
+Käyttäjätunnukset ohjaajalle: username: tsoha , password: testi
+Käyttäjän luominen toimii myös.
+
 Toteutettu:
   - Sovelluksen pohja (18.5)
   - Login (19.5)
