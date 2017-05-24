@@ -17,7 +17,7 @@ class RequiredIf(Required):
         other_field = form._fields.get(self.other_field_name)
         if other_field is None:
             raise Exception('no field named "%s" in form' % self.other_field_name)
-        if bool(other_field.data):
+        if other_field.data:
             super(RequiredIf, self).__call__(form, field)
 
 class FlashErrors():
