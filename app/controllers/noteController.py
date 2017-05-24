@@ -33,9 +33,13 @@ def note_add(date):
     if form.validate_on_submit():
         #time:
         if (form.isTimed.data):
-            time = form.time.data
-            time = datetime.combine(date, time)
-            insert_note(user.id,form.text.data,form.isTimed.data, time,date)
+            if (form.time.data is not None):
+                time = form.time.data
+                time = datetime.combine(date, time)
+                insert_note(user.id,form.text.data,form.isTimed.data, time,date)
+            else:
+                flash('Add time if note is timed.')
+                return render_template('/note/add.html', user=user, form=form)
         else:
             insert_note(user.id, form.text.data, form.isTimed.data, None, date)
 

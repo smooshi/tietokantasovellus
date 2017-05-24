@@ -80,6 +80,22 @@ def update_user_todo_points(id):
     con.commit()
     con.close()
 
+def update_user_goal_points(id):
+    con = sql.connect("database.db")
+    cur = con.cursor()
+    com = "UPDATE User SET goals = goals+1 WHERE id=?;"
+    cur.execute(com, (id,)).fetchall()
+    con.commit()
+    con.close()
+
+def update_user_focus_points(id):
+    con = sql.connect("database.db")
+    cur = con.cursor()
+    com = "UPDATE User SET focus = focus+1 WHERE id=?;"
+    cur.execute(com, (id,)).fetchall()
+    con.commit()
+    con.close()
+
 #def select_user_todo_points(id):
 
 class User():

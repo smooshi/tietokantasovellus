@@ -37,7 +37,7 @@ def update_goal_text(id, text):
 def delete_goal(id):
     con = sql.connect("database.db")
     cur = con.cursor()
-    cur.execute("DELETE FROM Goal WHERE id=?;", (id))
+    cur.execute("DELETE FROM Goal WHERE id=?;", (id,))
     con.commit()
     con.close()
 
@@ -50,5 +50,11 @@ def update_goal_active(id):
 def update_goal_deactivate(id):
     with sql.connect("database.db") as con:
         cur = con.cursor()
-        cur.execute("UPDATE Goal SET isActive = 0 WHERE id=?;", (id))
+        cur.execute("UPDATE Goal SET isActive = 0 WHERE id=?;", (id,))
+        con.commit()
+
+def update_goal_points(id):
+    with sql.connect("database.db") as con:
+        cur = con.cursor()
+        cur.execute("UPDATE Goal SET points = points+1 WHERE id=?;", (id,))
         con.commit()

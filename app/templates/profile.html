@@ -25,6 +25,19 @@
                             Focus points acquired: {{ focus }} <br>
                         {% endfor %}
                     </p>
+                    <h3>Your inactive goals:</h3>
+                    <table class="table borderless">
+                        {% for id, user_id, text, points, isActive, created_at, edited_at, end_date in goals %}
+                        {% if isActive ==0 %}<tr>
+                            <td class="col-sm-3">
+                                {{ text }}
+                            </td>
+                            <td>
+                                <a href="{{ url_for('goal_edit',id=id) }}"><button type="button">Edit</button></a>
+                            </td>
+                        </tr>{% endif %}
+                        {% endfor %}
+                    </table>
                     <h3>Your groups:</h3>
                     <h3>Groups you belong to:</h3>
                     <br>

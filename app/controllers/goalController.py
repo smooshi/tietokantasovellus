@@ -38,7 +38,9 @@ def goal_add():
         if (form.end_date.data is None or form.end_date.data == ""):
             insert_goal(g.user.id,form.text.data,None)
         else:
-            insert_goal(g.user.id, form.text.data, form.end_date.data)
+            #Tee Date datasta datetime:
+            #Talla hetkella end_time ei tallennu ja sita ei kayteta
+            insert_goal(g.user.id, form.text.data, None)
         return redirect(url_for('main'))
     form.flash_errors()
     return render_template('/goal/add.html', user=user, form=form)

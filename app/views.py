@@ -9,6 +9,7 @@ from models import *
 from notes import *
 from todos import *
 from goals import *
+from focus import *
 
 @app.before_request
 def before_request():
@@ -22,16 +23,37 @@ def main():
 	notes = select_note_by_user_id_and_date(g.user.id, days["today"])
 	timed, notTimed = sort_notes(notes)
 	todos = select_todo_by_user_id_and_date(g.user.id, days["today"])
+	todos = sorted(todos, key=itemgetter(3))
 	goals = select_current_goal_by_user_id(g.user.id)
+	focus = select_current_focus_by_user_id(g.user.id)
 
+	#on taysin mahdollista etta taman voi tehda paremmin
 	if request.method == 'POST':
+		# todo completion:
 		rq = request.form.getlist('check')
 		if (len(rq)>0):
 			update_todo_complete(int(rq[0]))
 			update_user_todo_points(g.user.id)
 			return redirect(url_for('main'))
-	return render_template('main.html', title='MainPage', user=user, tnotes= timed, notes=notTimed, days=days, todos=todos, goals=goals)
 
+		# goal points
+		gl = request.form.getlist('goal')
+		if (len(gl)>0):
+			#flash(gl[0])
+			update_goal_points(gl[0])
+			update_user_goal_points(g.user.id)
+			return redirect(url_for('main'))
+
+		#focus points
+		fp = request.form.getlist('focus')
+		if (len(fp) >0):
+			update_focus_points(fp[0])
+			update_user_focus_points(g.user.id)
+			return redirect(url_for('main'))
+
+	return render_template('main.html', title='MainPage', user=user, tnotes= timed, notes=notTimed, days=days, todos=todos, goals=goals, focus=focus)
+
+#talle tarvitaan parempi ratkaisu
 @app.route('/timetravel/<date>', methods=['GET', 'POST'])
 @login_required
 def timetravel(date):
@@ -39,7 +61,6 @@ def timetravel(date):
 
 	#emt miksei toimi
 	#day = datetime.strptime(str(date),"Y%-%m-%d")
-
 	s = str(date)
 	d = datetime.strptime(s, "%Y-%m-%d")
 	days = set_days(d.date())
@@ -48,7 +69,7 @@ def timetravel(date):
 	todos = select_todo_by_user_id_and_date(g.user.id, days["today"])
 	if request.method == 'POST':
 		#Todo complete estetty
-		flash("You can't complete that now, silly!")
+		flash("That's currently disabled.")
 
 	return render_template('main.html', title='MainPage', user=user, tnotes= timed, notes=notTimed, days=days, todos=todos)
 
@@ -65,8 +86,7 @@ def sort_notes(notes):
 		arr = list(notes[i])
 		if arr[3] == 1:
 			s = arr[4]
-			s = str(s)
-			d = datetime.strptime(s, "%Y-%m-%d %H:%M:%S")
+			d = datetime.strptime(str(s), "%Y-%m-%d %H:%M:%S")
 			t = d.time()
 			arr[4]=t
 			timed.append(arr)

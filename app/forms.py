@@ -98,9 +98,32 @@ class GoalAddForm(Form):
                     error
                 ))
 
+class FocusAddForm(Form):
+    text = StringField('text', validators=[DataRequired(message="Enter text")])
+
+    def flash_errors(form):
+        for field, errors in form.errors.items():
+            for error in errors:
+                flash(u"Error in the %s field - %s" % (
+                    getattr(form, field).label.text,
+                    error
+                ))
+
 class GoalEditForm(Form):
     text = StringField('text', validators=[DataRequired(message="Enter text")])
-    end_date = DateTimeField('end_date', validators=[Optional()])
+    end_date = DateField('end_date', validators=[Optional()])
+    isActive = BooleanField('isActive')
+
+    def flash_errors(form):
+        for field, errors in form.errors.items():
+            for error in errors:
+                flash(u"Error in the %s field - %s" % (
+                    getattr(form, field).label.text,
+                    error
+                ))
+
+class FocusEditForm(Form):
+    text = StringField('text', validators=[DataRequired(message="Enter text")])
     isActive = BooleanField('isActive')
 
     def flash_errors(form):
