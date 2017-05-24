@@ -4,7 +4,7 @@ from flask_login import login_required
 from datetime import datetime
 
 #models
-from app.forms import TodoEditForm
+from app.forms import TodoEditForm, FlashErrors
 from app.models import *
 from app.todos import *
 
@@ -23,6 +23,7 @@ def todo_edit(id):
         update_todo_text(id, text)
         flash("Succefully edited note!")
         return redirect(url_for('main'))
+    FlashErrors.flash_errors(form)
     return render_template('/todo/edit.html', todo=todo, user=user, form=form)
 
 @app.route('/todo/add/<date>', methods=['GET', 'POST'])
@@ -41,6 +42,7 @@ def todo_add(date):
         else:
             return redirect(url_for('timetravel', date=date.date()))
 
+    FlashErrors.flash_errors(form)
     return render_template('/todo/add.html', user=user, form=form)
 
 @app.route('/todo/delete/<id>', methods=['GET', 'POST'])

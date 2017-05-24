@@ -4,7 +4,7 @@ from flask_login import login_required
 from datetime import datetime
 
 #models
-from app.forms import FocusAddForm, FocusEditForm
+from app.forms import FocusAddForm, FocusEditForm, FlashErrors
 from app.focus import *
 
 @app.route('/focus_edit/<id>', methods=['GET', 'POST'])
@@ -26,7 +26,7 @@ def focus_edit(id):
                 update_focus_deactivate(focus[0][0])
             update_focus_text(focus[0][0], form.text.data)
         return redirect(url_for('main'))
-    form.flash_errors()
+    FlashErrors.flash_errors(form)
     return render_template('/focus/edit.html', user=user, focus=focus, form=form)
 
 @app.route('/focus_add/', methods=['GET', 'POST'])
@@ -42,7 +42,7 @@ def focus_add():
             #Talla hetkella end_time ei tallennu ja sita ei kayteta
         insert_focus(g.user.id, form.text.data, None)
         return redirect(url_for('main'))
-    form.flash_errors()
+    FlashErrors.flash_errors(form)
     return render_template('/focus/add.html', user=user, form=form)
 
 @app.route('/focus/delete/<id>', methods=['GET', 'POST'])

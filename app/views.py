@@ -1,10 +1,10 @@
 from app import app,lm
 from flask import render_template, redirect, request, flash, g, session, url_for
-from .forms import LoginForm, UserCreateForm
 from flask_login import login_user, logout_user, current_user, login_required
 from datetime import datetime, timedelta
 from operator import itemgetter
 
+from .forms import LoginForm, UserCreateForm, FlashErrors
 from models import *
 from notes import *
 from todos import *
@@ -115,6 +115,7 @@ def login():
 	if form.validate_on_submit():
 		#session['remember_me'] = form.remember_me.data
 		return try_login(form.username.data, form.password.data)
+	FlashErrors.flash_errors(form)
 	return render_template('login.html', form=form)
 
 def try_login(username, password):
@@ -162,7 +163,6 @@ def create():
 		return redirect(url_for('main'))
 	form = UserCreateForm()
 	if form.validate_on_submit():
-		form.flash_errors()
 		username = form.username.data
 		password = form.password.data
 		email = form.email.data
@@ -180,5 +180,5 @@ def create():
 		#login_user(user)
 		flash("Account succefully created! Try logging in.")
 		return redirect(url_for('index'))
-	form.flash_errors()
+	FlashErrors.flash_errors(form)
 	return render_template('create.html', form=form)
