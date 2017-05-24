@@ -1,6 +1,7 @@
 from flask import render_template, flash, redirect, url_for, g
 from app import app
 from flask_login import login_required
+from datetime import datetime
 
 #models
 from app.forms import NoteEditForm, flash_errors
@@ -28,7 +29,8 @@ def note_edit(id):
 @login_required
 def note_add(date):
     user = g.user
-    form = NoteEditForm()
+    time = datetime(2017,01,01,00,00,00)
+    form = NoteEditForm(time=time.time())
     s = str(date)
     date = datetime.strptime(s, "%Y-%m-%d")
     if form.validate_on_submit():

@@ -3,13 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a392ad2f-6047-433f-b399-a69f0cce78cc" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database.db" afterPath="$PROJECT_DIR$/database.db" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/focusController.py" afterPath="$PROJECT_DIR$/app/controllers/focusController.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/goalController.py" afterPath="$PROJECT_DIR$/app/controllers/goalController.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/noteController.py" afterPath="$PROJECT_DIR$/app/controllers/noteController.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/todoController.py" afterPath="$PROJECT_DIR$/app/controllers/todoController.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/userController.py" afterPath="$PROJECT_DIR$/app/controllers/userController.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/forms.py" afterPath="$PROJECT_DIR$/app/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views.py" afterPath="$PROJECT_DIR$/app/views.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -104,8 +98,8 @@
       <file leaf-file-name="noteController.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/noteController.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="24">
-              <caret line="39" column="76" lean-forward="false" selection-start-line="39" selection-start-column="76" selection-end-line="39" selection-end-column="76" />
+            <state relative-caret-position="252">
+              <caret line="31" column="24" lean-forward="false" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="24" />
               <folding>
                 <element signature="e#0#62#0" expanded="true" />
               </folding>
@@ -910,8 +904,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/noteController.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24">
-          <caret line="39" column="76" lean-forward="false" selection-start-line="39" selection-start-column="76" selection-end-line="39" selection-end-column="76" />
+        <state relative-caret-position="252">
+          <caret line="31" column="24" lean-forward="false" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="24" />
           <folding>
             <element signature="e#0#62#0" expanded="true" />
           </folding>
