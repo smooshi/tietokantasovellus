@@ -48,5 +48,10 @@ def goal_add():
 @app.route('/goal/delete/<id>', methods=['GET', 'POST'])
 @login_required
 def goal_delete(id):
-    flash("Attempted to delete goal.")
+    goal = select_goal_by_id(id)
+    if goal == None or goal[0][1] != g.user.id:
+        flash('Unauthorised enter to user delete.')
+        return redirect(url_for('index'))
+    delete_goal(goal[0][0])
+    flash("Succesfully deleted goal.")
     return redirect(url_for('main'))

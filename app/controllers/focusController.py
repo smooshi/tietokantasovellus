@@ -48,5 +48,10 @@ def focus_add():
 @app.route('/focus/delete/<id>', methods=['GET', 'POST'])
 @login_required
 def focus_delete(id):
-    flash("Attempted to delete focus.")
+    focus = select_focus_by_id(id)
+    if focus == None or focus[0][1] != g.user.id:
+        flash('Unauthorised enter to user delete.')
+        return redirect(url_for('index'))
+    delete_focus(focus[0][0])
+    flash("Succesfully deleted focus.")
     return redirect(url_for('main'))
