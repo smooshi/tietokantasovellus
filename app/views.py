@@ -10,6 +10,7 @@ from notes import *
 from todos import *
 from goals import *
 from focus import *
+from groups import *
 
 @app.before_request
 def before_request():

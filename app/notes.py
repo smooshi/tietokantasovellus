@@ -12,7 +12,7 @@ def insert_note(user_id, text, isTimed, time, date):
 def select_note_by_user_id(user_id):
     with sql.connect("database.db") as con:
         cur = con.cursor()
-        result = cur.execute("SELECT * FROM Note WHERE user_id=?;", user_id).fetchall()
+        result = cur.execute("SELECT * FROM Note WHERE user_id=?;", (user_id,)).fetchall()
     return result
 
 def select_note_by_user_id_and_date(user_id, date):
@@ -24,7 +24,7 @@ def select_note_by_user_id_and_date(user_id, date):
 def select_note_by_id(id):
     with sql.connect("database.db") as con:
         cur = con.cursor()
-        result = cur.execute("SELECT * FROM Note WHERE id=?;", id).fetchall()
+        result = cur.execute("SELECT * FROM Note WHERE id=?;", (id,)).fetchall()
     return result
 
 def update_note_text(id, text):

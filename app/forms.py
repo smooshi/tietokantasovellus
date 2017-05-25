@@ -69,3 +69,7 @@ class GoalEditForm(Form):
 class FocusEditForm(Form):
     text = StringField('text', validators=[DataRequired(message="Enter text")])
     isActive = BooleanField('isActive')
+
+class GroupAddForm(Form):
+    name = StringField('name', validators=[DataRequired()])
+    description = StringField('description', validators=[DataRequired()])

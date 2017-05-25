@@ -39,7 +39,7 @@ def delete_user(id):
     con = sql.connect("database.db")
     cur = con.cursor()
     com = "DELETE FROM User WHERE id=?;"
-    cur.execute(com, (id))
+    cur.execute(com, (id,))
     con.commit()
     con.close()
 
@@ -47,7 +47,7 @@ def select_by_id_user(id):
     with sql.connect("database.db") as con:
         cur = con.cursor()
         com = "SELECT * FROM User WHERE id=?;"
-        result = cur.execute(com, (id)).fetchall()
+        result = cur.execute(com, (id,)).fetchall()
         if len(result) > 0:
             user = User(result[0][0], result[0][1], result[0][2], result[0][3], result[0][4])
             return user

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+   {% extends "base.html" %}
+
+    {% block content %}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Groups: </h2>
+                    <table class="table">
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th></th>
+                        </tr>
+                        {% for id, name, description, created_at, edited_at in groups %}
+                                <tr>
+                                    <td class="col-sm-3"> {{ name }}</td>
+                                    <td> {{ description }}</td>
+                                    <td>
+                                    <a href="{{ url_for('group',id=id) }}"><button type="button" class="btn-primary">Inspect</button></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+</body>
+</html>
