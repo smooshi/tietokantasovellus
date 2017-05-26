@@ -12,16 +12,9 @@
 .divbutton:hover button {
     height: 25px;
     display: inline-block;
-}
 
-button {
-    height: 20px;
-    width: 40px;
+}button {
     display: none;
-    border: 1px solid;
-    border-radius: 7px;
-    background: wheat;
-    padding-top: 0px;
 }
 
 table button{

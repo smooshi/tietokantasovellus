@@ -108,15 +108,13 @@
  <a class="right carousel-control" href="#text-carousel" data-slide="next">
     <span class="glyphicon glyphicon-chevron-right"></span>
   </a>
-
-</div>
-            </div>
-        </div>
-
-    </div>
+                </div></div></div></div>
 
 
-    <div class="col-md-6">
+
+
+         <div class="col-md-6">
+
         <h2> <a href="{{ url_for('timetravel', date=days["yesterday"]) }}"><</a>  {{ days["today"].strftime("%d %B %Y") }}  <a href="{{ url_for('timetravel', date=days["tomorrow"]) }}">></a>  </h2>
       <h3>Terve {{ user.name }}</h3>
         <h4>Notes <a href="{{ url_for('note_add', date=days["today"]) }}">(+)</a></h4>
@@ -149,22 +147,25 @@
 
         <h4>Todos <a href="{{ url_for('todo_add', date=days["today"]) }}">(+)</a></h4>
          <form method="post">
+
+         <table class="table borderless">
+
         {% for id, user_id, text, isComplete, date in todos %}
 
             {% if isComplete == 0 %}
-            <div class="divbutton">
-                <label><input type="checkbox" name='check' value={{ id }}  onclick="this.form.submit()"> {{ text }} </label>        <a href="{{ url_for('todo_edit',id=id) }}"><button type="button">Edit</button></a>
-            </div>
+            <tr><td>
+                <label><input type="checkbox" name='check' value={{ id }}  onclick="this.form.submit()"> {{ text }} </label> </td><td>       <a href="{{ url_for('todo_edit',id=id) }}"><button type="button">Edit</button></a>
+            </td></tr>
             {% else %}
-               <div class="divbutton">
-                   <label><s><input type="checkbox" name='checked' disabled checked> {{ text }} </s></label>      <a href="{{ url_for('todo_edit',id=id) }}"><button type="button">Edit</button></a>
-                </div>
+             <tr><td>
+                 <label><s><input type="checkbox" name='checked' disabled checked> {{ text }} </s></label> </td><td>     <a href="{{ url_for('todo_edit',id=id) }}"><button type="button">Edit</button></a>
+             </td></tr>  
             {% endif %}
-
-
-            </p>
         {% endfor %}
+
+        </table>
         </form>
+         </div>
     </div>
   </div>
 </div>

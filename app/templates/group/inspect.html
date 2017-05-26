@@ -23,6 +23,10 @@
                             {{ name }}
                             </p>
                         {% endfor %}
+
+                    {% if admin %}
+                    <a href="{{ url_for('group_edit', id=group[0][0]) }}" type="btn btn-warning"><button type="button" class="btn btn-warning">Edit Group</button></a>
+                    {% endif %}
                     {% else %}
                         <form method="post" name="focus">
                             <input type="submit" class="btn btn-default" name="join" value="Join Group">

@@ -11,7 +11,6 @@ def insert_group(name, description):
     con.close()
     return id
 
-
 def select_all_groups():
     with sql.connect("database.db") as con:
         cur = con.cursor()
@@ -29,7 +28,7 @@ def select_group_by_id(id):
 def update_group(name, description, id):
     with sql.connect("database.db") as con:
         cur = con.cursor()
-        com = "UPDATE Groups SET name = ? AND description = ? AND edited_at = ? WHERE id=?;"
+        com = "UPDATE Groups SET name = ?, description = ?, edited_at = ? WHERE id=?;"
         cur.execute(com, (name, description, datetime.now(), id)).fetchall()
         con.commit()
 
@@ -52,6 +51,14 @@ def is_user_in_group(user_id, group_id):
         cur = con.cursor()
         #com = "SELECT * FROM User_in_Group WHERE group_id=? AND user_id=?;"
         com = "SELECT CASE WHEN EXISTS (SELECT * FROM User_in_Group WHERE group_id=? AND user_id=?) THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END;"
+        result = cur.execute(com, (group_id, user_id)).fetchall()
+    return result
+
+def is_user_group_admin(user_id, group_id):
+    with sql.connect("database.db") as con:
+        cur = con.cursor()
+        #com = "SELECT * FROM User_in_Group WHERE group_id=? AND user_id=?;"
+        com = "SELECT CASE WHEN EXISTS (SELECT * FROM User_in_Group WHERE group_id=? AND user_id=? AND isAdmin=1) THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END;"
         result = cur.execute(com, (group_id, user_id)).fetchall()
     return result
 

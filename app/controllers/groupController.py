@@ -49,6 +49,7 @@ def group(id):
     group = select_group_by_id(id)
     users = select_users_by_group_id(id)
     grouped = False
+    admin = False
     userNames = list()
 
     #does g.user belong in this group
@@ -58,9 +59,34 @@ def group(id):
         for i in range (0, len(users)):
             userNames.append(users[i][2])
 
+    #is user group admin
+    isA = is_user_group_admin(g.user.id, id)
+    if (isA[0][0] == 1):
+        admin = True
+
     if request.method == 'POST':
         j = request.form.getlist('join')
         if (len(j)>0):
             insert_user_in_group(g.user.id, id)
             return redirect(url_for('group', id=id))
-    return render_template('/group/inspect.html', user=user, group=group, grouped=grouped, userNames=userNames)
+    return render_template('/group/inspect.html', user=user, group=group, grouped=grouped, userNames=userNames, admin=admin)
+
+@app.route('/group/edit/<id>', methods=['GET', 'POST'])
+@login_required
+def group_edit(id):
+    user=g.user
+    group = select_group_by_id(id)
+    form=GroupAddForm(name=group[0][1], description=group[0][2])
+
+    isA = is_user_group_admin(g.user.id, id)
+    if (isA[0][0] == 0):
+        flash('No.')
+        return redirect(url_for('groups'))
+
+    if form.validate_on_submit():
+        update_group(form.name.data, form.description.data, id)
+        flash("Edited group details!")
+        return redirect(url_for('group', id=id))
+
+    flash_errors(form)
+    return render_template('/group/edit.html', user=user, group=group, form=form)

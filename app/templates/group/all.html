@@ -22,9 +22,7 @@
                                 <tr>
                                     <td class="col-sm-3"> {{ name }}</td>
                                     <td> {{ description }}</td>
-                                    <td>
-                                    <a href="{{ url_for('group',id=id) }}"><button type="button" class="btn-primary">Inspect</button></a>
-                                    </td>
+                                    <td><a href="{{ url_for('group',id=id) }}">Inspect</a></td>
                                 </tr>
                             {% endfor %}
                     </table>

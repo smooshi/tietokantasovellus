@@ -60,18 +60,22 @@ def main():
 @login_required
 def timetravel(date):
 	user = g.user
-
 	#emt miksei toimi
 	#day = datetime.strptime(str(date),"Y%-%m-%d")
 	s = str(date)
 	d = datetime.strptime(s, "%Y-%m-%d")
 	days = set_days(d.date())
+
+	if (days["today"] == datetime.now().date):
+		return redirect(url_for('main'))
+
 	notes = select_note_by_user_id_and_date(g.user.id, days["today"])
 	timed, notTimed = sort_notes(notes)
 	todos = select_todo_by_user_id_and_date(g.user.id, days["today"])
 	goals = select_current_goal_by_user_id(g.user.id)
 	focus = select_current_focus_by_user_id(g.user.id)
 	groups = select_groups_by_user_id(g.user.id)
+
 	if request.method == 'POST':
 		#Todo complete estetty
 		flash("That's currently disabled.")
