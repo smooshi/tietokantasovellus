@@ -27,6 +27,7 @@ def main():
 	todos = sorted(todos, key=itemgetter(3))
 	goals = select_current_goal_by_user_id(g.user.id)
 	focus = select_current_focus_by_user_id(g.user.id)
+	groups = select_groups_by_user_id(g.user.id)
 
 	#on taysin mahdollista etta taman voi tehda paremmin
 	if request.method == 'POST':
@@ -52,7 +53,7 @@ def main():
 			update_user_focus_points(g.user.id)
 			return redirect(url_for('main'))
 
-	return render_template('main.html', title='MainPage', user=user, tnotes= timed, notes=notTimed, days=days, todos=todos, goals=goals, focus=focus)
+	return render_template('main.html', title='MainPage', user=user, tnotes= timed, notes=notTimed, days=days, todos=todos, goals=goals, focus=focus, groups=groups)
 
 #talle tarvitaan parempi ratkaisu
 @app.route('/timetravel/<date>', methods=['GET', 'POST'])
@@ -68,11 +69,14 @@ def timetravel(date):
 	notes = select_note_by_user_id_and_date(g.user.id, days["today"])
 	timed, notTimed = sort_notes(notes)
 	todos = select_todo_by_user_id_and_date(g.user.id, days["today"])
+	goals = select_current_goal_by_user_id(g.user.id)
+	focus = select_current_focus_by_user_id(g.user.id)
+	groups = select_groups_by_user_id(g.user.id)
 	if request.method == 'POST':
 		#Todo complete estetty
 		flash("That's currently disabled.")
 
-	return render_template('main.html', title='MainPage', user=user, tnotes= timed, notes=notTimed, days=days, todos=todos)
+	return render_template('main.html', title='MainPage', user=user, tnotes= timed, notes=notTimed, days=days, todos=todos, goals=goals, groups=groups, focus=focus)
 
 def set_days(date):
 	t = date+timedelta(days=1)

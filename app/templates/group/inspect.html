@@ -14,7 +14,7 @@
                   <h2>{{ group[0][1] }}</h2>
                     <h3>Description:</h3>
                     <p>{{ group[0][2] }}</p>
-                    <h4>Users in group: {{ u_amount }}</h4>
+                    <h4>Users in group: {{ userNames|length }}</h4>
                     {% if grouped %}
                         You are in this group.
                         <h5>Users:</h5>

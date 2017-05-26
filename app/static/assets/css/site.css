@@ -41,3 +41,25 @@ table tr:hover button{
     height: 20px;
     width: 20px;
 }
+
+.body {
+  background-color: white;
+}
+
+.carousel-content {
+    color:black;
+    display:flex;
+    align-items:center;
+}
+
+#text-carousel {
+  width: 100%;
+  height: auto;
+    padding-left: 50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.carousel-control.left, .carousel-control.right {
+    background-image: none
+}

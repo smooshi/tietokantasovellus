@@ -47,24 +47,26 @@ def insert_user_in_group_admin(user_id, group_id):
     con.commit()
     con.close()
 
-def select_this_users_groups(user_id):
-    with sql.connect("database.db") as con:
-        cur = con.cursor()
-        com = "SELECT * FROM User_in_Group WHERE user_id=?;"
-        result = cur.execute(com, (user_id,)).fetchall()
-    return result
-
-def select_users_in_group(group_id):
-    with sql.connect("database.db") as con:
-        cur = con.cursor()
-        com = "SELECT * FROM User_in_Group WHERE group_id=?;"
-        result = cur.execute(com, (group_id,)).fetchall()
-    return result
-
 def is_user_in_group(user_id, group_id):
     with sql.connect("database.db") as con:
         cur = con.cursor()
         #com = "SELECT * FROM User_in_Group WHERE group_id=? AND user_id=?;"
         com = "SELECT CASE WHEN EXISTS (SELECT * FROM User_in_Group WHERE group_id=? AND user_id=?) THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END;"
         result = cur.execute(com, (group_id, user_id)).fetchall()
+    return result
+
+def select_groups_by_user_id(user_id):
+    with sql.connect("database.db") as con:
+        cur = con.cursor()
+        #com = "SELECT * FROM Groups INNER JOIN User_in_Group ON Groups.id = User_in_Group.group_id WHERE User_in_Group.user_id = ?;"
+        com = "SELECT g.* FROM Groups g INNER JOIN User_in_Group ug ON g.id=ug.group_id WHERE ug.user_id=?;"
+        result = cur.execute(com, (user_id,)).fetchall()
+    return result
+
+def select_users_by_group_id(group_id):
+    with sql.connect("database.db") as con:
+        cur = con.cursor()
+        #com = "SELECT * FROM User INNER JOIN User_in_Group ON User.id = User_in_Group.user_id WHERE User_in_Group.group_id = ?;"
+        com = "SELECT u.* FROM User u INNER JOIN User_in_Group ug ON u.id=ug.user_id WHERE ug.group_id=?;"
+        result = cur.execute(com, (group_id,)).fetchall()
     return result
