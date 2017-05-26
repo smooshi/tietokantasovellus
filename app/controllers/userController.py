@@ -16,7 +16,7 @@ def user(id):
 	if user == None or user.id != g.user.id:
 		flash('User not found or allowed.' %(id, g.user.id))
 		return redirect(url_for('index'))
-	return render_template('profile.html', user=user, points=points, goals=goals)
+	return render_template('/user/profile.html', user=user, points=points, goals=goals)
 
 @app.route('/user_edit/<id>', methods=['GET', 'POST'])
 @login_required
@@ -48,5 +48,5 @@ def user_delete(id):
 	if user == None or user.id != g.user.id:
 		flash('Unauthorised enter to user delete.')
 		return redirect(url_for('index'))
-	flash('Attempted to delete user')
+	flash('Attempted to delete user. (Not implemented)')
 	return redirect(url_for('index'))

@@ -77,3 +77,19 @@ def select_users_by_group_id(group_id):
         com = "SELECT u.* FROM User u INNER JOIN User_in_Group ug ON u.id=ug.user_id WHERE ug.group_id=?;"
         result = cur.execute(com, (group_id,)).fetchall()
     return result
+
+def delete_user_in_group(user_id, group_id):
+    con = sql.connect("database.db")
+    cur = con.cursor()
+    com = "DELETE FROM User_in_Group WHERE group_id=? AND user_id=?;"
+    cur.execute(com, (group_id,user_id))
+    con.commit()
+    con.close()
+
+def delete_group(id):
+    con = sql.connect("database.db")
+    cur = con.cursor()
+    com = "DELETE FROM Groups WHERE id=?;"
+    cur.execute(com, (id,))
+    con.commit()
+    con.close()

@@ -1,9 +1,9 @@
-from flask import Flask
-import sys
 import logging
-#from flask_sqlalchemy import SQLAlchemy
+# from flask_sqlalchemy import SQLAlchemy
 import sqlite3
-from contextlib import closing
+import sys
+
+from flask import Flask
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -32,5 +32,6 @@ lm.login_view = 'login'
 lm.login_message = "Please login first."
 
 #last
-from app import views, models
+from app import models
+from app.controllers import views
 from app.controllers import *

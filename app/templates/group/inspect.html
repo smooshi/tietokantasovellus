@@ -14,18 +14,31 @@
                   <h2>{{ group[0][1] }}</h2>
                     <h3>Description:</h3>
                     <p>{{ group[0][2] }}</p>
-                    <h4>Users in group: {{ userNames|length }}</h4>
+
                     {% if grouped %}
                         You are in this group.
+                        <h4>Users in group: {{ users|length }}</h4>
+
                         <h5>Users:</h5>
-                        {% for name in userNames %}
+                        {% for i in range(0, users|length) %}
                             <p>
-                            {{ name }}
+                            {{ users[i][2] }}
+                            {% if admin %}
+                                <a href="{{ url_for('remove_user', user_id=users[i][0], group_id=group[0][0]) }}"><button type="button" class="btn btn-xs btn-danger">Remove</button></a>
+                            {% endif %}
                             </p>
                         {% endfor %}
+                        <br>
+                        <p>
+                        <a href="{{ url_for('leave_group', id=group[0][0]) }}"><button type="button" class="btn btn-danger">Leave Group</button></a>
+                        </p>
 
                     {% if admin %}
-                    <a href="{{ url_for('group_edit', id=group[0][0]) }}" type="btn btn-warning"><button type="button" class="btn btn-warning">Edit Group</button></a>
+                        <br>
+                        <p>
+                         <a href="{{ url_for('group_edit', id=group[0][0]) }}"><button type="button" class="btn btn-warning">Edit Group</button></a>
+
+                        </p>
                     {% endif %}
                     {% else %}
                         <form method="post" name="focus">

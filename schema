@@ -76,3 +76,16 @@ isAdmin bool not null default 0,
 FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE,
 FOREIGN KEY (group_id) REFERENCES Groups(id) ON DELETE CASCADE
 );
+
+drop table if exists GroupDiscussion;
+create table GroupDiscussion(
+id integer PRIMARY key autoincrement,
+user_id integer not null,
+group_id integer not null,
+title text not null,
+text text not null,
+created_at DATETIME not null,
+edited_at DATETIME not null,
+FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE,
+FOREIGN KEY (group_id) REFERENCES Groups(id) ON DELETE CASCADE
+);

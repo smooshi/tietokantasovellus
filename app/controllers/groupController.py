@@ -42,34 +42,35 @@ def group_add():
         return redirect(url_for('main'))
     return render_template('/group/add.html', user=user, form=form)
 
+def is_user_admin(user_id, group_id):
+    isA = is_user_group_admin(user_id, group_id)
+    if (isA[0][0] == 1):
+        return True
+    else:
+        return False
+
+def is_user_in_this_group(user_id, group_id):
+    isU = is_user_in_group(user_id, group_id)
+    if (isU[0][0] == 1):
+        return True
+    else:
+        return False
+
 @app.route('/group/<id>', methods=['GET', 'POST'])
 @login_required
 def group(id):
     user=g.user
     group = select_group_by_id(id)
     users = select_users_by_group_id(id)
-    grouped = False
-    admin = False
-    userNames = list()
-
-    #does g.user belong in this group
-    isU = is_user_in_group(g.user.id, id)
-    if (isU[0][0] == 1):
-        grouped = True
-        for i in range (0, len(users)):
-            userNames.append(users[i][2])
-
-    #is user group admin
-    isA = is_user_group_admin(g.user.id, id)
-    if (isA[0][0] == 1):
-        admin = True
+    grouped = is_user_in_this_group(user.id, id)
+    admin = is_user_admin(user.id, id)
 
     if request.method == 'POST':
         j = request.form.getlist('join')
         if (len(j)>0):
             insert_user_in_group(g.user.id, id)
             return redirect(url_for('group', id=id))
-    return render_template('/group/inspect.html', user=user, group=group, grouped=grouped, userNames=userNames, admin=admin)
+    return render_template('/group/inspect.html', user=user, group=group, grouped=grouped, users=users, admin=admin)
 
 @app.route('/group/edit/<id>', methods=['GET', 'POST'])
 @login_required
@@ -78,8 +79,7 @@ def group_edit(id):
     group = select_group_by_id(id)
     form=GroupAddForm(name=group[0][1], description=group[0][2])
 
-    isA = is_user_group_admin(g.user.id, id)
-    if (isA[0][0] == 0):
+    if not is_user_admin(user.id, id):
         flash('No.')
         return redirect(url_for('groups'))
 
@@ -90,3 +90,32 @@ def group_edit(id):
 
     flash_errors(form)
     return render_template('/group/edit.html', user=user, group=group, form=form)
+
+@app.route('/group/leave/<id>')
+@login_required
+def leave_group(id):
+    user = g.user
+    delete_user_in_group(user.id, id)
+    flash('Left group!')
+    return redirect(url_for('main'))
+
+@app.route('/group/remove/<user_id><group_id>')
+@login_required
+def remove_user(user_id, group_id):
+    if is_user_admin(g.user.id, group_id):
+        delete_user_in_group(user_id, group_id)
+        flash('Removed user from group.')
+        return redirect(url_for('group', id=group_id))
+    else:
+        flash('Not allowed.')
+        return redirect(url_for('main'))
+
+@app.route('/group/delete/<id>')
+@login_required
+def group_delete(id):
+    if is_user_admin(g.user.id, id):
+        flash('Deleted group!')
+        delete_group(id)
+    else:
+        flash('Not allowed.')
+    return redirect(url_for('main'))

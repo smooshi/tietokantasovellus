@@ -71,43 +71,43 @@
 
                 <div id="text-carousel" class="carousel slide" data-ride="carousel">
     <!-- Wrapper for slides -->
-    <div class="row">
-        <div class="col-xs-offset-1 col-xs-6">
-            <div class="carousel-inner">
-
-                <div class="item active">
-                    <div class="carousel-content">
-                        <div>
-                            <h4>{{ groups[0][1] }}</h4>
-                            <p>
-                                {{ groups[0][2] }}
-                            </p>
+                <div class="row">
+                    <div class="col-xs-offset-1 col-xs-6">
+                        <div class="carousel-inner">
+            
+                            <div class="item active">
+                                <div class="carousel-content">
+                                    <div>
+                                        <h4>{{ groups[0][1] }}</h4>
+                                        <p>
+                                            {{ groups[0][2] }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+            
+                            {% for i in range(1,groups|length) %}
+            
+                            <div class="item">
+                                <div class="carousel-content">
+                                    <div>
+                                        <h4>{{ groups[i][1] }}</h4>
+                                        <p>{{ groups[i][2] }}</p>
+                                    </div>
+                                </div>
+                            </div>
+            
+                            {% endfor %}
+            
                         </div>
                     </div>
                 </div>
-
-                {% for i in range(1,groups|length) %}
-
-                <div class="item">
-                    <div class="carousel-content">
-                        <div>
-                            <h4>{{ groups[i][1] }}</h4>
-                            <p>{{ groups[i][2] }}</p>
-                        </div>
-                    </div>
-                </div>
-
-                {% endfor %}
-
-            </div>
-        </div>
-    </div>
-    <!-- Controls --> <a class="left carousel-control" href="#text-carousel" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left"></span>
-  </a>
- <a class="right carousel-control" href="#text-carousel" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right"></span>
-  </a>
+                <!-- Controls --> <a class="left carousel-control" href="#text-carousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+              </a>
+             <a class="right carousel-control" href="#text-carousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+              </a>
                 </div></div></div></div>
 
 

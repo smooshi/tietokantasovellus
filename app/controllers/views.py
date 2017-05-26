@@ -4,13 +4,13 @@ from flask_login import login_user, logout_user, current_user, login_required
 from datetime import datetime, timedelta
 from operator import itemgetter
 
-from .forms import LoginForm, UserCreateForm, flash_errors
-from models import *
-from notes import *
-from todos import *
-from goals import *
-from focus import *
-from groups import *
+from app.forms import LoginForm, UserCreateForm, flash_errors
+from app.models import *
+from app.notes import *
+from app.todos import *
+from app.goals import *
+from app.focus import *
+from app.groups import *
 
 @app.before_request
 def before_request():
