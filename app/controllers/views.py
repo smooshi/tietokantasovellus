@@ -11,6 +11,7 @@ from app.todos import *
 from app.goals import *
 from app.focus import *
 from app.groups import *
+from app.discussions import *
 
 @app.before_request
 def before_request():
@@ -28,6 +29,8 @@ def main():
 	goals = select_current_goal_by_user_id(g.user.id)
 	focus = select_current_focus_by_user_id(g.user.id)
 	groups = select_groups_by_user_id(g.user.id)
+	latest = get_latest_discussions(groups)
+
 
 	#on taysin mahdollista etta taman voi tehda paremmin
 	if request.method == 'POST':
@@ -53,7 +56,7 @@ def main():
 			update_user_focus_points(g.user.id)
 			return redirect(url_for('main'))
 
-	return render_template('main.html', title='MainPage', user=user, tnotes= timed, notes=notTimed, days=days, todos=todos, goals=goals, focus=focus, groups=groups)
+	return render_template('main.html', title='MainPage', user=user, tnotes= timed, notes=notTimed, days=days, todos=todos, goals=goals, focus=focus, groups=groups, latest=latest)
 
 #talle tarvitaan parempi ratkaisu
 @app.route('/timetravel/<date>', methods=['GET', 'POST'])
@@ -66,6 +69,7 @@ def timetravel(date):
 	d = datetime.strptime(s, "%Y-%m-%d")
 	days = set_days(d.date())
 
+
 	if (days["today"] == datetime.now().date):
 		return redirect(url_for('main'))
 
@@ -75,19 +79,22 @@ def timetravel(date):
 	goals = select_current_goal_by_user_id(g.user.id)
 	focus = select_current_focus_by_user_id(g.user.id)
 	groups = select_groups_by_user_id(g.user.id)
+	latest = get_latest_discussions(groups)
 
 	if request.method == 'POST':
 		#Todo complete estetty
 		flash("That's currently disabled.")
 
-	return render_template('main.html', title='MainPage', user=user, tnotes= timed, notes=notTimed, days=days, todos=todos, goals=goals, groups=groups, focus=focus)
+	return render_template('main.html', title='MainPage', user=user, tnotes= timed, notes=notTimed, days=days, todos=todos, goals=goals, groups=groups, focus=focus, latest=latest)
 
+#Set yesterday,today, tomorrow into dictionary
 def set_days(date):
 	t = date+timedelta(days=1)
 	y = date+timedelta(days=-1)
 	days = {"today":date, "tomorrow": t, "yesterday": y}
 	return(days)
 
+#Sort notes into right order
 def sort_notes(notes):
 	timed = list()
 	notTimed = list()
@@ -104,6 +111,13 @@ def sort_notes(notes):
 
 	timed = sorted(timed, key=itemgetter(4))
 	return timed, notTimed
+
+#set the latest post in group to dict where key is group id
+def get_latest_discussions(groups):
+	latest = {}
+	for i in range(0, len(groups)):
+		latest[groups[i][0]] = latest_discussion_in_group(groups[i][0])
+	return latest
 
 @app.route('/')
 @app.route('/index')
@@ -127,6 +141,7 @@ def login():
 	flash_errors(form)
 	return render_template('login.html', form=form)
 
+#Login logiikka
 def try_login(username, password):
 	if username is None or username =="":
 		flash('Invalid username. Please try again.')
@@ -147,7 +162,8 @@ def try_login(username, password):
 		else:
 			flash('Password is wrong. Please try again.')
 			return redirect(url_for('login'))
-#
+
+#Required for login manager
 @lm.user_loader
 def load_user(id):
 	user = select_by_id_user(id)

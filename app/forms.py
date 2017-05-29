@@ -73,3 +73,7 @@ class FocusEditForm(Form):
 class GroupAddForm(Form):
     name = StringField('name', validators=[DataRequired()])
     description = StringField('description', validators=[DataRequired()])
+
+class DiscussionAddForm(Form):
+    title = StringField('title', validators=[DataRequired()])
+    text = StringField('text', validators=[DataRequired()])

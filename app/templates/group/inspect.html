@@ -30,9 +30,41 @@
                         {% endfor %}
                         <br>
                         <p>
+                        <h6>Add new post:</h6>
+                         <form action="" method="post" name="add">
+                            {{ form.hidden_tag() }}
+                            <p>
+                                Title:<br>
+                                {{ form.title(size=64) }}
+                            </p>
+                            <p>
+                                Text:<br>
+                                {{ form.text(size=64) }}
+                            </p>
+
+                            <input class="btn btn-lg btn-primary" type="submit" value="Post">
+                        </form>
+                        </p>
+                        <br>
+                        <p>
+                        <h5>Discussion:</h5>
+                        {% for id, user_id, group_id, title, text, created_at, edited_at, username in discussions %}
+
+                            <table class="table table-striped col-lg-1">
+                            <tr>
+                                <td class="col-xs-1">{{ username}}</td><td class="col-xs-3">{{ created_at }}</td><td>{{ title }}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-1">{{ text }}</td>
+                            </tr>
+                            </table>
+
+                        {% endfor %}
+                        </p>
+                        <br>
+                        <p>
                         <a href="{{ url_for('leave_group', id=group[0][0]) }}"><button type="button" class="btn btn-danger">Leave Group</button></a>
                         </p>
-
                     {% if admin %}
                         <br>
                         <p>
