@@ -6,6 +6,7 @@ from flask_login import login_required
 from app.forms import flash_errors, GroupAddForm, DiscussionAddForm
 from app.discussions import *
 from app.groups import *
+from app.models import *
 
 def is_user_admin(user_id, group_id):
     isA = is_user_group_admin(user_id, group_id)
@@ -52,7 +53,7 @@ def group_add():
 @app.route('/group/<id>', methods=['GET', 'POST'])
 @login_required
 def group(id):
-    user=g.user
+    user= select_by_id_user(g.user.id)
     group = select_group_by_id(id)
     users = select_users_by_group_id(id)
     grouped = is_user_in_this_group(user.id, id)

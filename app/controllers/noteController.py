@@ -60,7 +60,7 @@ def note_add(date):
 def note_delete(id):
     note = select_note_by_id(id)
     if note == None or note[0][1] != g.user.id:
-        flash('Unauthorised enter to user delete.')
+        flash('Unauthorised enter to note delete.')
         return redirect(url_for('index'))
     delete_note(note[0][0])
     flash("Succesfully deleted note.")

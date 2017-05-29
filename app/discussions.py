@@ -23,7 +23,7 @@ def select_discussion_by_id(id):
 def update_discussion_text(id, title, text):
     with sql.connect("database.db") as con:
         cur = con.cursor()
-        cur.execute("UPDATE GroupDiscussion SET text = ?, title=title, edited_at=? WHERE id=?;", (text, title, datetime.now(), id))
+        cur.execute("UPDATE GroupDiscussion SET text = ?, title=?, edited_at=? WHERE id=?;", (text, title, datetime.now(), id))
         con.commit()
 
 def delete_discussion(id):

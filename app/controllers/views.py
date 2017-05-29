@@ -69,8 +69,8 @@ def timetravel(date):
 	d = datetime.strptime(s, "%Y-%m-%d")
 	days = set_days(d.date())
 
-
-	if (days["today"] == datetime.now().date):
+	#Return to main if date is "today"
+	if d.date() == datetime.now().date():
 		return redirect(url_for('main'))
 
 	notes = select_note_by_user_id_and_date(g.user.id, days["today"])

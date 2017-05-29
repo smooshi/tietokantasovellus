@@ -25,7 +25,7 @@
                         {% for i in range(0, users|length) %}
                             <p>
                             {{ users[i][2] }}
-                            {% if admin %}
+                            {% if admin and user.id != users[i][0] %}
                                 <a href="{{ url_for('remove_user', user_id=users[i][0], group_id=group[0][0]) }}"><button type="button" class="btn btn-xs btn-danger">Remove</button></a>
                             {% endif %}
                             </p>
@@ -54,11 +54,16 @@
 
                             <table class="table table-striped col-xs-12">
                             <tr>
-                                <td class="col-xs-5">{{ title }}</td><td class="col-xs-3">{{ username}}</td><td class="col-xs-4">{{ created_at }}</td>
+                                <td class="col-xs-5">{{ title }}</td><td class="col-xs-2">{{ username}}</td><td class="col-xs-4">{{ created_at }}</td>
+                                {% if user_id == user.id %}
+                                    <td class="col-xs-1"><a href="{{ url_for('discussion_edit', id=id) }}">Edit</a></td>
+                                {% endif %}{% if admin %}
+                                    <td><a href="{{ url_for('discussion_delete', id=id) }}">Delete</a></td>{% endif %}
                             </tr>
                             <tr>
                                 <td class="col-xs-12">{{ text }}</td>
                             </tr>
+
                             </table>
 
                         {% endfor %}
