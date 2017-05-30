@@ -12,9 +12,12 @@ from app.goals import *
 def goal_edit(id):
     user = g.user
     goal = select_goal_by_id(id)
+
+    #Pitaisi estaa sopimatonta kaytosta
     if goal == None or goal[0][1] != g.user.id:
         flash('Note not found.')
         return redirect(url_for('index'))
+
     form = GoalEditForm(isActive=goal[0][4], text=goal[0][2])
     if form.validate_on_submit():
         if (form.isActive.data == goal[0][4]):
@@ -38,7 +41,7 @@ def goal_add():
         if (form.end_date.data is None or form.end_date.data == ""):
             insert_goal(g.user.id,form.text.data,None)
         else:
-            #Tee Date datasta datetime:
+            #End timen tallentaminen
             #Talla hetkella end_time ei tallennu ja sita ei kayteta
             insert_goal(g.user.id, form.text.data, None)
         return redirect(url_for('main'))

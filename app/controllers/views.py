@@ -58,7 +58,7 @@ def main():
 
 	return render_template('main.html', title='MainPage', user=user, tnotes= timed, notes=notTimed, days=days, todos=todos, goals=goals, focus=focus, groups=groups, latest=latest)
 
-#talle tarvitaan parempi ratkaisu
+#talle tarvitaan parempi ratkaisu, tama on kontrolleri joka nayttaa "eri paivia", mutta kayttaa kuitenkin main.html sivua
 @app.route('/timetravel/<date>', methods=['GET', 'POST'])
 @login_required
 def timetravel(date):
@@ -94,7 +94,7 @@ def set_days(date):
 	days = {"today":date, "tomorrow": t, "yesterday": y}
 	return(days)
 
-#Sort notes into right order
+#Sort notes into right order and two different arrays for display on page
 def sort_notes(notes):
 	timed = list()
 	notTimed = list()
@@ -103,8 +103,7 @@ def sort_notes(notes):
 		if arr[3] == 1:
 			s = arr[4]
 			d = datetime.strptime(str(s), "%Y-%m-%d %H:%M:%S")
-			t = d.time()
-			arr[4]=t
+			arr[4]=d.time()
 			timed.append(arr)
 		else:
 			notTimed.append(arr)
@@ -122,16 +121,12 @@ def get_latest_discussions(groups):
 @app.route('/')
 @app.route('/index')
 def index():
- 	#if current_user.is_authenticated and current_user is not None:
- 	#	return redirect(url_for('main'))
 	if g.user is not None and g.user.is_authenticated:
  		return redirect(url_for('main'))
  	return render_template('index.html', title='index')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-	#if current_user.is_authenticated and current_user is not None:
-	#	return redirect(url_for('main'))
 	if g.user is not None and g.user.is_authenticated:
 		return redirect(url_for('main'))
 	form = LoginForm()
@@ -182,8 +177,6 @@ def logout():
 #
 @app.route('/create', methods=['GET', 'POST'])
 def create():
-	#if current_user.is_authenticated:
-	#	return redirect(url_for('main'))
 	if g.user is not None and g.user.is_authenticated:
 		return redirect(url_for('main'))
 	form = UserCreateForm()

@@ -8,6 +8,7 @@ from app.discussions import *
 from app.groups import *
 from app.models import *
 
+#Tarkistaa tietokannasta onko tama kaytttaja taman ryhman admin (tarvitaan sivulogiikassa)
 def is_user_admin(user_id, group_id):
     isA = is_user_group_admin(user_id, group_id)
     if (isA[0][0] == 1):
@@ -15,6 +16,7 @@ def is_user_admin(user_id, group_id):
     else:
         return False
 
+#Tarkistaa tietokannasta onko tama kayttaja tassa ryhmassa
 def is_user_in_this_group(user_id, group_id):
     isU = is_user_in_group(user_id, group_id)
     if (isU[0][0] == 1):
@@ -81,7 +83,7 @@ def group_edit(id):
     form=GroupAddForm(name=group[0][1], description=group[0][2])
 
     if not is_user_admin(user.id, id):
-        flash('No.')
+        flash('Not allowed.')
         return redirect(url_for('groups'))
 
     if form.validate_on_submit():
@@ -109,7 +111,7 @@ def remove_user(user_id, group_id):
         return redirect(url_for('group', id=group_id))
     else:
         flash('Not allowed.')
-        return redirect(url_for('main'))
+        return redirect(url_for('index'))
 
 @app.route('/group/delete/<id>')
 @login_required

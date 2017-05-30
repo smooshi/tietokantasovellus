@@ -3,15 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="a392ad2f-6047-433f-b399-a69f0cce78cc" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database.db" afterPath="$PROJECT_DIR$/database.db" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/discussionController.py" afterPath="$PROJECT_DIR$/app/controllers/discussionController.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/focusController.py" afterPath="$PROJECT_DIR$/app/controllers/focusController.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/goalController.py" afterPath="$PROJECT_DIR$/app/controllers/goalController.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/groupController.py" afterPath="$PROJECT_DIR$/app/controllers/groupController.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/noteController.py" afterPath="$PROJECT_DIR$/app/controllers/noteController.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/userController.py" afterPath="$PROJECT_DIR$/app/controllers/userController.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/views.py" afterPath="$PROJECT_DIR$/app/controllers/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/discussions.py" afterPath="$PROJECT_DIR$/app/discussions.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/goal/add.html" afterPath="$PROJECT_DIR$/app/templates/goal/add.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/goal/edit.html" afterPath="$PROJECT_DIR$/app/templates/goal/edit.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/group/inspect.html" afterPath="$PROJECT_DIR$/app/templates/group/inspect.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -25,115 +21,7 @@
     <favorites_list name="tietokantasovellus" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/templates/main.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1414">
-              <caret line="106" column="50" lean-forward="false" selection-start-line="106" selection-start-column="50" selection-end-line="106" selection-end-column="50" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/templates/base.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="24" column="78" lean-forward="true" selection-start-line="24" selection-start-column="43" selection-end-line="24" selection-end-column="78" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="discussions.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/discussions.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="311">
-              <caret line="29" column="36" lean-forward="true" selection-start-line="29" selection-start-column="36" selection-end-line="29" selection-end-column="36" />
-              <folding>
-                <element signature="e#0#21#0" expanded="true" />
-                <marker date="1496068309000" expanded="true" signature="185:288" ph="INSERT INTO GroupDiscussion... " />
-                <marker date="1496068309000" expanded="true" signature="536:581" ph="SELECT * FRO... GroupDiscussion" />
-                <marker date="1496068309000" expanded="true" signature="761:801" ph="SELECT * FRO... Note" />
-                <marker date="1496068309000" expanded="true" signature="979:1047" ph="UPDATE Note " />
-                <marker date="1496068309000" expanded="true" signature="1212:1250" ph="DELETE FROM " />
-                <marker date="1496068309000" expanded="true" signature="1443:1450" ph="SELECT d.* F... GroupDiscussion" />
-                <marker date="1496068309000" expanded="true" signature="1443:1471" ph="SELECT * FRO... GroupDicussion" />
-                <marker date="1496068309000" expanded="true" signature="1443:1477" ph="SELECT * FRO... GroupDicussion" />
-                <marker date="1496068309000" expanded="true" signature="1443:1487" ph="SELECT * FRO... GroupDicussion" />
-                <marker date="1496068309000" expanded="true" signature="1443:1502" ph="SELECT * FRO... GroupDicussion" />
-                <marker date="1496068309000" expanded="true" signature="1718:1762" ph="SELECT * FRO... GroupDicussion" />
-                <marker date="1496068309000" expanded="true" signature="1973:1980" ph="SELECT u.* F... User" />
-                <marker date="1496068309000" expanded="true" signature="1973:1997" ph="SELECT * FRO... GroupDiscu" />
-                <marker date="1496068309000" expanded="true" signature="1973:2001" ph="SELECT * FRO... GroupDiscussio" />
-                <marker date="1496068309000" expanded="true" signature="1973:2002" ph="SELECT * FRO... GroupDiscussion" />
-                <marker date="1496068309000" expanded="true" signature="1973:2011" ph="SELECT * FRO... GroupDiscussion" />
-                <marker date="1496068309000" expanded="true" signature="1973:2022" ph="SELECT * FRO... GroupDiscussion" />
-                <marker date="1496068309000" expanded="true" signature="2040:2134" ph="SELECT gd.*,... GroupDiscussion" />
-                <marker date="1496068309000" expanded="true" signature="2343:2356" ph="SELECT * FRO... TABLE" />
-                <marker date="1496068309000" expanded="true" signature="2343:2372" ph="SELECT * FRO... GroupDiscussion" />
-                <marker date="1496068309000" expanded="true" signature="2343:2439" ph="SELECT * FRO... GroupDiscussion" />
-                <marker date="1496068309000" expanded="true" signature="2386:2421" ph="SELECT MAX(i... GroupDiscussion" />
-                <marker date="1496068309000" expanded="true" signature="2386:2438" ph="SELECT MAX(i... GroupDiscussion" />
-                <marker date="1496068309000" expanded="true" signature="2457:2505" ph="SELECT gd.*,... GroupDiscussion" />
-                <marker date="1496068309000" expanded="true" signature="2457:2607" ph="SELECT gd.*,... GroupDiscussion" />
-                <marker date="1496068309000" expanded="true" signature="2547:2606" ph="SELECT MAX(g... GroupDiscussion" />
-                <marker date="1496068309000" expanded="true" signature="2813:2871" ph="SELECT * FRO... GroupDiscussion" />
-                <marker date="1496068309000" expanded="true" signature="2813:2908" ph="SELECT * FRO... GroupDiscussion" />
-                <marker date="1496068309000" expanded="true" signature="2856:2871" ph="SELECT MAX(i... GroupDiscussion" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="groupController.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/groupController.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="15" selection-end-column="20" />
-              <folding>
-                <element signature="e#0#71#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/controllers/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="842">
-              <caret line="71" column="38" lean-forward="false" selection-start-line="71" selection-start-column="38" selection-end-line="71" selection-end-column="38" />
-              <folding>
-                <element signature="e#0#22#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="inspect.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/templates/group/inspect.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="398">
-              <caret line="64" column="33" lean-forward="true" selection-start-line="64" selection-start-column="33" selection-end-line="64" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="discussionController.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/discussionController.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="524">
-              <caret line="45" column="55" lean-forward="false" selection-start-line="45" selection-start-column="55" selection-end-line="45" selection-end-column="55" />
-              <folding>
-                <element signature="e#0#71#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -186,8 +74,6 @@
         <option value="$PROJECT_DIR$/app/focus.py" />
         <option value="$PROJECT_DIR$/app/templates/focus/edit.html" />
         <option value="$PROJECT_DIR$/app/templates/focus/add.html" />
-        <option value="$PROJECT_DIR$/app/controllers/focusController.py" />
-        <option value="$PROJECT_DIR$/app/controllers/goalController.py" />
         <option value="$PROJECT_DIR$/app/controllers/todoController.py" />
         <option value="$PROJECT_DIR$/app/templates/group.html" />
         <option value="$PROJECT_DIR$/app/templates/group/add.html" />
@@ -199,7 +85,6 @@
         <option value="$PROJECT_DIR$/schema" />
         <option value="$PROJECT_DIR$/app/groups.py" />
         <option value="$PROJECT_DIR$/app/templates/group/edit.html" />
-        <option value="$PROJECT_DIR$/app/controllers/userController.py" />
         <option value="$PROJECT_DIR$/app/notes.py" />
         <option value="$PROJECT_DIR$/app/forms.py" />
         <option value="$PROJECT_DIR$/app/templates/discussions/all.html" />
@@ -208,12 +93,15 @@
         <option value="$PROJECT_DIR$/app/templates/base.html" />
         <option value="$PROJECT_DIR$/app/templates/goal/add.html" />
         <option value="$PROJECT_DIR$/app/templates/goal/edit.html" />
-        <option value="$PROJECT_DIR$/app/controllers/groupController.py" />
         <option value="$PROJECT_DIR$/app/discussions.py" />
         <option value="$PROJECT_DIR$/app/controllers/noteController.py" />
         <option value="$PROJECT_DIR$/app/templates/group/inspect.html" />
         <option value="$PROJECT_DIR$/app/controllers/discussionController.py" />
         <option value="$PROJECT_DIR$/app/controllers/views.py" />
+        <option value="$PROJECT_DIR$/app/controllers/goalController.py" />
+        <option value="$PROJECT_DIR$/app/controllers/groupController.py" />
+        <option value="$PROJECT_DIR$/app/controllers/focusController.py" />
+        <option value="$PROJECT_DIR$/app/controllers/userController.py" />
       </list>
     </option>
   </component>
@@ -529,9 +417,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="40" y="38" width="1400" height="757" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.49418604" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.49418604" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -762,24 +649,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/userController.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
-          <caret line="50" column="54" lean-forward="false" selection-start-line="50" selection-start-column="54" selection-end-line="50" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/todoController.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="564">
-          <caret line="56" column="0" lean-forward="true" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#62#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/focus.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -847,14 +716,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/focusController.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="18" column="33" lean-forward="true" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/schema">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="630">
@@ -876,48 +737,6 @@
         <state relative-caret-position="1414">
           <caret line="106" column="50" lean-forward="false" selection-start-line="106" selection-start-column="50" selection-end-line="106" selection-end-column="50" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/goalController.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="61" lean-forward="false" selection-start-line="6" selection-start-column="61" selection-end-line="6" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/groups.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="94">
-          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-            <marker date="1495804079000" expanded="true" signature="167:244" ph="INSERT INTO Groups... " />
-            <marker date="1495804079000" expanded="true" signature="498:518" ph="SELECT * FRO... Groups" />
-            <marker date="1495804079000" expanded="true" signature="699:730" ph="SELECT * FRO... Groups" />
-            <marker date="1495804079000" expanded="true" signature="931:974" ph="UPDATE Group... " />
-            <marker date="1495804079000" expanded="true" signature="931:1000" ph="UPDATE Group... " />
-            <marker date="1495804079000" expanded="true" signature="1224:1281" ph="INSERT INTO User_in_G... " />
-            <marker date="1495804079000" expanded="true" signature="1467:1535" ph="INSERT INTO User_in_Group... " />
-            <marker date="1495804079000" expanded="true" signature="1800:1885" ph="SELECT CASE " />
-            <marker date="1495804079000" expanded="true" signature="1800:1904" ph="SELECT CASE " />
-            <marker date="1495804079000" expanded="true" signature="1800:1928" ph="SELECT CASE " />
-            <marker date="1495804079000" expanded="true" signature="1825:1883" ph="SELECT * FRO... User_in_Group" />
-            <marker date="1495804079000" expanded="true" signature="2223:2365" ph="SELECT CASE " />
-            <marker date="1495804079000" expanded="true" signature="2248:2320" ph="SELECT * FRO... User_in_Group" />
-            <marker date="1495804079000" expanded="true" signature="2579:2599" ph="SELECT * FRO... Groups" />
-            <marker date="1495804079000" expanded="true" signature="2579:2600" ph="SELECT * FRO... Groups" />
-            <marker date="1495804079000" expanded="true" signature="2579:2687" ph="SELECT * FRO... Groups" />
-            <marker date="1495804079000" expanded="true" signature="2579:2694" ph="SELECT * FRO... Groups" />
-            <marker date="1495804079000" expanded="true" signature="2712:2803" ph="Select g.* f... groups" />
-            <marker date="1495804079000" expanded="true" signature="3009:3120" ph="SELECT * FRO... User" />
-            <marker date="1495804079000" expanded="true" signature="3138:3171" ph="SELECT u.* F... User" />
-            <marker date="1495804079000" expanded="true" signature="3138:3200" ph="SELECT u.* F... User" />
-            <marker date="1495804079000" expanded="true" signature="3138:3227" ph="SELECT u.* F... User" />
-            <marker date="1495804079000" expanded="true" signature="3423:3479" ph="DELETE FROM " />
-            <marker date="1495804079000" expanded="true" signature="3650:3679" ph="DELETE FROM " />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -960,17 +779,71 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/base.html">
+    <entry file="file://$PROJECT_DIR$/app/controllers/discussionController.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="24" column="78" lean-forward="true" selection-start-line="24" selection-start-column="43" selection-end-line="24" selection-end-column="78" />
+        <state relative-caret-position="519">
+          <caret line="45" column="55" lean-forward="false" selection-start-line="45" selection-start-column="55" selection-end-line="45" selection-end-column="55" />
+          <folding>
+            <element signature="e#0#71#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="899">
+          <caret line="60" column="121" lean-forward="false" selection-start-line="60" selection-start-column="121" selection-end-line="60" selection-end-column="121" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/group/inspect.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="398">
+          <caret line="64" column="33" lean-forward="true" selection-start-line="64" selection-start-column="33" selection-end-line="64" selection-end-column="33" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/groups.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-694">
+          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+            <marker date="1495804079000" expanded="true" signature="167:244" ph="INSERT INTO Groups... " />
+            <marker date="1495804079000" expanded="true" signature="498:518" ph="SELECT * FRO... Groups" />
+            <marker date="1495804079000" expanded="true" signature="699:730" ph="SELECT * FRO... Groups" />
+            <marker date="1495804079000" expanded="true" signature="931:974" ph="UPDATE Group... " />
+            <marker date="1495804079000" expanded="true" signature="931:1000" ph="UPDATE Group... " />
+            <marker date="1495804079000" expanded="true" signature="1224:1281" ph="INSERT INTO User_in_G... " />
+            <marker date="1495804079000" expanded="true" signature="1467:1535" ph="INSERT INTO User_in_Group... " />
+            <marker date="1495804079000" expanded="true" signature="1800:1885" ph="SELECT CASE " />
+            <marker date="1495804079000" expanded="true" signature="1800:1904" ph="SELECT CASE " />
+            <marker date="1495804079000" expanded="true" signature="1800:1928" ph="SELECT CASE " />
+            <marker date="1495804079000" expanded="true" signature="1825:1883" ph="SELECT * FRO... User_in_Group" />
+            <marker date="1495804079000" expanded="true" signature="2223:2365" ph="SELECT CASE " />
+            <marker date="1495804079000" expanded="true" signature="2248:2320" ph="SELECT * FRO... User_in_Group" />
+            <marker date="1495804079000" expanded="true" signature="2579:2599" ph="SELECT * FRO... Groups" />
+            <marker date="1495804079000" expanded="true" signature="2579:2600" ph="SELECT * FRO... Groups" />
+            <marker date="1495804079000" expanded="true" signature="2579:2687" ph="SELECT * FRO... Groups" />
+            <marker date="1495804079000" expanded="true" signature="2579:2694" ph="SELECT * FRO... Groups" />
+            <marker date="1495804079000" expanded="true" signature="2712:2803" ph="Select g.* f... groups" />
+            <marker date="1495804079000" expanded="true" signature="3009:3120" ph="SELECT * FRO... User" />
+            <marker date="1495804079000" expanded="true" signature="3138:3171" ph="SELECT u.* F... User" />
+            <marker date="1495804079000" expanded="true" signature="3138:3200" ph="SELECT u.* F... User" />
+            <marker date="1495804079000" expanded="true" signature="3138:3227" ph="SELECT u.* F... User" />
+            <marker date="1495804079000" expanded="true" signature="3423:3479" ph="DELETE FROM " />
+            <marker date="1495804079000" expanded="true" signature="3650:3679" ph="DELETE FROM " />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/discussions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
+        <state relative-caret-position="290">
           <caret line="29" column="36" lean-forward="true" selection-start-line="29" selection-start-column="36" selection-end-line="29" selection-end-column="36" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
@@ -1007,17 +880,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/group/inspect.html">
+    <entry file="file://$PROJECT_DIR$/app/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="64" column="33" lean-forward="true" selection-start-line="64" selection-start-column="33" selection-end-line="64" selection-end-column="33" />
+        <state relative-caret-position="230">
+          <caret line="24" column="78" lean-forward="true" selection-start-line="24" selection-start-column="43" selection-end-line="24" selection-end-column="78" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/userController.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="45" column="56" lean-forward="true" selection-start-line="45" selection-start-column="56" selection-end-line="45" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/todoController.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="56" column="0" lean-forward="true" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#62#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/noteController.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="825">
+        <state relative-caret-position="339">
           <caret line="62" column="41" lean-forward="false" selection-start-line="62" selection-start-column="41" selection-end-line="62" selection-end-column="41" />
           <folding />
         </state>
@@ -1025,31 +916,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/groupController.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="15" selection-end-column="20" />
+        <state relative-caret-position="1695">
+          <caret line="113" column="41" lean-forward="true" selection-start-line="113" selection-start-column="41" selection-end-line="113" selection-end-column="41" />
           <folding>
             <element signature="e#0#71#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/discussionController.py">
+    <entry file="file://$PROJECT_DIR$/app/controllers/goalController.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="524">
-          <caret line="45" column="55" lean-forward="false" selection-start-line="45" selection-start-column="55" selection-end-line="45" selection-end-column="55" />
+        <state relative-caret-position="279">
+          <caret line="43" column="36" lean-forward="false" selection-start-line="43" selection-start-column="36" selection-end-line="43" selection-end-column="36" />
           <folding>
-            <element signature="e#0#71#0" expanded="true" />
+            <element signature="e#0#62#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/views.py">
+    <entry file="file://$PROJECT_DIR$/app/controllers/focusController.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="842">
-          <caret line="71" column="38" lean-forward="false" selection-start-line="71" selection-start-column="38" selection-end-line="71" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#22#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="435">
+          <caret line="36" column="33" lean-forward="false" selection-start-line="36" selection-start-column="33" selection-end-line="36" selection-end-column="33" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -35,11 +35,6 @@ def focus_add():
     user = g.user
     form = FocusAddForm()
     if form.validate_on_submit():
-        #if (form.end_date.data is None or form.end_date.data == ""):
-        #    insert_focus(g.user.id,form.text.data,None)
-        #else:
-            #Tee Date datasta datetime:
-            #Talla hetkella end_time ei tallennu ja sita ei kayteta
         insert_focus(g.user.id, form.text.data, None)
         return redirect(url_for('main'))
     flash_errors(form)
