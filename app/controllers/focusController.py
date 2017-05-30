@@ -15,16 +15,11 @@ def focus_edit(id):
     if focus == None or focus[0][1] != g.user.id:
         flash('Note not found.')
         return redirect(url_for('index'))
-    form = FocusEditForm(isActive=focus[0][4], text=focus[0][2])
+    form = FocusEditForm(text=focus[0][2])
     if form.validate_on_submit():
         if (form.isActive.data == focus[0][4]):
             update_focus_text(focus[0][0], form.text.data)
-        else:
-            if (form.isActive.data):
-                update_focus_active(focus[0][0])
-            else:
-                update_focus_deactivate(focus[0][0])
-            update_focus_text(focus[0][0], form.text.data)
+            flash('Updated focus!')
         return redirect(url_for('main'))
     flash_errors(form)
     return render_template('/focus/edit.html', user=user, focus=focus, form=form)
@@ -35,7 +30,7 @@ def focus_add():
     user = g.user
     form = FocusAddForm()
     if form.validate_on_submit():
-        insert_focus(g.user.id, form.text.data, None)
+        insert_focus(g.user.id, form.text.data)
         return redirect(url_for('main'))
     flash_errors(form)
     return render_template('/focus/add.html', user=user, form=form)

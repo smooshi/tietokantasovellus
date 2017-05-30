@@ -8,6 +8,16 @@ def insert_todo(user_id, text, date):
     con.commit()
     con.close()
 
+def insert_todo_return_id(user_id, text, date):
+    con = sql.connect("database.db")
+    cur = con.cursor()
+    cur.execute("INSERT INTO Todo (user_id, text, date) VALUES(?,?,?)", (user_id, text, date))
+    con.commit()
+    id = cur.lastrowid
+    cur.close()
+    con.close()
+    return id
+
 def select_todo_by_user_id(user_id):
     with sql.connect("database.db") as con:
         cur = con.cursor()

@@ -1,9 +1,9 @@
 from flask_wtf import Form
-from wtforms import StringField, BooleanField, PasswordField, DateField, DateTimeField
+from wtforms import StringField, BooleanField, PasswordField, DateField, DateTimeField, SelectField
 from wtforms_components import TimeField
 from wtforms.validators import DataRequired, Length, EqualTo, Required, Optional
 from flask import flash
-from datetime import datetime
+
 
 class RequiredIf(Required):
     # a validator which makes a field required if
@@ -53,6 +53,7 @@ class NoteEditForm(Form):
 
 class TodoEditForm(Form):
     text = StringField('text', validators=[DataRequired(message="Enter text")])
+    focus = SelectField('focus', coerce=int)
 
 class GoalAddForm(Form):
     text = StringField('text', validators=[DataRequired(message="Enter text")])

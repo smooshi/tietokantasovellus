@@ -24,13 +24,13 @@ def main():
 	days = set_days(datetime.today().date())
 	notes = select_note_by_user_id_and_date(g.user.id, days["today"])
 	timed, notTimed = sort_notes(notes)
-	todos = select_todo_by_user_id_and_date(g.user.id, days["today"])
-	todos = sorted(todos, key=itemgetter(3))
+	todot = select_todo_by_user_id_and_date(g.user.id, days["today"])
+	todos = sorted(todot, key=itemgetter(3))
 	goals = select_current_goal_by_user_id(g.user.id)
-	focus = select_current_focus_by_user_id(g.user.id)
+	focus = select_focus_by_user_id(g.user.id)
 	groups = select_groups_by_user_id(g.user.id)
 	latest = get_latest_discussions(groups)
-
+	todo_focus = get_todo_focus(todot)
 
 	#on taysin mahdollista etta taman voi tehda paremmin
 	if request.method == 'POST':
@@ -39,6 +39,12 @@ def main():
 		if (len(rq)>0):
 			update_todo_complete(int(rq[0]))
 			update_user_todo_points(g.user.id)
+
+			#update focus that todo is linked with if todo is linked with focus
+			f = select_focus_tag_by_todo_id(int(rq[0]))
+			if len(f) > 0:
+				update_focus_points(f[0][0])
+				update_user_focus_points(g.user.id)
 			return redirect(url_for('main'))
 
 		# goal points
@@ -56,7 +62,7 @@ def main():
 			update_user_focus_points(g.user.id)
 			return redirect(url_for('main'))
 
-	return render_template('main.html', title='MainPage', user=user, tnotes= timed, notes=notTimed, days=days, todos=todos, goals=goals, focus=focus, groups=groups, latest=latest)
+	return render_template('main.html', title='MainPage', user=user, tnotes= timed, notes=notTimed, days=days, todos=todos, goals=goals, focus=focus, groups=groups, latest=latest, todo_focus=todo_focus)
 
 #talle tarvitaan parempi ratkaisu, tama on kontrolleri joka nayttaa "eri paivia", mutta kayttaa kuitenkin main.html sivua
 @app.route('/timetravel/<date>', methods=['GET', 'POST'])
@@ -77,7 +83,7 @@ def timetravel(date):
 	timed, notTimed = sort_notes(notes)
 	todos = select_todo_by_user_id_and_date(g.user.id, days["today"])
 	goals = select_current_goal_by_user_id(g.user.id)
-	focus = select_current_focus_by_user_id(g.user.id)
+	focus = select_focus_by_user_id(g.user.id)
 	groups = select_groups_by_user_id(g.user.id)
 	latest = get_latest_discussions(groups)
 
@@ -117,6 +123,17 @@ def get_latest_discussions(groups):
 	for i in range(0, len(groups)):
 		latest[groups[i][0]] = latest_discussion_in_group(groups[i][0])
 	return latest
+
+#set todo tags into dict where key is todo id
+def get_todo_focus(todos):
+	todo_focus = {}
+	for i in range(0, len(todos)):
+		focus =  select_focus_tag_by_todo_id(todos[i][0])
+		if (focus != None and len(focus) != 0):
+			todo_focus[todos[i][0]] = focus[0][2]
+		else:
+			todo_focus[todos[i][0]] = " "
+	return todo_focus
 
 @app.route('/')
 @app.route('/index')

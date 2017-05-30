@@ -52,11 +52,16 @@ id integer PRIMARY key autoincrement,
 user_id integer not null,
 text text not null,
 points integer default 0,
-isActive bool default 1,
 created_at DATETIME not null,
-edited_at DATETIME not null,
-end_date DATETIME,
 FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE
+);
+
+drop table if exists Focus_Tag;
+create table Focus_Tag(
+todo_id integer not null,
+focus_id integer not null,
+FOREIGN KEY(todo_id) REFERENCES Todo(id) ON DELETE CASCADE,
+FOREIGN KEY(focus_id) REFERENCES Focus(id) ON DELETE CASCADE
 );
 
 drop table if exists Groups;

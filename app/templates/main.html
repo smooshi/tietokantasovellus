@@ -43,7 +43,7 @@
             <div class="col-md-6">
                 <h2>Focus <a href="{{ url_for('focus_add') }}">(+)</a></h2>
                                 <table class="table borderless">
-                    {% for id, user_id, text, points, isActive, created_at, edited_at, end_date in focus %}
+                    {% for id, user_id, text, points, created_at in focus %}
                     <tr>
                         <td class="col-xs-1">
                             <form method="post" name="focus">
@@ -170,8 +170,8 @@
         {% for id, user_id, text, isComplete, date in todos %}
 
             {% if isComplete == 0 %}
-            <tr><td>
-                <label><input type="checkbox" name='check' value={{ id }}  onclick="this.form.submit()"> {{ text }} </label> </td><td class="col-xs-1">       <a href="{{ url_for('todo_edit',id=id) }}"><button type="button">Edit</button></a>
+            <tr><td class="col-xs-6">
+                <label><input type="checkbox" name='check' value={{ id }}  onclick="this.form.submit()"> {{ text }} </label> </td><td class="col-xs-5"><font color="orange">{{ todo_focus[id] }}</font></td><td class="col-xs-1">       <a href="{{ url_for('todo_edit',id=id) }}"><button type="button">Edit</button></a>
             </td></tr>
             {% else %}
              <tr><td>
