@@ -8,12 +8,6 @@ def insert_discussion(user_id, group_id, title, text):
     con.commit()
     con.close()
 
-def select_discussions_by_user_id(user_id):
-    with sql.connect("database.db") as con:
-        cur = con.cursor()
-        result = cur.execute("SELECT * FROM GroupDiscussion WHERE user_id=?;", (user_id,)).fetchall()
-    return result
-
 def select_discussion_by_id(id):
     with sql.connect("database.db") as con:
         cur = con.cursor()
@@ -68,4 +62,10 @@ def latest_discussion_by_user(user_id):
         cur = con.cursor()
         com = "SELECT * FROM GroupDiscussion WHERE  id = (SELECT MAX(id) FROM GroupDiscussion WHERE user_id=?)"
         result = cur.execute(com, (user_id,)).fetchall()
+    return result
+
+def select_discussions_by_user_id(user_id):
+    with sql.connect("database.db") as con:
+        cur = con.cursor()
+        result = cur.execute("SELECT gd.*, g.name FROM GroupDiscussion gd JOIN Groups g ON gd.group_id=g.id WHERE user_id=?;", (user_id,)).fetchall()
     return result

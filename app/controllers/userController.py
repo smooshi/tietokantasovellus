@@ -6,6 +6,7 @@ from flask_login import login_required
 from app.forms import UserEditForm, flash_errors
 from app.models import *
 from app.goals import *
+from app.discussions import *
 
 @app.route('/user/<id>')
 @login_required
@@ -17,6 +18,19 @@ def user(id):
 		flash('User not found or allowed.' %(id, g.user.id))
 		return redirect(url_for('index'))
 	return render_template('/user/profile.html', user=user, points=points, goals=goals)
+
+@app.route('/user/archive/<id>')
+@login_required
+def archive(id):
+	user = select_by_id_user(id)
+	goals = select_goals_by_user_id(id)
+	discussions = select_discussions_by_user_id(id)
+	if user == None or user.id != g.user.id:
+		flash('User not found or allowed.' %(id, g.user.id))
+		return redirect(url_for('index'))
+	title = "To Do"
+	return render_template('/user/archive.html', user=user, goals=goals, discussions=discussions, title=title)
+
 
 @app.route('/user_edit/<id>', methods=['GET', 'POST'])
 @login_required

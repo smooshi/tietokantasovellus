@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+ {% extends "base.html" %}
+
+    {% block content %}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <h2> Archived things: </h2>
+                    <h3>Your inactive goals:</h3>
+                    <table class="table borderless">
+                        {% for id, user_id, text, points, isActive, created_at, edited_at, end_date in goals %}
+                        {% if isActive ==0 %}<tr>
+                            <td class="col-sm-3">
+                                {{ text }}
+                            </td>
+                            <td>
+                                <a href="{{ url_for('goal_edit',id=id) }}"><button type="button">Edit</button></a>
+                            </td>
+                        </tr>{% endif %}
+                        {% endfor %}
+                    </table>
+
+                    <h3>Your posts:</h3>
+
+<table class="table table-striped">
+                    {% for id, user_id, group_id, title, text, created_at, edited_at, groupname in discussions %}
+
+                            <tr>
+                                <td class="col-xs-5">{{ groupname}}</td>
+                                <td class="col-xs-5">{{ title }}</td>
+                                <td class="col-xs-2"><a href="{{ url_for('discussion_edit', id=id) }}">Edit</a></td>
+                            </tr>
+                            <tr>
+                                <td class="col-xs-6">{{ text }}</td>
+                            </tr>
+
+
+
+                        {% endfor %} </table>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+</body>
+</html>
