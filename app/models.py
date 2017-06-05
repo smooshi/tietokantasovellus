@@ -21,8 +21,8 @@ def update_user_auth(id, authenticated):
 def update_user_no_pw(id, name, email):
     con = sql.connect("database.db")
     cur = con.cursor()
-    com = "UPDATE User SET name = ?, email= ? WHERE id=?;"
-    cur.execute(com, (name, email, id))
+    com = "UPDATE User SET name = ?, email= ?, edited_at= ? WHERE id=?;"
+    cur.execute(com, (name, email, datetime.now(), id))
     con.commit()
     con.close()
 

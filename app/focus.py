@@ -25,7 +25,7 @@ def select_focus_by_id(id):
 def update_focus_text(id, text):
     with sql.connect("database.db") as con:
         cur = con.cursor()
-        cur.execute("UPDATE Focus SET text = ? WHERE id=?;", (text, id))
+        cur.execute("UPDATE Focus SET text = ?, edited_at = ? WHERE id=?;", (text, datetime.now(), id))
         con.commit()
 
 def delete_focus(id):

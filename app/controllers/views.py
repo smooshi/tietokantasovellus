@@ -32,6 +32,9 @@ def main():
 	latest = get_latest_discussions(groups)
 	todo_focus = get_todo_focus(todot)
 
+	#Testing focus colors:
+	focus_colors = ["red", "blue", "green", "yellow", "orange"]
+
 	#on taysin mahdollista etta taman voi tehda paremmin
 	if request.method == 'POST':
 		# todo completion:
@@ -179,7 +182,7 @@ def try_login(username, password):
 @lm.user_loader
 def load_user(id):
 	user = select_by_id_user(id)
-	if user != None:
+	if user != None or len(user)>0:
 		return (user)
 	else:
 		return (None)

@@ -58,6 +58,7 @@ FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE
 
 drop table if exists Focus_Tag;
 create table Focus_Tag(
+id integer PRIMARY key autoincrement,
 todo_id integer not null,
 focus_id integer not null,
 FOREIGN KEY(todo_id) REFERENCES Todo(id) ON DELETE CASCADE,
@@ -75,6 +76,7 @@ edited_at DATETIME not null
 
 drop table if exists User_in_Group;
 create table User_in_Group(
+id integer PRIMARY key autoincrement,
 user_id integer not null,
 group_id integer not null,
 isAdmin bool not null default 0,
