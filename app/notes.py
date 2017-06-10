@@ -1,6 +1,5 @@
 import sqlite3 as sql
 from datetime import datetime
-import time
 
 def insert_note(user_id, text, isTimed, time, date):
     con = sql.connect("database.db")

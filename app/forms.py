@@ -1,5 +1,5 @@
 from flask_wtf import Form
-from wtforms import StringField, BooleanField, PasswordField, DateField, DateTimeField, SelectField
+from wtforms import StringField, BooleanField, PasswordField, DateField, DateTimeField, SelectField, HiddenField
 from wtforms_components import TimeField
 from wtforms.validators import DataRequired, Length, EqualTo, Required, Optional
 from flask import flash
@@ -46,6 +46,11 @@ class UserEditForm(Form):
 #    password = PasswordField('password', validators=[])
     confirm = PasswordField('confirm', validators=[DataRequired(message="Enter current password to confirm changes")])
 
+class UserPasswordEditForm(Form):
+    newPassword = PasswordField('newPassword', validators=[])
+    confirm = PasswordField('confirm', validators=[DataRequired(message="Enter current password to confirm changes")])
+    password = PasswordField('password', validators=[])
+
 class NoteEditForm(Form):
     text = StringField('text', validators=[DataRequired(message="Enter text")])
     isTimed = BooleanField('isTimed', default=False)
@@ -77,4 +82,11 @@ class GroupAddForm(Form):
 
 class DiscussionAddForm(Form):
     title = StringField('title', validators=[DataRequired()])
+    text = StringField('text', validators=[DataRequired()])
+
+class AffirmationForm(Form):
+    text = StringField('text', validators=[DataRequired()])
+    date = HiddenField('date', validators=[Optional()])
+
+class AffirmationEditForm(Form):
     text = StringField('text', validators=[DataRequired()])

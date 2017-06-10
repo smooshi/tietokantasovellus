@@ -63,9 +63,22 @@ def select_focus_tag_by_focus_id(id):
         result = cur.execute(com, (id,)).fetchall()
     return result
 
+def update_focus_tag(id, todo_id, focus_id):
+    with sql.connect("database.db") as con:
+        cur = con.cursor()
+        cur.execute("UPDATE Focus_Tag SET todo_id=?, focus_id=? WHERE id=?;", (todo_id, focus_id, id))
+        con.commit()
+
 def delete_focus_tag(todo_id, focus_id):
     con = sql.connect("database.db")
     cur = con.cursor()
     cur.execute("DELETE FROM Focus_Tag WHERE todo_id=? AND focus_id=?;", (todo_id,focus_id))
+    con.commit()
+    con.close()
+
+def delete_focus_tag_by_id(id):
+    con = sql.connect("database.db")
+    cur = con.cursor()
+    cur.execute("DELETE FROM Focus_Tag WHERE id=?;", (id,))
     con.commit()
     con.close()

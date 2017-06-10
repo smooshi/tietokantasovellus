@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, url_for, g, request, jsonify
+from flask import render_template, flash, redirect, url_for, g
 from app import app
 from flask_login import login_required
 from datetime import datetime
@@ -13,12 +13,13 @@ from app.todos import *
 def todo_edit(id):
     user = g.user
     todo = select_todo_by_id(id)
-    focus = select_focus_tag_by_todo_id(id)
+    focus_tag = select_focus_tag_by_todo_id(id)
+
     if todo == None or todo[0][1] != g.user.id:
         flash('Note not found.')
         return redirect(url_for('index'))
 
-    form = TodoEditForm(text=todo[0][2], focus=(focus[0][0] if len(focus)>0 else 0))
+    form = TodoEditForm(text=todo[0][2], focus=(focus_tag[0][0] if len(focus_tag)>0 else 0))
     choices = [(0, "Select focus")]
     for row in select_focus_by_user_id(user.id):
         choices.append((row[0], row[2]))
@@ -32,18 +33,18 @@ def todo_edit(id):
 
         #hmm...
         if form.focus.data != 0:
-            if len(focus) > 0:
-                delete_focus_tag(id, focus[0][0])
+            if len(focus_tag) > 0:
+                #update_focus_tag(focus_tag[0][0], id, form.focus.data)
+                delete_focus_tag(id, focus_tag[0][0])
             insert_focus_tag(id, form.focus.data)
         else:
-            if len(focus) > 0:
-                delete_focus_tag(id, focus[0][0])
+            if len(focus_tag) > 0:
+                delete_focus_tag(id, focus_tag[0][0])
 
-        flash("Succefully edited note!")
-        flash(form.focus.data)
+        flash("Succefully edited todo!")
         return redirect(url_for('main'))
     flash_errors(form)
-    return render_template('/todo/edit.html', todo=todo, user=user, form=form, focus=focus)
+    return render_template('/todo/edit.html', todo=todo, user=user, form=form, focus=focus_tag)
 
 @app.route('/todo/add/<date>', methods=['GET', 'POST'])
 @login_required
@@ -77,7 +78,7 @@ def todo_add(date):
 def todo_delete(id):
     todo = select_todo_by_id(id)
     if todo == None or todo[0][1] != g.user.id:
-        flash('Unauthorised enter to user delete.')
+        flash('Unauthorised enter to todo delete.')
         return redirect(url_for('index'))
     delete_todo(todo[0][0])
     flash("Succesfully deleted note.")

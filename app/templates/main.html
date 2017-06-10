@@ -3,6 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ title }}</title>
+
+    <script type="text/javascript">
+
+$("#affirmationButton").click(function(){
+    alert("?");
+    $("#affirmationForm").toggle();
+});
+
+</script>
+
 </head>
 <body>
 
@@ -182,12 +192,33 @@
 
         </table>
         </form>
+
          </div>
     </div>
+
+    <h4>Daily affirmation: <a href="#affirmationButton" id="affirmationButton">(+)</a></h4>
+
+    <table class="table borderless">
+    {% for id, user_id, created_at, text in affirmations %}
+        <p>
+            <tr><td>{{ text }}</td><td><a href="{{ url_for('affirmation_edit',id=id) }}"><button type="button">Edit</button></a></td></tr>
+    </p>
+    {% endfor %}
+    </table>
+
+    <form method="post" name="affirmationForm" action="/add_affirmation" id="affirmationForm">
+        {{ aForm.hidden_tag() }}
+        <p>
+        Affirmation text:<br>
+        {{ aForm.text(size=64) }}
+
+            {{ aForm.date }}
+        </p>
+        <input class="btn btn-lg btn-primary" type="submit" value="Submit">
+    </form>
+
   </div>
 </div>
-
-
 {% endblock %}
 </body>
 </html>

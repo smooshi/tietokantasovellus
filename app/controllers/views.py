@@ -4,7 +4,7 @@ from flask_login import login_user, logout_user, current_user, login_required
 from datetime import datetime, timedelta
 from operator import itemgetter
 
-from app.forms import LoginForm, UserCreateForm, flash_errors
+from app.forms import LoginForm, UserCreateForm, flash_errors, AffirmationForm
 from app.models import *
 from app.notes import *
 from app.todos import *
@@ -12,6 +12,7 @@ from app.goals import *
 from app.focus import *
 from app.groups import *
 from app.discussions import *
+from app.affirmations import *
 
 @app.before_request
 def before_request():
@@ -31,6 +32,9 @@ def main():
 	groups = select_groups_by_user_id(g.user.id)
 	latest = get_latest_discussions(groups)
 	todo_focus = get_todo_focus(todot)
+	aForm = AffirmationForm()
+	aForm.date.data = days["today"]
+	affirmations = select_affirmation_by_user_id_and_date(user.id, days["today"])
 
 	#Testing focus colors:
 	focus_colors = ["red", "blue", "green", "yellow", "orange"]
@@ -65,7 +69,7 @@ def main():
 			update_user_focus_points(g.user.id)
 			return redirect(url_for('main'))
 
-	return render_template('main.html', title='MainPage', user=user, tnotes= timed, notes=notTimed, days=days, todos=todos, goals=goals, focus=focus, groups=groups, latest=latest, todo_focus=todo_focus)
+	return render_template('main.html', title='MainPage', user=user, tnotes= timed, notes=notTimed, days=days, todos=todos, goals=goals, focus=focus, groups=groups, latest=latest, todo_focus=todo_focus, aForm=aForm, affirmations=affirmations)
 
 #talle tarvitaan parempi ratkaisu, tama on kontrolleri joka nayttaa "eri paivia", mutta kayttaa kuitenkin main.html sivua
 @app.route('/timetravel/<date>', methods=['GET', 'POST'])
@@ -89,12 +93,32 @@ def timetravel(date):
 	focus = select_focus_by_user_id(g.user.id)
 	groups = select_groups_by_user_id(g.user.id)
 	latest = get_latest_discussions(groups)
+	aForm = AffirmationForm()
+	aForm.date.data = days["today"]
+	affirmations = select_affirmation_by_user_id_and_date(user.id, days["today"])
 
 	if request.method == 'POST':
 		#Todo complete estetty
 		flash("That's currently disabled.")
 
-	return render_template('main.html', title='MainPage', user=user, tnotes= timed, notes=notTimed, days=days, todos=todos, goals=goals, groups=groups, focus=focus, latest=latest)
+	return render_template('main.html', title='MainPage', user=user, tnotes= timed, notes=notTimed, days=days, todos=todos, goals=goals, groups=groups, focus=focus, latest=latest, aForm=aForm, affirmations=affirmations)
+
+@login_required
+@app.route('/add_affirmation', methods=['GET', 'POST'])
+def add_affirmation():
+	user = g.user
+	text = request.form['text']
+	date = request.form['date']
+	day = datetime.strptime(date, "%Y-%m-%d")
+
+	insert_affirmation(user.id, text, day)
+
+	if day.date() == datetime.today().date():
+		return redirect(url_for('main'))
+	else:
+		return redirect(url_for('timetravel', date=day.date()))
+	flash('Affirmation added!')
+	return redirect(url_for('main'))
 
 #Set yesterday,today, tomorrow into dictionary
 def set_days(date):
@@ -182,7 +206,7 @@ def try_login(username, password):
 @lm.user_loader
 def load_user(id):
 	user = select_by_id_user(id)
-	if user != None or len(user)>0:
+	if user != None:
 		return (user)
 	else:
 		return (None)

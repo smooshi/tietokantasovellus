@@ -96,3 +96,12 @@ edited_at DATETIME not null,
 FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE,
 FOREIGN KEY (group_id) REFERENCES Groups(id) ON DELETE CASCADE
 );
+
+drop table if exists Affirmation;
+create table Affirmation(
+id integer PRIMARY key autoincrement,
+user_id integer not null,
+date DATE not null,
+text text not null,
+FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE
+);
