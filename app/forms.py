@@ -56,9 +56,14 @@ class NoteEditForm(Form):
     isTimed = BooleanField('isTimed', default=False)
     time = TimeField('time', validators=[Optional(), RequiredIf('isTimed')])
 
+class TodoAddForm(Form):
+    text = StringField('text', validators=[DataRequired(message="Enter text")])
+    focus = SelectField('focus', coerce=int)
+
 class TodoEditForm(Form):
     text = StringField('text', validators=[DataRequired(message="Enter text")])
     focus = SelectField('focus', coerce=int)
+    completeStatus = BooleanField('completeStatus', validators=[Optional(), RequiredIf('isTimed')])
 
 class GoalAddForm(Form):
     text = StringField('text', validators=[DataRequired(message="Enter text")])

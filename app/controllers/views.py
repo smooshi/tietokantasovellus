@@ -22,6 +22,7 @@ def before_request():
 @login_required
 def main():
 	user = g.user
+	message = "Welcome, "+user.name+"!"
 	days = set_days(datetime.today().date())
 	notes = select_note_by_user_id_and_date(g.user.id, days["today"])
 	timed, notTimed = sort_notes(notes)
@@ -69,7 +70,7 @@ def main():
 			update_user_focus_points(g.user.id)
 			return redirect(url_for('main'))
 
-	return render_template('main.html', title='MainPage', user=user, tnotes= timed, notes=notTimed, days=days, todos=todos, goals=goals, focus=focus, groups=groups, latest=latest, todo_focus=todo_focus, aForm=aForm, affirmations=affirmations)
+	return render_template('main.html', message=message, title='To Do App', user=user, tnotes= timed, notes=notTimed, days=days, todos=todos, goals=goals, focus=focus, groups=groups, latest=latest, todo_focus=todo_focus, aForm=aForm, affirmations=affirmations)
 
 #talle tarvitaan parempi ratkaisu, tama on kontrolleri joka nayttaa "eri paivia", mutta kayttaa kuitenkin main.html sivua
 @app.route('/timetravel/<date>', methods=['GET', 'POST'])
@@ -81,7 +82,6 @@ def timetravel(date):
 	s = str(date)
 	d = datetime.strptime(s, "%Y-%m-%d")
 	days = set_days(d.date())
-
 	#Return to main if date is "today"
 	if d.date() == datetime.now().date():
 		return redirect(url_for('main'))
@@ -101,7 +101,7 @@ def timetravel(date):
 		#Todo complete estetty
 		flash("That's currently disabled.")
 
-	return render_template('main.html', title='MainPage', user=user, tnotes= timed, notes=notTimed, days=days, todos=todos, goals=goals, groups=groups, focus=focus, latest=latest, aForm=aForm, affirmations=affirmations)
+	return render_template('main.html', title='To Do App', user=user, tnotes= timed, notes=notTimed, days=days, todos=todos, goals=goals, groups=groups, focus=focus, latest=latest, aForm=aForm, affirmations=affirmations)
 
 @login_required
 @app.route('/add_affirmation', methods=['GET', 'POST'])

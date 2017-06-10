@@ -1,3 +1,5 @@
+@import "compass/css3";
+
 #main-container{
   max-width: 1200px;
   padding: 10px 25px;

@@ -4,7 +4,7 @@ from flask_login import login_required
 from datetime import datetime
 
 #models
-from app.forms import TodoEditForm, flash_errors
+from app.forms import TodoEditForm, flash_errors, TodoAddForm
 from app.focus import *
 from app.todos import *
 
@@ -19,19 +19,27 @@ def todo_edit(id):
         flash('Note not found.')
         return redirect(url_for('index'))
 
-    form = TodoEditForm(text=todo[0][2], focus=(focus_tag[0][0] if len(focus_tag)>0 else 0))
+    form = TodoEditForm(text=todo[0][2], focus=(focus_tag[0][0] if len(focus_tag)>0 else 0),completeStatus=todo[0][3])
     choices = [(0, "Select focus")]
     for row in select_focus_by_user_id(user.id):
         choices.append((row[0], row[2]))
     form.focus.choices = choices
-    #form.focus.data = (focus[0][0] if len(focus)>0 else 0)
 
     if form.validate_on_submit():
         text = form.text.data
         id = todo[0][0]
+
+        #tekstin muuttaminen
         update_todo_text(id, text)
 
-        #hmm...
+        #complete muutos
+        if form.completeStatus.data != todo[0][3]:
+            if form.completeStatus.data:
+                update_todo_complete(id)
+            else:
+                update_todo_uncomplete(id)
+
+        #hmm... focus tag muuttaminen
         if form.focus.data != 0:
             if len(focus_tag) > 0:
                 #update_focus_tag(focus_tag[0][0], id, form.focus.data)
@@ -50,7 +58,7 @@ def todo_edit(id):
 @login_required
 def todo_add(date):
     user = g.user
-    form = TodoEditForm()
+    form = TodoAddForm()
     choices = [(0, "Select focus")]
     for row in select_focus_by_user_id(user.id):
         choices.append((row[0], row[2]))
