@@ -18,6 +18,7 @@ Toteutettu:
   - Viikko2 huom: tietokantataulut pystytetään/dropataan samassa tiedostossa = schema.sql
   - Focus on nyt "tagi" To Doille sen lisäksi, että se on oma listattava juttunsa ja liitostaulu on dokumentoitu
   - Git Ignore lisätty (5.6.)
+  - Enemmän editointihommia/toiminnallisuutta, lisätaulu "Affirmation". (10.6)
 
 Tehdyt sivut:
 
