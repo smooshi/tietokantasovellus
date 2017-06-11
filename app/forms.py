@@ -1,7 +1,7 @@
 from flask_wtf import Form
 from wtforms import StringField, BooleanField, PasswordField, DateField, DateTimeField, SelectField, HiddenField
 from wtforms_components import TimeField
-from wtforms.validators import DataRequired, Length, EqualTo, Required, Optional
+from wtforms.validators import DataRequired, Length, EqualTo, Required, Optional, Email
 from flask import flash
 
 
@@ -36,13 +36,13 @@ class LoginForm(Form):
 
 class UserCreateForm(Form):
     username = StringField('username', validators=[DataRequired(), Length(min=4, max=35)])
-    email = StringField('email', validators=[DataRequired(), Length(min=4, max=35)])
+    email = StringField('email', validators=[DataRequired(), Length(min=4, max=35), Email("Requires valid email address.")])
     password = PasswordField('password', validators=[DataRequired(), Length(min=4, message="Password too short"), EqualTo('confirm', message="Passwords must match")])
     confirm = PasswordField('confirm')
 
 class UserEditForm(Form):
     username = StringField('username', validators=[DataRequired(), Length(min=4, max=35)])
-    email = StringField('email', validators=[DataRequired(), Length(min=4, max=35)])
+    email = StringField('email', validators=[DataRequired(), Length(min=4, max=35), Email()])
 #    password = PasswordField('password', validators=[])
     confirm = PasswordField('confirm', validators=[DataRequired(message="Enter current password to confirm changes")])
 

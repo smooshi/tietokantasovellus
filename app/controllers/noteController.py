@@ -15,11 +15,24 @@ def note_edit(id):
     if note == None or note[0][1] != g.user.id:
         flash('Note not found.')
         return redirect(url_for('index'))
-    form = NoteEditForm(text=note[0][2])
+
+    #time format change
+    if note[0][3] == 1:
+        d = datetime.strptime(str(note[0][4]), "%Y-%m-%d %H:%M:%S")
+        time = d.time()
+    else:
+        d = datetime.now()
+        time = datetime(2017, 01, 01, 00, 00, 00)
+        time = time.time()
+
+    form = NoteEditForm(text=note[0][2], isTimed=note[0][3], time=time)
     if form.validate_on_submit():
-        text = form.text.data
         id = note[0][0]
-        update_note_text(id, text)
+        if form.isTimed.data != note[0][3] or form.time.data != time:
+            time = datetime.combine(d, form.time.data)
+            update_note_text_time(id, form.text.data, form.isTimed.data, time)
+        else:
+            update_note_text(id, form.text.data)
         flash("Succefully edited note!")
         return redirect(url_for('main'))
     flash_errors(form)
