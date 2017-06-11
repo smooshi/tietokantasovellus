@@ -8,6 +8,7 @@ from app.forms import TodoEditForm, flash_errors, TodoAddForm
 from app.focus import *
 from app.todos import *
 
+#todojen muokkaaminen+focus_tagit
 @app.route('/todo/edit/<id>', methods=['GET', 'POST'])
 @login_required
 def todo_edit(id):
@@ -54,6 +55,7 @@ def todo_edit(id):
     flash_errors(form)
     return render_template('/todo/edit.html', todo=todo, user=user, form=form, focus=focus_tag)
 
+#todojen lisays
 @app.route('/todo/add/<date>', methods=['GET', 'POST'])
 @login_required
 def todo_add(date):
@@ -81,6 +83,7 @@ def todo_add(date):
     flash_errors(form)
     return render_template('/todo/add.html', user=user, form=form)
 
+#todojen poisto
 @app.route('/todo/delete/<id>', methods=['GET', 'POST'])
 @login_required
 def todo_delete(id):

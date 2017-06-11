@@ -103,6 +103,7 @@ def leave_group(id):
     flash('Left group!')
     return redirect(url_for('main'))
 
+#kayttajan poisto (adminin toimesta) ryhmasta
 @app.route('/group/remove/<user_id><group_id>')
 @login_required
 def remove_user(user_id, group_id):

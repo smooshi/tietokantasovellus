@@ -98,6 +98,7 @@ def update_user_focus_points(id):
 
 #def select_user_todo_points(id):
 
+#user olio login managerille
 class User():
 
     def __init__(self, id, email, name, salt, authenticated):

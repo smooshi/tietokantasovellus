@@ -7,6 +7,7 @@ from datetime import datetime
 from app.forms import NoteEditForm, flash_errors
 from app.notes import *
 
+#notejen muokkaus
 @app.route('/note/edit/<id>', methods=['GET', 'POST'])
 @login_required
 def note_edit(id):
@@ -16,11 +17,13 @@ def note_edit(id):
         flash('Note not found.')
         return redirect(url_for('index'))
 
-    #time format change
+    #aikojen muokkaus, yritetään myös ylläpitää päivää.
     if note[0][3] == 1:
         d = datetime.strptime(str(note[0][4]), "%Y-%m-%d %H:%M:%S")
         time = d.time()
     else:
+        #korjattava: jos aikaa ei ole määritelty aiemmin mutta muokataan todoa x päivässä, aikaa ei saa oikein sille paivalle vaan asetetaan nyt aika.
+        #se pitaa tuoda jostain muualta
         d = datetime.now()
         time = datetime(2017, 01, 01, 00, 00, 00)
         time = time.time()
@@ -38,6 +41,7 @@ def note_edit(id):
     flash_errors(form)
     return render_template('/note/edit.html', note=note, user=user, form=form)
 
+#notejen lisays
 @app.route('/note/add/<date>', methods=['GET', 'POST'])
 @login_required
 def note_add(date):
@@ -68,6 +72,7 @@ def note_add(date):
     flash_errors(form)
     return render_template('/note/add.html', user=user, form=form)
 
+#notejen poisto
 @app.route('/note/delete/<id>', methods=['GET', 'POST'])
 @login_required
 def note_delete(id):

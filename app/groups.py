@@ -49,7 +49,6 @@ def insert_user_in_group_admin(user_id, group_id):
 def is_user_in_group(user_id, group_id):
     with sql.connect("database.db") as con:
         cur = con.cursor()
-        #com = "SELECT * FROM User_in_Group WHERE group_id=? AND user_id=?;"
         com = "SELECT CASE WHEN EXISTS (SELECT * FROM User_in_Group WHERE group_id=? AND user_id=?) THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END;"
         result = cur.execute(com, (group_id, user_id)).fetchall()
     return result
@@ -57,7 +56,6 @@ def is_user_in_group(user_id, group_id):
 def is_user_group_admin(user_id, group_id):
     with sql.connect("database.db") as con:
         cur = con.cursor()
-        #com = "SELECT * FROM User_in_Group WHERE group_id=? AND user_id=?;"
         com = "SELECT CASE WHEN EXISTS (SELECT * FROM User_in_Group WHERE group_id=? AND user_id=? AND isAdmin=1) THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END;"
         result = cur.execute(com, (group_id, user_id)).fetchall()
     return result

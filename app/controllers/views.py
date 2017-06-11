@@ -14,10 +14,14 @@ from app.groups import *
 from app.discussions import *
 from app.affirmations import *
 
+#applikaation keskeisin kontrolleri, sisaltaa login/create ja paasivuasioita, seka kaiken kayttajan sisaankirjautumisen logiikan
+
+#asettaa globaaliksi kayttajaksi login managerin antaman current_user olion
 @app.before_request
 def before_request():
 	g.user = current_user
 
+#aplikaation paasivu
 @app.route('/main', methods=['GET', 'POST'])
 @login_required
 def main():
@@ -40,7 +44,7 @@ def main():
 	#Testing focus colors:
 	focus_colors = ["red", "blue", "green", "yellow", "orange"]
 
-	#on taysin mahdollista etta taman voi tehda paremmin
+	#on taysin mahdollista etta taman voi tehda paremmin. tassa siis POSTien vastaanottoa...
 	if request.method == 'POST':
 		# todo completion:
 		rq = request.form.getlist('check')
@@ -103,6 +107,7 @@ def timetravel(date):
 
 	return render_template('main.html', title='To Do App', user=user, tnotes= timed, notes=notTimed, days=days, todos=todos, goals=goals, groups=groups, focus=focus, latest=latest, aForm=aForm, affirmations=affirmations)
 
+#affirmaatioiden lisays paasivulta
 @login_required
 @app.route('/add_affirmation', methods=['GET', 'POST'])
 def add_affirmation():
@@ -120,14 +125,14 @@ def add_affirmation():
 	flash('Affirmation added!')
 	return redirect(url_for('main'))
 
-#Set yesterday,today, tomorrow into dictionary
+#asetetaan edellinen, tama, ja huominen paiva oikein diktionaryyn, jotta linkit paasivulla toimivat
 def set_days(date):
 	t = date+timedelta(days=1)
 	y = date+timedelta(days=-1)
 	days = {"today":date, "tomorrow": t, "yesterday": y}
 	return(days)
 
-#Sort notes into right order and two different arrays for display on page
+#notejen sorttaus oikeaan jarjestykseen, ajallisiin ja ajattomiin
 def sort_notes(notes):
 	timed = list()
 	notTimed = list()
@@ -144,14 +149,14 @@ def sort_notes(notes):
 	timed = sorted(timed, key=itemgetter(4))
 	return timed, notTimed
 
-#set the latest post in group to dict where key is group id
+#loytaa uusimman postauksen grouppiin ja palauttaa dictionaryn jossa voidaan hakea uusin posti groupin id:lla
 def get_latest_discussions(groups):
 	latest = {}
 	for i in range(0, len(groups)):
 		latest[groups[i][0]] = latest_discussion_in_group(groups[i][0])
 	return latest
 
-#set todo tags into dict where key is todo id
+#etsii todojen mahdolliset fokukset dictionaryyn, josta voidaan hakea todon IDlla
 def get_todo_focus(todos):
 	todo_focus = {}
 	for i in range(0, len(todos)):
@@ -162,6 +167,7 @@ def get_todo_focus(todos):
 			todo_focus[todos[i][0]] = " "
 	return todo_focus
 
+#kun kayttaja ei ole kirjautunut sisaan, ohjataan talle sivulle, jos kayttaja on kirjautunut sisaan ohjataan mainiin
 @app.route('/')
 @app.route('/index')
 def index():
@@ -169,6 +175,7 @@ def index():
  		return redirect(url_for('main'))
  	return render_template('index.html', title='index')
 
+#login sivu
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 	if g.user is not None and g.user.is_authenticated:
@@ -202,7 +209,7 @@ def try_login(username, password):
 			flash('Password is wrong. Please try again.')
 			return redirect(url_for('login'))
 
-#Required for login manager
+#Pakollinen login managerille, tarvitsee user olion
 @lm.user_loader
 def load_user(id):
 	user = select_by_id_user(id)
@@ -211,6 +218,7 @@ def load_user(id):
 	else:
 		return (None)
 
+#logout sivu
 @app.route('/logout')
 def logout():
 	user = current_user
@@ -218,7 +226,8 @@ def logout():
 	update_user_auth(user.id, 0)
 	logout_user()
 	return redirect(url_for('index'))
-#
+
+#uuden kayttajan luominen
 @app.route('/create', methods=['GET', 'POST'])
 def create():
 	if g.user is not None and g.user.is_authenticated:

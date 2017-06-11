@@ -4,7 +4,9 @@ from wtforms_components import TimeField
 from wtforms.validators import DataRequired, Length, EqualTo, Required, Optional, Email
 from flask import flash
 
+#taalla maaritellaan kaikki formit ja niiden validaatio
 
+#metodi jotta voidaan todeta etta jos joku on TRUE niin jokin on pakollinen (kaytetaan esim. notejen ajassa)
 class RequiredIf(Required):
     # a validator which makes a field required if
     # another field is set and has a truthy value
@@ -20,7 +22,7 @@ class RequiredIf(Required):
         if other_field.data:
             super(RequiredIf, self).__call__(form, field)
 
-
+#nayttaa kaikki errorit jos validointi epaonnistuu
 def flash_errors(form):
     for field, errors in form.errors.items():
         for error in errors:

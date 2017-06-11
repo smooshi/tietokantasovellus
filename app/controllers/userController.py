@@ -8,6 +8,7 @@ from app.models import *
 from app.goals import *
 from app.discussions import *
 
+#kayttajan profiilisivu
 @app.route('/user/<id>')
 @login_required
 def user(id):
@@ -19,6 +20,7 @@ def user(id):
 		return redirect(url_for('index'))
 	return render_template('/user/profile.html', user=user, points=points, goals=goals)
 
+#kayttajan kommenttiarkisto
 @app.route('/user/archive/<id>')
 @login_required
 def archive(id):
@@ -31,7 +33,7 @@ def archive(id):
 	title = "To Do"
 	return render_template('/user/archive.html', user=user, goals=goals, discussions=discussions, title=title)
 
-
+#kayttajan muokkaaminen
 @app.route('/user_edit/<id>', methods=['GET', 'POST'])
 @login_required
 def user_edit(id):
@@ -50,6 +52,7 @@ def user_edit(id):
 	flash_errors(form)
 	return render_template('/user/edit.html', user=user, form=form)
 
+#kayttajan poisto
 @app.route('/user_delete/<id>', methods=['GET', 'POST'])
 @login_required
 def user_delete(id):

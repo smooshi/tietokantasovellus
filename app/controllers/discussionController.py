@@ -7,6 +7,7 @@ from app.forms import flash_errors, DiscussionAddForm
 from app.discussions import *
 from app.groups import *
 
+#onko kayttaja ryhman admin
 def is_user_admin(user_id, group_id):
     isA = is_user_group_admin(user_id, group_id)
     if (isA[0][0] == 1):

@@ -44,7 +44,6 @@ def select_discussions_from_user(user_id):
 def select_discussion_by_group_id(group_id):
     with sql.connect("database.db") as con:
         cur = con.cursor()
-        #com = "SELECT * FROM GroupDiscussion gd WHERE group_id=?;"
         com = "SELECT gd.*, u.name FROM GroupDiscussion gd JOIN User u ON u.id=gd.user_id WHERE gd.group_id=?;"
         result = cur.execute(com, (group_id,)).fetchall()
     return result
