@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Password</title>
+</head>
+<body>
+    {% extends "base.html" %}
+    {% block content %}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-md-offset-3">
+            <h2>Edit password:</h2>
+
+        <form action="" method="post" name="edit">
+        {{ form.hidden_tag() }}
+        <p>
+            Enter new password:<br>
+            {{ form.password(size=64)}} <br>
+        </p>
+
+        <p>
+            Confirm new password:<br>
+            {{ form.confirm(size=64) }}<br>
+        </p>
+        <br><br>
+        <p>
+            Confirm changes with your current password:<br>
+            {{ form.oldPassword(size=64) }}<br>
+        </p>
+            <p>
+            <input class="btn btn-lg btn-primary" type="submit" value="Edit">
+        </p>
+    </form>
+                </div></div></div>
+
+    {% endblock %}
+</body>
+</html>

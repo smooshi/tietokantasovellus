@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 from operator import itemgetter
 
 from app.forms import LoginForm, UserCreateForm, flash_errors, AffirmationForm
-from app.models import *
+from app.users import *
 from app.notes import *
 from app.todos import *
 from app.goals import *
@@ -233,19 +233,15 @@ def create():
 	if g.user is not None and g.user.is_authenticated:
 		return redirect(url_for('main'))
 	form = UserCreateForm()
+
 	if form.validate_on_submit():
 		username = form.username.data
 		password = form.password.data
 		email = form.email.data
-		if username is None or username == "":
-			flash('Invalid username. Please try again.')
-			return redirect(url_for('create'))
-		if password is None or password == "":
-			flash('Invalid password. Please try again.')
-			return redirect(url_for('create'))
-		if email is None or email == "":
-			flash('Invalid email. Please try again.')
-			return redirect(url_for('create'))
+		check = select_user_by_name(username)
+		if check != None: #tarkista onko kayttaja talla nimella jo tietokannassa koska Users.name == UNIQUE
+			flash('User already exists')
+			return render_template('create.html', form=form)
 
 		insert_user(username, email, password, True)
 		#login_user(user)

@@ -1,16 +1,15 @@
 from flask_wtf import Form
 from wtforms import StringField, BooleanField, PasswordField, DateField, DateTimeField, SelectField, HiddenField
 from wtforms_components import TimeField
-from wtforms.validators import DataRequired, Length, EqualTo, Required, Optional, Email
+from wtforms.validators import DataRequired, Length, EqualTo, Required, Optional, Email, Regexp, ValidationError
 from flask import flash
+
+from app.users import select_user_by_name
 
 #taalla maaritellaan kaikki formit ja niiden validaatio
 
 #metodi jotta voidaan todeta etta jos joku on TRUE niin jokin on pakollinen (kaytetaan esim. notejen ajassa)
 class RequiredIf(Required):
-    # a validator which makes a field required if
-    # another field is set and has a truthy value
-
     def __init__(self, other_field_name, *args, **kwargs):
         self.other_field_name = other_field_name
         super(RequiredIf, self).__init__(*args, **kwargs)
@@ -21,6 +20,20 @@ class RequiredIf(Required):
             raise Exception('no field named "%s" in form' % self.other_field_name)
         if other_field.data:
             super(RequiredIf, self).__call__(form, field)
+
+# class Unique_name(object):
+#     #Unique validator
+#
+#     def __init__(self, message=None):
+#         if not message:
+#             message = u'this user already exists'
+#             self.message = message
+#
+#     def __call__(self, form, field):
+#         usernameField = form._fields.get('username')
+#         check = select_user_by_name(usernameField.data)
+#         if check is not None:
+#             raise ValidationError(self.message)
 
 #nayttaa kaikki errorit jos validointi epaonnistuu
 def flash_errors(form):
@@ -37,21 +50,21 @@ class LoginForm(Form):
     remember_me = BooleanField('remember_me', default=False)
 
 class UserCreateForm(Form):
-    username = StringField('username', validators=[DataRequired(), Length(min=4, max=35)])
+    username = StringField('username', validators=[DataRequired(), Length(min=4, max=35, message="Username length should be between 4 and 35 and it should only contain letters and numbers."), Regexp('^\w+$', message="Username should contain only letters and numbers")])
     email = StringField('email', validators=[DataRequired(), Length(min=4, max=35), Email("Requires valid email address.")])
-    password = PasswordField('password', validators=[DataRequired(), Length(min=4, message="Password too short"), EqualTo('confirm', message="Passwords must match")])
-    confirm = PasswordField('confirm')
+    password = PasswordField('password', validators=[DataRequired(), Length(min=6, message="Password too short, minimum length is 6 digits."), EqualTo('confirm', message="Passwords must match")])
+    confirm = PasswordField('confirm', validators=[DataRequired()])
 
 class UserEditForm(Form):
     username = StringField('username', validators=[DataRequired(), Length(min=4, max=35)])
     email = StringField('email', validators=[DataRequired(), Length(min=4, max=35), Email()])
-#    password = PasswordField('password', validators=[])
-    confirm = PasswordField('confirm', validators=[DataRequired(message="Enter current password to confirm changes")])
+    confirm = PasswordField('confirm', validators=[DataRequired()])
 
 class UserPasswordEditForm(Form):
-    newPassword = PasswordField('newPassword', validators=[])
-    confirm = PasswordField('confirm', validators=[DataRequired(message="Enter current password to confirm changes")])
-    password = PasswordField('password', validators=[])
+    password = PasswordField('password', validators=[DataRequired(), Length(min=6, message="Password too short, minimum length is 6 digits."),Regexp('^\w+$', message="Username should contain only letters and numbers"),
+                                                     EqualTo('confirm', message="Passwords must match")])
+    confirm = PasswordField('confirm', validators=[DataRequired()])
+    oldPassword = PasswordField('password', validators=[DataRequired()])
 
 class NoteEditForm(Form):
     text = StringField('text', validators=[DataRequired(message="Enter text")])

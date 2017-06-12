@@ -32,6 +32,6 @@ lm.login_view = 'login'
 lm.login_message = "Please login first."
 
 #last
-from app import models
+from app import users
 from app.controllers import views
 from app.controllers import *

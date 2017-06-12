@@ -1,7 +1,7 @@
 #Tällä tiedostolla vaan populoidaan databaseen nopeasti jotain että voi sitten sörkkiä jos joutuu sen pyyhkimään
 
 import app
-from app.models import *
+from app.users import *
 from app.notes import *
 from datetime import datetime
 

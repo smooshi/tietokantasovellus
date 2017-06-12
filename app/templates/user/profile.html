@@ -18,6 +18,10 @@
                       <a class="btn btn-default" href="{{ url_for('user_edit', id=g.user.id) }}">Edit Profile</a>
                     </p>
                     <p>
+                        <a class="btn btn-default" href="{{ url_for('user_edit_pw', id=g.user.id) }}">Edit Password</a>
+                    </p>
+                    <br>
+                    <p>
                         <h3>Points:</h3>
                         {% for todos, goals, focus in points %}
                             Todos completed: {{ todos }} <br>

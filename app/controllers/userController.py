@@ -3,8 +3,8 @@ from app import app
 from flask_login import login_required
 
 #models
-from app.forms import UserEditForm, flash_errors
-from app.models import *
+from app.forms import UserEditForm, flash_errors, UserPasswordEditForm
+from app.users import *
 from app.goals import *
 from app.discussions import *
 
@@ -43,14 +43,32 @@ def user_edit(id):
 		return redirect(url_for('index'))
 	form = UserEditForm(username=user.name, email=user.email)
 	if form.validate_on_submit():
+		check = select_user_by_name(form.username.data)
+		if check != None and check.name != form.username.data:
+			flash('User already exists')
+			return render_template('/user/edit.html', user=user, form=form)
 		update_user_no_pw(user.id, form.username.data, form.email.data)
 		flash('Succefully edited user details!')
 		return redirect(url_for('user', id=g.user.id))
 
-	#toteuttamatta: salasanan vaihto
-
 	flash_errors(form)
 	return render_template('/user/edit.html', user=user, form=form)
+
+#salasanan muutto
+@app.route('/user_edit_pw/<id>', methods=['GET', 'POST'])
+@login_required
+def user_edit_pw(id):
+	user = select_by_id_user(id)
+	if user == None or user.id != g.user.id:
+		flash('User not found.')
+		return redirect(url_for('index'))
+
+	form = UserPasswordEditForm()
+	if form.validate_on_submit():
+		update_user_pw(user.id, form.password.data)
+		flash('Succesfully edited password!')
+		return redirect(url_for('user', id=g.user.id))
+	return render_template('/user/edit_pw.html', user=user, form=form)
 
 #kayttajan poisto
 @app.route('/user_delete/<id>', methods=['GET', 'POST'])

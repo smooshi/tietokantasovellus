@@ -26,11 +26,11 @@ def update_user_no_pw(id, name, email):
     con.commit()
     con.close()
 
-def update_user_pw(id, name, email, password):
+def update_user_pw(id, password):
     con = sql.connect("database.db")
     cur = con.cursor()
     salt = generate_password_hash(password)
-    com = "UPDATE User SET salt='?'' WHERE id=?;"
+    com = "UPDATE User SET salt=? WHERE id=?;"
     cur.execute(com, (salt, id))
     con.commit()
     con.close()
@@ -42,6 +42,17 @@ def delete_user(id):
     cur.execute(com, (id,))
     con.commit()
     con.close()
+
+def select_user_by_name(name):
+    with sql.connect("database.db") as con:
+        cur = con.cursor()
+        com = "SELECT * FROM User WHERE name=?;"
+        result = cur.execute(com, (name,)).fetchall()
+        if len(result) > 0:
+            user = User(result[0][0], result[0][1], result[0][2], result[0][3], result[0][4])
+            return user
+        else:
+            return None
 
 def select_by_id_user(id):
     with sql.connect("database.db") as con:

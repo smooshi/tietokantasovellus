@@ -7,7 +7,7 @@ from datetime import datetime
 from app.forms import flash_errors, GroupAddForm, DiscussionAddForm
 from app.discussions import *
 from app.groups import *
-from app.models import *
+from app.users import *
 
 #Tarkistaa tietokannasta onko tama kaytttaja taman ryhman admin (tarvitaan sivulogiikassa)
 def is_user_admin(user_id, group_id):

@@ -7,6 +7,7 @@ from datetime import datetime
 from app.forms import NoteEditForm, flash_errors
 from app.notes import *
 
+
 #notejen muokkaus
 @app.route('/note/edit/<id>', methods=['GET', 'POST'])
 @login_required
@@ -17,14 +18,13 @@ def note_edit(id):
         flash('Note not found.')
         return redirect(url_for('index'))
 
-    #aikojen muokkaus, yritetään myös ylläpitää päivää.
+    #aikojen muokkaus formia varten ja jotta date saadaan oikein (d)
     if note[0][3] == 1:
-        d = datetime.strptime(str(note[0][4]), "%Y-%m-%d %H:%M:%S")
-        time = d.time()
+        d = datetime.strptime(str(note[0][5]), "%Y-%m-%d %H:%M:%S") #"date"
+        t = datetime.strptime(str(note[0][4]), "%Y-%m-%d %H:%M:%S") #"time"
+        time = t.time()
     else:
-        #korjattava: jos aikaa ei ole määritelty aiemmin mutta muokataan todoa x päivässä, aikaa ei saa oikein sille paivalle vaan asetetaan nyt aika.
-        #se pitaa tuoda jostain muualta
-        d = datetime.now()
+        d = datetime.strptime(str(note[0][5]), "%Y-%m-%d %H:%M:%S")
         time = datetime(2017, 01, 01, 00, 00, 00)
         time = time.time()
 
@@ -37,7 +37,12 @@ def note_edit(id):
         else:
             update_note_text(id, form.text.data)
         flash("Succefully edited note!")
-        return redirect(url_for('main'))
+
+        if d.date() == datetime.today().date():
+            return redirect(url_for('main'))
+        else:
+            return redirect(url_for('timetravel', date=d.date()))
+
     flash_errors(form)
     return render_template('/note/edit.html', note=note, user=user, form=form)
 
