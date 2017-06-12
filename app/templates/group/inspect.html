@@ -25,8 +25,15 @@
                         {% for i in range(0, users|length) %}
                             <p>
                             {{ users[i][2] }}
-                            {% if admin and user.id != users[i][0] %}
+                            {% if admin and user.id != users[i][0]%}
+                                {% if users[i][0] not in admins %}
+                                <a href="{{ url_for('make_user_admin', user_id=users[i][0], group_id=group[0][0]) }}"><button type="button" class="btn btn-xs btn-warning">Make Admin</button></a>
                                 <a href="{{ url_for('remove_user', user_id=users[i][0], group_id=group[0][0]) }}"><button type="button" class="btn btn-xs btn-danger">Remove</button></a>
+
+                                {% else %}
+                                     <a href="{{ url_for('demote_user_admin', user_id=users[i][0], group_id=group[0][0]) }}"><button type="button" class="btn btn-xs btn-warning">Demote Admin</button></a>
+
+                                {% endif %}
                             {% endif %}
                             </p>
                         {% endfor %}

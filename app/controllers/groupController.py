@@ -64,17 +64,25 @@ def group(id):
     discussions = select_discussion_by_group_id(id)
     discussions.reverse()
     form = DiscussionAddForm()
+    group_admins = select_group_admins(id)
+    admins = []
+    for a in group_admins:
+        admins.append(a[0])
 
+    #join button
     if request.method == 'POST':
         j = request.form.getlist('join')
         if (len(j)>0):
             insert_user_in_group(g.user.id, id)
+            flash('Joined group!')
             return redirect(url_for('group', id=id))
+
+    #post submit
     if form.validate_on_submit():
         insert_discussion(user.id,id,form.title.data,form.text.data)
         return redirect(url_for('group', id=id))
 
-    return render_template('/group/inspect.html', user=user, group=group, grouped=grouped, users=users, admin=admin, discussions=discussions, form=form)
+    return render_template('/group/inspect.html', user=user, group=group, grouped=grouped, users=users, admin=admin, discussions=discussions, form=form, admins=admins)
 
 @app.route('/group/edit/<id>', methods=['GET', 'POST'])
 @login_required
@@ -88,7 +96,7 @@ def group_edit(id):
         return redirect(url_for('groups'))
 
     if form.validate_on_submit():
-        update_group(form.name.data, form.description.data, id)
+        update_group(form.name.data, form.description.data, id) 
         flash("Edited group details!")
         return redirect(url_for('group', id=id))
 
@@ -102,6 +110,28 @@ def leave_group(id):
     delete_user_in_group(user.id, id)
     flash('Left group!')
     return redirect(url_for('main'))
+
+#tee kayttajasta admin
+@app.route('/group/admin/<user_id><group_id>')
+@login_required
+def make_user_admin(user_id, group_id):
+    if is_user_admin(g.user.id, group_id):
+        update_group_user_to_admin(user_id, group_id)
+        flash('Made user admin!')
+    else:
+        flash('Not allowed!')
+    return redirect(url_for('group', id=group_id))
+
+#poista kayttajan admin
+@app.route('/group/admin/demote/<user_id><group_id>')
+@login_required
+def demote_user_admin(user_id, group_id):
+    if is_user_admin(g.user.id, group_id):
+        update_group_user_to_not_admin(user_id, group_id)
+        flash('Demoted admin!')
+    else:
+        flash('Not allowed!')
+    return redirect(url_for('group', id=group_id))
 
 #kayttajan poisto (adminin toimesta) ryhmasta
 @app.route('/group/remove/<user_id><group_id>')

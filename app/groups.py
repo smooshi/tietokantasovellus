@@ -60,12 +60,33 @@ def is_user_group_admin(user_id, group_id):
         result = cur.execute(com, (group_id, user_id)).fetchall()
     return result
 
+def update_group_user_to_admin(user_id, group_id):
+    with sql.connect("database.db") as con:
+        cur = con.cursor()
+        com = "UPDATE User_in_Group SET isAdmin=1 WHERE user_id=? AND group_id=?;"
+        cur.execute(com, (user_id, group_id)).fetchall()
+        con.commit()
+
+def update_group_user_to_not_admin(user_id, group_id):
+    with sql.connect("database.db") as con:
+        cur = con.cursor()
+        com = "UPDATE User_in_Group SET isAdmin=0 WHERE user_id=? AND group_id=?;"
+        cur.execute(com, (user_id, group_id)).fetchall()
+        con.commit()
+
 def select_groups_by_user_id(user_id):
     with sql.connect("database.db") as con:
         cur = con.cursor()
         #com = "SELECT * FROM Groups INNER JOIN User_in_Group ON Groups.id = User_in_Group.group_id WHERE User_in_Group.user_id = ?;"
         com = "SELECT g.* FROM Groups g INNER JOIN User_in_Group ug ON g.id=ug.group_id WHERE ug.user_id=?;"
         result = cur.execute(com, (user_id,)).fetchall()
+    return result
+
+def select_group_admins(group_id):
+    with sql.connect("database.db") as con:
+        cur = con.cursor()
+        com = "SELECT User_in_Group.user_id FROM User_in_Group WHERE group_id=? AND isAdmin=1;"
+        result = cur.execute(com, (group_id,)).fetchall()
     return result
 
 def select_users_by_group_id(group_id):
