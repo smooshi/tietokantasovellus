@@ -1,6 +1,8 @@
 import sqlite3 as sql
 from datetime import datetime
 
+#Fokuksien modeli eli tietokantakutsut
+
 def insert_focus(user_id, text):
     con = sql.connect("database.db")
     cur = con.cursor()

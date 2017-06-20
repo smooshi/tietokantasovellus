@@ -9,6 +9,8 @@ from app.discussions import *
 from app.groups import *
 from app.users import *
 
+#Grouppien paakontrolleri: sis. edit, add, delete ja listaus
+
 #Tarkistaa tietokannasta onko tama kaytttaja taman ryhman admin (tarvitaan sivulogiikassa)
 def is_user_admin(user_id, group_id):
     isA = is_user_group_admin(user_id, group_id)
@@ -25,6 +27,7 @@ def is_user_in_this_group(user_id, group_id):
     else:
         return False
 
+#Kaikkien ryhmien listaussivu
 @app.route('/groups')
 @login_required
 def groups():
@@ -33,6 +36,7 @@ def groups():
 
     return render_template('/group/all.html', groups=groups, user=user)
 
+#Omien ryhmien listausisuv
 @app.route('/own_groups')
 @login_required
 def own_groups():
@@ -41,6 +45,7 @@ def own_groups():
 
     return render_template('/group/all.html', groups=groups, user=user)
 
+#Ryhmien lisays
 @app.route('/group_add', methods=['GET', 'POST'])
 @login_required
 def group_add():
@@ -59,6 +64,7 @@ def group_add():
         return redirect(url_for('main'))
     return render_template('/group/add.html', user=user, form=form)
 
+#Ryhman paasivu
 @app.route('/group/<id>', methods=['GET', 'POST'])
 @login_required
 def group(id):
@@ -75,7 +81,7 @@ def group(id):
     for a in group_admins:
         admins.append(a[0])
 
-    #join button
+    #join button, eli ryhmaan liittyminen kun saadaan requestista post 'join' asialta (kuten paasivu):
     if request.method == 'POST':
         j = request.form.getlist('join')
         if (len(j)>0):
@@ -83,13 +89,14 @@ def group(id):
             flash('Joined group!')
             return redirect(url_for('group', id=id))
 
-    #post submit
+    #post submit, eli Keskustelun luominen ryhmaan
     if form.validate_on_submit():
         insert_discussion(user.id,id,form.title.data,form.text.data)
         return redirect(url_for('group', id=id))
 
     return render_template('/group/inspect.html', user=user, group=group, grouped=grouped, users=users, admin=admin, discussions=discussions, form=form, admins=admins)
 
+#Ryhman muokkaus
 @app.route('/group/edit/<id>', methods=['GET', 'POST'])
 @login_required
 def group_edit(id):
@@ -97,6 +104,7 @@ def group_edit(id):
     group = select_group_by_id(id)
     form=GroupAddForm(name=group[0][1], description=group[0][2])
 
+    #Ei admin joka yrittaa paasta sivulle ohjataan pois.
     if not is_user_admin(user.id, id):
         flash('Not allowed.')
         return redirect(url_for('groups'))
@@ -109,6 +117,7 @@ def group_edit(id):
     flash_errors(form)
     return render_template('/group/edit.html', user=user, group=group, form=form)
 
+#Ryhmasta lahteminen
 @app.route('/group/leave/<id>')
 @login_required
 def leave_group(id):

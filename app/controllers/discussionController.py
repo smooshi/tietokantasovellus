@@ -7,6 +7,8 @@ from app.forms import flash_errors, DiscussionAddForm
 from app.discussions import *
 from app.groups import *
 
+# Keskustelujen paakontrolleri: edit, delete. Keskustelun lisays tehdaan Group-kontrollerissa.
+
 #onko kayttaja ryhman admin
 def is_user_admin(user_id, group_id):
     isA = is_user_group_admin(user_id, group_id)

@@ -8,6 +8,8 @@ from app.forms import TodoEditForm, flash_errors, TodoAddForm
 from app.focus import *
 from app.todos import *
 
+#Todojen paakontrolleri add, edit, delete. Listaus paasivulla paivittain.
+
 #todojen muokkaaminen+focus_tagit
 @app.route('/todo/edit/<id>', methods=['GET', 'POST'])
 @login_required

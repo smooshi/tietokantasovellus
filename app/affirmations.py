@@ -1,6 +1,8 @@
 import sqlite3 as sql
 from datetime import datetime
 
+#Affirmatioiden modeli eli tietokantakutsut
+
 def insert_affirmation(user_id, text, date):
     con = sql.connect("database.db")
     cur = con.cursor()

@@ -7,6 +7,9 @@ from datetime import datetime
 from app.forms import FocusAddForm, FocusEditForm, flash_errors
 from app.focus import *
 
+#Focusten paakontrolleri: Sis. Edit, Add, Delete.
+#Fokukset listataan paasivulla.
+
 @app.route('/focus_edit/<id>', methods=['GET', 'POST'])
 @login_required
 def focus_edit(id):

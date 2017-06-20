@@ -7,6 +7,14 @@ from datetime import datetime
 from app.forms import AffirmationEditForm, flash_errors
 from app.affirmations import *
 
+#Affirmation kontrolleri:
+#affirmaatioiden lisays ja deletointi tehdaan taalla, mutta kokeilusyista lisays tehdaan views.py:ssa.
+#(Halusin koittaa single page hommia)
+
+#
+# Affirmationin on tarkoitus olla jokin sellainen positiivinen viesti.
+#
+
 @app.route('/affirmation/edit/<id>', methods=['GET', 'POST'])
 @login_required
 def affirmation_edit(id):

@@ -3,7 +3,18 @@
   <component name="ChangeListManager">
     <list default="true" id="a392ad2f-6047-433f-b399-a69f0cce78cc" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database.db" afterPath="$PROJECT_DIR$/database.db" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/affirmations.py" afterPath="$PROJECT_DIR$/app/affirmations.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/affirmationController.py" afterPath="$PROJECT_DIR$/app/controllers/affirmationController.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/discussionController.py" afterPath="$PROJECT_DIR$/app/controllers/discussionController.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/focusController.py" afterPath="$PROJECT_DIR$/app/controllers/focusController.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/groupController.py" afterPath="$PROJECT_DIR$/app/controllers/groupController.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/todoController.py" afterPath="$PROJECT_DIR$/app/controllers/todoController.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/views.py" afterPath="$PROJECT_DIR$/app/controllers/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/discussions.py" afterPath="$PROJECT_DIR$/app/discussions.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/focus.py" afterPath="$PROJECT_DIR$/app/focus.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/forms.py" afterPath="$PROJECT_DIR$/app/forms.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/main.html" afterPath="$PROJECT_DIR$/app/templates/main.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/users.py" afterPath="$PROJECT_DIR$/app/users.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,23 +32,48 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="schema" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/schema">
+      <file leaf-file-name="goals.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/goals.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1470">
-              <caret line="98" column="0" lean-forward="true" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="-186">
+              <caret line="12" column="26" lean-forward="true" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
+              <folding>
+                <marker date="1495624978000" expanded="true" signature="172:255" ph="INSERT INTO Goal... " />
+                <marker date="1495624978000" expanded="true" signature="475:509" ph="SELECT * FRO... Goal" />
+                <marker date="1495624978000" expanded="true" signature="542:576" ph="SELECT * FRO... Goal" />
+                <marker date="1495624978000" expanded="true" signature="768:815" ph="SELECT * FRO... Goal" />
+                <marker date="1495624978000" expanded="true" signature="974:1003" ph="SELECT * FRO... Goal" />
+                <marker date="1495624978000" expanded="true" signature="1201:1250" ph="UPDATE Goal " />
+                <marker date="1495624978000" expanded="true" signature="1402:1429" ph="DELETE FROM " />
+                <marker date="1495624978000" expanded="true" signature="1594:1633" ph="UPDATE Goal " />
+                <marker date="1495624978000" expanded="true" signature="1790:1829" ph="UPDATE Goal " />
+                <marker date="1495624978000" expanded="true" signature="1982:2026" ph="UPDATE Goal " />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/controllers/views.py">
+      <file leaf-file-name="users.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/users.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="489">
-              <caret line="103" column="0" lean-forward="true" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
+            <state relative-caret-position="-1596">
+              <caret line="4" column="54" lean-forward="false" selection-start-line="4" selection-start-column="54" selection-end-line="4" selection-end-column="54" />
               <folding>
-                <element signature="e#0#22#0" expanded="true" />
+                <marker date="1497962803000" expanded="true" signature="359:453" ph="INSERT INTO User... " />
+                <marker date="1497962803000" expanded="true" signature="670:713" ph="UPDATE User " />
+                <marker date="1497962803000" expanded="true" signature="903:962" ph="UPDATE User " />
+                <marker date="1497962803000" expanded="true" signature="1204:1237" ph="UPDATE User " />
+                <marker date="1497962803000" expanded="true" signature="1204:1238" ph="UPDATE User " />
+                <marker date="1497962803000" expanded="true" signature="1399:1426" ph="DELETE FROM " />
+                <marker date="1497962803000" expanded="true" signature="1608:1639" ph="SELECT * FRO... User" />
+                <marker date="1497962803000" expanded="true" signature="1994:2022" ph="SELECT * fro... User" />
+                <marker date="1497962803000" expanded="true" signature="1994:2023" ph="SELECT * FRO... User" />
+                <marker date="1497962803000" expanded="true" signature="2000:2022" ph="select * fro... User" />
+                <marker date="1497962803000" expanded="true" signature="2380:2411" ph="select * fro... User" />
+                <marker date="1497962803000" expanded="true" signature="2772:2819" ph="select todos... User" />
+                <marker date="1497962803000" expanded="true" signature="3000:3042" ph="UPDATE User " />
+                <marker date="1497962803000" expanded="true" signature="3222:3264" ph="UPDATE User " />
+                <marker date="1497962803000" expanded="true" signature="3445:3487" ph="UPDATE User " />
               </folding>
             </state>
           </provider>
@@ -95,31 +131,20 @@
         <option value="$PROJECT_DIR$/app/templates/note/add.html" />
         <option value="$PROJECT_DIR$/app/todos.py" />
         <option value="$PROJECT_DIR$/app/templates/user/archive.html" />
-        <option value="$PROJECT_DIR$/app/controllers/focusController.py" />
-        <option value="$PROJECT_DIR$/app/focus.py" />
-        <option value="$PROJECT_DIR$/app/affirmations.py" />
         <option value="$PROJECT_DIR$/app/templates/affirmation/edit.html" />
-        <option value="$PROJECT_DIR$/app/controllers/affirmationController.py" />
         <option value="$PROJECT_DIR$/app/templates/todo/edit.html" />
         <option value="$PROJECT_DIR$/app/static/assets/js/site.js" />
         <option value="$PROJECT_DIR$/app/notes.py" />
         <option value="$PROJECT_DIR$/app/templates/note/edit.html" />
-        <option value="$PROJECT_DIR$/app/controllers/todoController.py" />
-        <option value="$PROJECT_DIR$/app/controllers/discussionController.py" />
         <option value="$PROJECT_DIR$/app/models.py" />
-        <option value="$PROJECT_DIR$/app/discussions.py" />
         <option value="$PROJECT_DIR$/app/controllers/noteController.py" />
         <option value="$PROJECT_DIR$/app/static/assets/css/site.css" />
         <option value="$PROJECT_DIR$/app/templates/user/profile.html" />
-        <option value="$PROJECT_DIR$/app/forms.py" />
         <option value="$PROJECT_DIR$/app/templates/user/edit_pw.html" />
         <option value="$PROJECT_DIR$/app/controllers/userController.py" />
-        <option value="$PROJECT_DIR$/app/templates/main.html" />
         <option value="$PROJECT_DIR$/app/templates/group/inspect.html" />
         <option value="$PROJECT_DIR$/schema" />
         <option value="$PROJECT_DIR$/app/groups.py" />
-        <option value="$PROJECT_DIR$/app/users.py" />
-        <option value="$PROJECT_DIR$/app/controllers/groupController.py" />
         <option value="$PROJECT_DIR$/app/templates/user/all.html" />
         <option value="$PROJECT_DIR$/Procfile" />
         <option value="$PROJECT_DIR$/app/templates/base.html" />
@@ -127,7 +152,18 @@
         <option value="$PROJECT_DIR$/config.py" />
         <option value="$PROJECT_DIR$/sql/drop_tables.sql" />
         <option value="$PROJECT_DIR$/sql/create_tables.sql" />
+        <option value="$PROJECT_DIR$/app/templates/main.html" />
         <option value="$PROJECT_DIR$/app/controllers/views.py" />
+        <option value="$PROJECT_DIR$/app/controllers/affirmationController.py" />
+        <option value="$PROJECT_DIR$/app/controllers/discussionController.py" />
+        <option value="$PROJECT_DIR$/app/controllers/focusController.py" />
+        <option value="$PROJECT_DIR$/app/controllers/groupController.py" />
+        <option value="$PROJECT_DIR$/app/controllers/todoController.py" />
+        <option value="$PROJECT_DIR$/app/affirmations.py" />
+        <option value="$PROJECT_DIR$/app/discussions.py" />
+        <option value="$PROJECT_DIR$/app/focus.py" />
+        <option value="$PROJECT_DIR$/app/forms.py" />
+        <option value="$PROJECT_DIR$/app/users.py" />
       </list>
     </option>
   </component>
@@ -192,24 +228,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tietokantasovellus" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tietokantasovellus" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -460,9 +478,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="40" y="38" width="1400" height="757" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.49418604" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.49418604" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -547,6 +564,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="279">
           <caret line="43" column="36" lean-forward="false" selection-start-line="43" selection-start-column="36" selection-end-line="43" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#62#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -575,25 +595,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="14" column="62" lean-forward="false" selection-start-line="14" selection-start-column="62" selection-end-line="14" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/goals.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="12" column="26" lean-forward="true" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
-          <folding>
-            <marker date="1495624978000" expanded="true" signature="172:255" ph="INSERT INTO Goal... " />
-            <marker date="1495624978000" expanded="true" signature="475:509" ph="SELECT * FRO... Goal" />
-            <marker date="1495624978000" expanded="true" signature="542:576" ph="SELECT * FRO... Goal" />
-            <marker date="1495624978000" expanded="true" signature="768:815" ph="SELECT * FRO... Goal" />
-            <marker date="1495624978000" expanded="true" signature="974:1003" ph="SELECT * FRO... Goal" />
-            <marker date="1495624978000" expanded="true" signature="1201:1250" ph="UPDATE Goal " />
-            <marker date="1495624978000" expanded="true" signature="1402:1429" ph="DELETE FROM " />
-            <marker date="1495624978000" expanded="true" signature="1594:1633" ph="UPDATE Goal " />
-            <marker date="1495624978000" expanded="true" signature="1790:1829" ph="UPDATE Goal " />
-            <marker date="1495624978000" expanded="true" signature="1982:2026" ph="UPDATE Goal " />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -681,27 +682,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/discussionController.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="26">
-          <caret line="9" column="27" lean-forward="false" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/affirmationController.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="32" column="36" lean-forward="true" selection-start-line="32" selection-start-column="36" selection-end-line="32" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/focusController.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="29" lean-forward="false" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/notes.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="399">
@@ -719,43 +699,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/discussions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="45" column="26" lean-forward="false" selection-start-line="45" selection-start-column="26" selection-end-line="45" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#21#0" expanded="false" />
-            <marker date="1497187369000" expanded="true" signature="185:288" ph="INSERT INTO GroupDiscussion... " />
-            <marker date="1497187369000" expanded="true" signature="525:565" ph="SELECT * FRO... Note" />
-            <marker date="1497187369000" expanded="true" signature="743:811" ph="UPDATE Note " />
-            <marker date="1497187369000" expanded="true" signature="976:1014" ph="DELETE FROM " />
-            <marker date="1497187369000" expanded="true" signature="1207:1214" ph="SELECT d.* F... GroupDiscussion" />
-            <marker date="1497187369000" expanded="true" signature="1207:1235" ph="SELECT * FRO... GroupDicussion" />
-            <marker date="1497187369000" expanded="true" signature="1207:1241" ph="SELECT * FRO... GroupDicussion" />
-            <marker date="1497187369000" expanded="true" signature="1207:1251" ph="SELECT * FRO... GroupDicussion" />
-            <marker date="1497187369000" expanded="true" signature="1207:1266" ph="SELECT * FRO... GroupDicussion" />
-            <marker date="1497187369000" expanded="true" signature="1482:1526" ph="SELECT * FRO... GroupDicussion" />
-            <marker date="1497187369000" expanded="true" signature="1736:1830" ph="SELECT gd.*,... GroupDiscussion" />
-            <marker date="1497187369000" expanded="true" signature="2039:2052" ph="SELECT * FRO... TABLE" />
-            <marker date="1497187369000" expanded="true" signature="2039:2068" ph="SELECT * FRO... GroupDiscussion" />
-            <marker date="1497187369000" expanded="true" signature="2039:2135" ph="SELECT * FRO... GroupDiscussion" />
-            <marker date="1497187369000" expanded="true" signature="2082:2117" ph="SELECT MAX(i... GroupDiscussion" />
-            <marker date="1497187369000" expanded="true" signature="2082:2134" ph="SELECT MAX(i... GroupDiscussion" />
-            <marker date="1497187369000" expanded="true" signature="2153:2201" ph="SELECT gd.*,... GroupDiscussion" />
-            <marker date="1497187369000" expanded="true" signature="2153:2303" ph="SELECT gd.*,... GroupDiscussion" />
-            <marker date="1497187369000" expanded="true" signature="2243:2302" ph="SELECT MAX(g... GroupDiscussion" />
-            <marker date="1497187369000" expanded="true" signature="2509:2567" ph="SELECT * FRO... GroupDiscussion" />
-            <marker date="1497187369000" expanded="true" signature="2509:2604" ph="SELECT * FRO... GroupDiscussion" />
-            <marker date="1497187369000" expanded="true" signature="2552:2567" ph="SELECT MAX(i... GroupDiscussion" />
-            <marker date="1497187369000" expanded="true" signature="2827:2920" ph="SELECT gd.*,... GroupDiscussion" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/noteController.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#62#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -799,62 +749,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-156">
-          <caret line="66" column="8" lean-forward="false" selection-start-line="66" selection-start-column="8" selection-end-line="66" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/users.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1800">
-          <caret line="120" column="0" lean-forward="true" selection-start-line="120" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#73#0" expanded="false" />
-            <marker date="1497287274000" expanded="true" signature="303:397" ph="INSERT INTO User... " />
-            <marker date="1497287274000" expanded="true" signature="614:657" ph="UPDATE User " />
-            <marker date="1497287274000" expanded="true" signature="847:906" ph="UPDATE User " />
-            <marker date="1497287274000" expanded="true" signature="1148:1181" ph="UPDATE User " />
-            <marker date="1497287274000" expanded="true" signature="1148:1182" ph="UPDATE User " />
-            <marker date="1497287274000" expanded="true" signature="1343:1370" ph="DELETE FROM " />
-            <marker date="1497287274000" expanded="true" signature="1552:1583" ph="SELECT * FRO... User" />
-            <marker date="1497287274000" expanded="true" signature="1938:1966" ph="SELECT * fro... User" />
-            <marker date="1497287274000" expanded="true" signature="1938:1967" ph="SELECT * FRO... User" />
-            <marker date="1497287274000" expanded="true" signature="1944:1966" ph="select * fro... User" />
-            <marker date="1497287274000" expanded="true" signature="2324:2355" ph="select * fro... User" />
-            <marker date="1497287274000" expanded="true" signature="2716:2763" ph="select todos... User" />
-            <marker date="1497287274000" expanded="true" signature="2944:2986" ph="UPDATE User " />
-            <marker date="1497287274000" expanded="true" signature="3166:3208" ph="UPDATE User " />
-            <marker date="1497287274000" expanded="true" signature="3389:3431" ph="UPDATE User " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/group/inspect.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="361">
           <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/main.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="436">
-          <caret line="112" column="81" lean-forward="true" selection-start-line="112" selection-start-column="81" selection-end-line="112" selection-end-column="81" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/groupController.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="53" column="75" lean-forward="false" selection-start-line="53" selection-start-column="75" selection-end-line="53" selection-end-column="75" />
-          <folding>
-            <element signature="e#0#71#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -952,33 +850,57 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/affirmations.py">
+    <entry file="file://$PROJECT_DIR$/app/templates/main.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="29" column="27" lean-forward="true" selection-start-line="29" selection-start-column="27" selection-end-line="29" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-            <marker date="1497102733000" expanded="true" signature="175:234" ph="INSERT INTO Affirmation... " />
-            <marker date="1497102733000" expanded="true" signature="439:480" ph="SELECT * FRO... Affirmation" />
-            <marker date="1497102733000" expanded="true" signature="686:744" ph="SELECT * FRO... Affirmation" />
-            <marker date="1497102733000" expanded="true" signature="930:966" ph="SELECT * FRO... Affirmation" />
-            <marker date="1497102733000" expanded="true" signature="1138:1180" ph="UPDATE Affir... " />
-            <marker date="1497102733000" expanded="true" signature="1323:1357" ph="DELETE FROM " />
-          </folding>
+        <state relative-caret-position="3060">
+          <caret line="204" column="111" lean-forward="false" selection-start-line="204" selection-start-column="111" selection-end-line="204" selection-end-column="111" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/affirmationController.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="14" column="70" lean-forward="false" selection-start-line="14" selection-start-column="70" selection-end-line="14" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/discussionController.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="9" column="94" lean-forward="false" selection-start-line="9" selection-start-column="94" selection-end-line="9" selection-end-column="94" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/focusController.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="10" column="31" lean-forward="false" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/groupController.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-246">
+          <caret line="119" column="20" lean-forward="false" selection-start-line="119" selection-start-column="20" selection-end-line="119" selection-end-column="20" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/todoController.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1155">
-          <caret line="85" column="15" lean-forward="false" selection-start-line="85" selection-start-column="15" selection-end-line="85" selection-end-column="15" />
+        <state relative-caret-position="-906">
+          <caret line="10" column="73" lean-forward="false" selection-start-line="10" selection-start-column="73" selection-end-line="10" selection-end-column="73" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/userController.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="690">
+        <state relative-caret-position="-6">
           <caret line="46" column="57" lean-forward="true" selection-start-line="46" selection-start-column="57" selection-end-line="46" selection-end-column="57" />
           <folding>
             <element signature="e#0#62#0" expanded="true" />
@@ -986,43 +908,144 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/focus.py">
+    <entry file="file://$PROJECT_DIR$/app/controllers/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1005">
-          <caret line="67" column="26" lean-forward="true" selection-start-line="67" selection-start-column="26" selection-end-line="67" selection-end-column="26" />
+        <state relative-caret-position="-119">
+          <caret line="121" column="0" lean-forward="true" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
           <folding>
-            <element signature="e#0#21#0" expanded="true" />
-            <marker date="1497100652000" expanded="true" signature="163:222" ph="INSERT INTO Focus... " />
-            <marker date="1497100652000" expanded="true" signature="416:451" ph="SELECT * FRO... Focus" />
-            <marker date="1497100652000" expanded="true" signature="484:519" ph="SELECT * FRO... Focus" />
-            <marker date="1497100652000" expanded="true" signature="679:709" ph="SELECT * FRO... Focus" />
-            <marker date="1497100652000" expanded="true" signature="908:959" ph="UPDATE Focus... " />
-            <marker date="1497100652000" expanded="true" signature="1112:1140" ph="DELETE FROM " />
-            <marker date="1497100652000" expanded="true" signature="1306:1351" ph="UPDATE Focus... " />
-            <marker date="1497100652000" expanded="true" signature="1502:1555" ph="INSERT INTO Focus_Tag... " />
-            <marker date="1497100652000" expanded="true" signature="1844:1930" ph="SELECT * FRO... Focus_Tag" />
-            <marker date="1497100652000" expanded="true" signature="2128:2168" ph="SELECT * FRO... Focus_Tag" />
-            <marker date="1497100652000" expanded="true" signature="2379:2432" ph="UPDATE Focus... " />
-            <marker date="1497100652000" expanded="true" signature="2601:2653" ph="DELETE FROM " />
-            <marker date="1497100652000" expanded="true" signature="2820:2852" ph="DELETE FROM " />
+            <element signature="e#0#22#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/schema">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1470">
+        <state relative-caret-position="1410">
           <caret line="98" column="0" lean-forward="true" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/views.py">
+    <entry file="file://$PROJECT_DIR$/app/discussions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="489">
-          <caret line="103" column="0" lean-forward="true" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
+        <state relative-caret-position="30">
+          <caret line="3" column="42" lean-forward="false" selection-start-line="3" selection-start-column="42" selection-end-line="3" selection-end-column="42" />
           <folding>
-            <element signature="e#0#22#0" expanded="true" />
+            <marker date="1497962460000" expanded="true" signature="229:332" ph="INSERT INTO GroupDiscussion... " />
+            <marker date="1497962460000" expanded="true" signature="569:609" ph="SELECT * FRO... Note" />
+            <marker date="1497962460000" expanded="true" signature="787:855" ph="UPDATE Note " />
+            <marker date="1497962460000" expanded="true" signature="1020:1058" ph="DELETE FROM " />
+            <marker date="1497962460000" expanded="true" signature="1251:1258" ph="SELECT d.* F... GroupDiscussion" />
+            <marker date="1497962460000" expanded="true" signature="1251:1279" ph="SELECT * FRO... GroupDicussion" />
+            <marker date="1497962460000" expanded="true" signature="1251:1285" ph="SELECT * FRO... GroupDicussion" />
+            <marker date="1497962460000" expanded="true" signature="1251:1295" ph="SELECT * FRO... GroupDicussion" />
+            <marker date="1497962460000" expanded="true" signature="1251:1310" ph="SELECT * FRO... GroupDicussion" />
+            <marker date="1497962460000" expanded="true" signature="1526:1570" ph="SELECT * FRO... GroupDicussion" />
+            <marker date="1497962460000" expanded="true" signature="1780:1874" ph="SELECT gd.*,... GroupDiscussion" />
+            <marker date="1497962460000" expanded="true" signature="2083:2096" ph="SELECT * FRO... TABLE" />
+            <marker date="1497962460000" expanded="true" signature="2083:2112" ph="SELECT * FRO... GroupDiscussion" />
+            <marker date="1497962460000" expanded="true" signature="2083:2179" ph="SELECT * FRO... GroupDiscussion" />
+            <marker date="1497962460000" expanded="true" signature="2126:2161" ph="SELECT MAX(i... GroupDiscussion" />
+            <marker date="1497962460000" expanded="true" signature="2126:2178" ph="SELECT MAX(i... GroupDiscussion" />
+            <marker date="1497962460000" expanded="true" signature="2197:2245" ph="SELECT gd.*,... GroupDiscussion" />
+            <marker date="1497962460000" expanded="true" signature="2197:2347" ph="SELECT gd.*,... GroupDiscussion" />
+            <marker date="1497962460000" expanded="true" signature="2287:2346" ph="SELECT MAX(g... GroupDiscussion" />
+            <marker date="1497962460000" expanded="true" signature="2553:2611" ph="SELECT * FRO... GroupDiscussion" />
+            <marker date="1497962460000" expanded="true" signature="2553:2648" ph="SELECT * FRO... GroupDiscussion" />
+            <marker date="1497962460000" expanded="true" signature="2596:2611" ph="SELECT MAX(i... GroupDiscussion" />
+            <marker date="1497962460000" expanded="true" signature="2871:2964" ph="SELECT gd.*,... GroupDiscussion" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/focus.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="38" lean-forward="false" selection-start-line="3" selection-start-column="38" selection-end-line="3" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+            <marker date="1497962592000" expanded="true" signature="203:262" ph="INSERT INTO Focus... " />
+            <marker date="1497962592000" expanded="true" signature="456:491" ph="SELECT * FRO... Focus" />
+            <marker date="1497962592000" expanded="true" signature="524:559" ph="SELECT * FRO... Focus" />
+            <marker date="1497962592000" expanded="true" signature="719:749" ph="SELECT * FRO... Focus" />
+            <marker date="1497962592000" expanded="true" signature="948:999" ph="UPDATE Focus... " />
+            <marker date="1497962592000" expanded="true" signature="1152:1180" ph="DELETE FROM " />
+            <marker date="1497962592000" expanded="true" signature="1346:1391" ph="UPDATE Focus... " />
+            <marker date="1497962592000" expanded="true" signature="1542:1595" ph="INSERT INTO Focus_Tag... " />
+            <marker date="1497962592000" expanded="true" signature="1884:1970" ph="SELECT * FRO... Focus_Tag" />
+            <marker date="1497962592000" expanded="true" signature="2168:2208" ph="SELECT * FRO... Focus_Tag" />
+            <marker date="1497962592000" expanded="true" signature="2419:2472" ph="UPDATE Focus... " />
+            <marker date="1497962592000" expanded="true" signature="2641:2693" ph="DELETE FROM " />
+            <marker date="1497962592000" expanded="true" signature="2860:2892" ph="DELETE FROM " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/affirmations.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-51">
+          <caret line="3" column="43" lean-forward="false" selection-start-line="3" selection-start-column="43" selection-end-line="3" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+            <marker date="1497962445000" expanded="true" signature="220:279" ph="INSERT INTO Affirmation... " />
+            <marker date="1497962445000" expanded="true" signature="484:525" ph="SELECT * FRO... Affirmation" />
+            <marker date="1497962445000" expanded="true" signature="731:789" ph="SELECT * FRO... Affirmation" />
+            <marker date="1497962445000" expanded="true" signature="975:1011" ph="SELECT * FRO... Affirmation" />
+            <marker date="1497962445000" expanded="true" signature="1183:1225" ph="UPDATE Affir... " />
+            <marker date="1497962445000" expanded="true" signature="1368:1402" ph="DELETE FROM " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="97" column="113" lean-forward="false" selection-start-line="97" selection-start-column="113" selection-end-line="97" selection-end-column="113" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/goals.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-186">
+          <caret line="12" column="26" lean-forward="true" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
+          <folding>
+            <marker date="1495624978000" expanded="true" signature="172:255" ph="INSERT INTO Goal... " />
+            <marker date="1495624978000" expanded="true" signature="475:509" ph="SELECT * FRO... Goal" />
+            <marker date="1495624978000" expanded="true" signature="542:576" ph="SELECT * FRO... Goal" />
+            <marker date="1495624978000" expanded="true" signature="768:815" ph="SELECT * FRO... Goal" />
+            <marker date="1495624978000" expanded="true" signature="974:1003" ph="SELECT * FRO... Goal" />
+            <marker date="1495624978000" expanded="true" signature="1201:1250" ph="UPDATE Goal " />
+            <marker date="1495624978000" expanded="true" signature="1402:1429" ph="DELETE FROM " />
+            <marker date="1495624978000" expanded="true" signature="1594:1633" ph="UPDATE Goal " />
+            <marker date="1495624978000" expanded="true" signature="1790:1829" ph="UPDATE Goal " />
+            <marker date="1495624978000" expanded="true" signature="1982:2026" ph="UPDATE Goal " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/users.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1596">
+          <caret line="4" column="54" lean-forward="false" selection-start-line="4" selection-start-column="54" selection-end-line="4" selection-end-column="54" />
+          <folding>
+            <marker date="1497962803000" expanded="true" signature="359:453" ph="INSERT INTO User... " />
+            <marker date="1497962803000" expanded="true" signature="670:713" ph="UPDATE User " />
+            <marker date="1497962803000" expanded="true" signature="903:962" ph="UPDATE User " />
+            <marker date="1497962803000" expanded="true" signature="1204:1237" ph="UPDATE User " />
+            <marker date="1497962803000" expanded="true" signature="1204:1238" ph="UPDATE User " />
+            <marker date="1497962803000" expanded="true" signature="1399:1426" ph="DELETE FROM " />
+            <marker date="1497962803000" expanded="true" signature="1608:1639" ph="SELECT * FRO... User" />
+            <marker date="1497962803000" expanded="true" signature="1994:2022" ph="SELECT * fro... User" />
+            <marker date="1497962803000" expanded="true" signature="1994:2023" ph="SELECT * FRO... User" />
+            <marker date="1497962803000" expanded="true" signature="2000:2022" ph="select * fro... User" />
+            <marker date="1497962803000" expanded="true" signature="2380:2411" ph="select * fro... User" />
+            <marker date="1497962803000" expanded="true" signature="2772:2819" ph="select todos... User" />
+            <marker date="1497962803000" expanded="true" signature="3000:3042" ph="UPDATE User " />
+            <marker date="1497962803000" expanded="true" signature="3222:3264" ph="UPDATE User " />
+            <marker date="1497962803000" expanded="true" signature="3445:3487" ph="UPDATE User " />
           </folding>
         </state>
       </provider>

@@ -1,6 +1,8 @@
 import sqlite3 as sql
 from datetime import datetime
 
+#discussionien modeli eli tietokantakutsut
+
 def insert_discussion(user_id, group_id, title, text):
     con = sql.connect("database.db")
     cur = con.cursor()

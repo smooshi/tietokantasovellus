@@ -22,6 +22,7 @@ def before_request():
 	g.user = current_user
 
 #aplikaation paasivu ja paakontolleri
+#taalla on kaytannossa haut kaikelle mita pitaa nayttaa eli kaytannossa kaikki
 @app.route('/main', methods=['GET', 'POST'])
 @login_required
 def main():
@@ -40,12 +41,16 @@ def main():
 	aForm = AffirmationForm()
 	aForm.date.data = days["today"]
 	affirmations = select_affirmation_by_user_id_and_date(user.id, days["today"])
+	past = False
 
 	#Testing focus colors:
 	focus_colors = ["red", "blue", "green", "yellow", "orange"]
 
 	#on taysin mahdollista etta taman voi tehda paremmin. tassa siis POSTien vastaanottoa...
+	#kuunnellaan POST:
 	if request.method == 'POST':
+		#Jos saadaan post request 'check' nimiselta asialta, on kyseessa todo ja jos 'goal' niin se on goal jne.:
+
 		# todo completion:
 		rq = request.form.getlist('check')
 		if (len(rq)>0):
@@ -74,7 +79,7 @@ def main():
 			update_user_focus_points(g.user.id)
 			return redirect(url_for('main'))
 
-	return render_template('main.html', message=message, title='To Do App', user=user, tnotes= timed, notes=notTimed, days=days, todos=todos, goals=goals, focus=focus, groups=groups, latest=latest, todo_focus=todo_focus, aForm=aForm, affirmations=affirmations)
+	return render_template('main.html', past=past, message=message, title='To Do App', user=user, tnotes= timed, notes=notTimed, days=days, todos=todos, goals=goals, focus=focus, groups=groups, latest=latest, todo_focus=todo_focus, aForm=aForm, affirmations=affirmations)
 
 #talle tarvitaan parempi ratkaisu, tama on kontrolleri joka nayttaa "eri paivia", mutta kayttaa kuitenkin main.html sivua
 @app.route('/timetravel/<date>', methods=['GET', 'POST'])
@@ -86,9 +91,16 @@ def timetravel(date):
 	s = str(date)
 	d = datetime.strptime(s, "%Y-%m-%d")
 	days = set_days(d.date())
-	#Return to main if date is "today"
+
+	#Palauta kayttaja "MAIN" nakymaan jos paiva on tanaan.
 	if d.date() == datetime.now().date():
 		return redirect(url_for('main'))
+
+	#Estetaan asioiden tekeminen menneisyydessa (disablee linkkeja sivulla ettei voi esim. lisata todoja menneisyyteen):
+	if d.date() < datetime.now().date():
+		past = True
+	else:
+		past = False
 
 	notes = select_note_by_user_id_and_date(g.user.id, days["today"])
 	timed, notTimed = sort_notes(notes)
@@ -101,15 +113,14 @@ def timetravel(date):
 	aForm = AffirmationForm()
 	aForm.date.data = days["today"]
 	affirmations = select_affirmation_by_user_id_and_date(user.id, days["today"])
-
 	todo_focus = get_todo_focus(todot)
 
-
+	#Kompletaus on estetty.
 	if request.method == 'POST':
 		#Todo complete estetty
 		flash("That's currently disabled.")
 
-	return render_template('main.html', title='To Do App', user=user, tnotes= timed, notes=notTimed, days=days, todos=todos, goals=goals, groups=groups, focus=focus, latest=latest, aForm=aForm, affirmations=affirmations, todo_focus=todo_focus)
+	return render_template('main.html', past=past, title='To Do App', user=user, tnotes= timed, notes=notTimed, days=days, todos=todos, goals=goals, groups=groups, focus=focus, latest=latest, aForm=aForm, affirmations=affirmations, todo_focus=todo_focus)
 
 #affirmaatioiden lisays paasivulta
 @login_required

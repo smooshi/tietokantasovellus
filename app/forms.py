@@ -21,21 +21,7 @@ class RequiredIf(Required):
         if other_field.data:
             super(RequiredIf, self).__call__(form, field)
 
-# class Unique_name(object):
-#     #Unique validator
-#
-#     def __init__(self, message=None):
-#         if not message:
-#             message = u'this user already exists'
-#             self.message = message
-#
-#     def __call__(self, form, field):
-#         usernameField = form._fields.get('username')
-#         check = select_user_by_name(usernameField.data)
-#         if check is not None:
-#             raise ValidationError(self.message)
-
-#nayttaa kaikki errorit jos validointi epaonnistuu
+#nayttaa kaikki errorit jos validointi epaonnistuu talla formilla.
 def flash_errors(form):
     for field, errors in form.errors.items():
         for error in errors:
@@ -52,7 +38,7 @@ class LoginForm(Form):
 class UserCreateForm(Form):
     username = StringField('username', validators=[DataRequired(), Length(min=4, max=35, message="Username length should be between 4 and 35 and it should only contain letters and numbers."), Regexp('^\w+$', message="Username should contain only letters and numbers")])
     email = StringField('email', validators=[DataRequired(), Length(min=4, max=35), Email("Requires valid email address.")])
-    password = PasswordField('password', validators=[DataRequired(), Length(min=6, message="Password too short, minimum length is 6 digits."), EqualTo('confirm', message="Passwords must match")])
+    password = PasswordField('password', validators=[DataRequired(), Length(min=6, max=35, message="Password too short, minimum length is 6 digits."), EqualTo('confirm', message="Passwords must match")])
     confirm = PasswordField('confirm', validators=[DataRequired()])
 
 class UserEditForm(Form):
@@ -61,52 +47,52 @@ class UserEditForm(Form):
     confirm = PasswordField('confirm', validators=[DataRequired()])
 
 class UserPasswordEditForm(Form):
-    password = PasswordField('password', validators=[DataRequired(), Length(min=6, message="Password too short, minimum length is 6 digits."),Regexp('^\w+$', message="Username should contain only letters and numbers"),
+    password = PasswordField('password', validators=[DataRequired(), Length(min=6, max=35, message="Password too short, minimum length is 6 digits."),Regexp('^\w+$', message="Username should contain only letters and numbers"),
                                                      EqualTo('confirm', message="Passwords must match")])
     confirm = PasswordField('confirm', validators=[DataRequired()])
     oldPassword = PasswordField('password', validators=[DataRequired()])
 
 class NoteEditForm(Form):
-    text = StringField('text', validators=[DataRequired(message="Enter text")])
+    text = StringField('text', validators=[DataRequired(message="Enter text"), Length(max=200, message="Maximum length 200 letters.")])
     isTimed = BooleanField('isTimed', default=False)
     time = TimeField('time', validators=[Optional(), RequiredIf('isTimed')])
 
 class TodoAddForm(Form):
-    text = StringField('text', validators=[DataRequired(message="Enter text")])
+    text = StringField('text', validators=[DataRequired(message="Enter text"), Length(max=200, message="Maximum length 200 letters.")])
     focus = SelectField('focus', coerce=int)
 
 class TodoEditForm(Form):
-    text = StringField('text', validators=[DataRequired(message="Enter text")])
+    text = StringField('text', validators=[DataRequired(message="Enter text"), Length(max=200, message="Maximum length 200 letters.")])
     focus = SelectField('focus', coerce=int)
     completeStatus = BooleanField('completeStatus', validators=[Optional(), RequiredIf('isTimed')])
 
 class GoalAddForm(Form):
-    text = StringField('text', validators=[DataRequired(message="Enter text")])
+    text = StringField('text', validators=[DataRequired(message="Enter text"), Length(max=200, message="Maximum length 200 letters.")])
     end_date = DateTimeField('end_date', validators=[Optional()])
 
 class FocusAddForm(Form):
-    text = StringField('text', validators=[DataRequired(message="Enter text")])
+    text = StringField('text', validators=[DataRequired(message="Enter text"), Length(max=200, message="Maximum length 200 letters.")])
 
 class GoalEditForm(Form):
-    text = StringField('text', validators=[DataRequired(message="Enter text")])
+    text = StringField('text', validators=[DataRequired(message="Enter text"), Length(max=200, message="Maximum length 200 letters.")])
     end_date = DateField('end_date', validators=[Optional()])
     isActive = BooleanField('isActive')
 
 class FocusEditForm(Form):
-    text = StringField('text', validators=[DataRequired(message="Enter text")])
+    text = StringField('text', validators=[DataRequired(message="Enter text"), Length(max=200, message="Maximum length 200 letters.")])
     isActive = BooleanField('isActive')
 
 class GroupAddForm(Form):
-    name = StringField('name', validators=[DataRequired()])
+    name = StringField('name', validators=[DataRequired(), Length(max=200, message="Maximum length 200 letters.")])
     description = StringField('description', validators=[DataRequired()])
 
 class DiscussionAddForm(Form):
     title = StringField('title', validators=[DataRequired()])
-    text = StringField('text', validators=[DataRequired()])
+    text = StringField('text', validators=[DataRequired(), Length(max=200, message="Maximum length 200 letters.")])
 
 class AffirmationForm(Form):
-    text = StringField('text', validators=[DataRequired()])
+    text = StringField('text', validators=[DataRequired(), Length(max=200, message="Maximum length 200 letters.")])
     date = HiddenField('date', validators=[Optional()])
 
 class AffirmationEditForm(Form):
-    text = StringField('text', validators=[DataRequired()])
+    text = StringField('text', validators=[DataRequired(), Length(max=200, message="Maximum length 200 letters.")])

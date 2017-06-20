@@ -2,6 +2,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import sqlite3 as sql
 from datetime import datetime
 
+#User taulun modeli eli tietokantakutsut ja olion teko
+
 def insert_user(name, email, password, authenticated):
     con = sql.connect("database.db")
     cur = con.cursor()

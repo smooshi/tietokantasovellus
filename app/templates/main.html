@@ -25,14 +25,16 @@ $("#affirmationButton").click(function(){
 
         <div class="row">
             <div class="col-md-6">
-                <h2>Goals <a href="{{ url_for('goal_add') }}">(+)</a></h2>
+                <h2>Goals {% if not past %}<a href="{{ url_for('goal_add') }}">(+)</a>{% endif %}</h2>
 
                 <table class="table borderless">
                     {% for id, user_id, text, points, isActive, created_at, edited_at, end_date in goals %}
                     <tr>
                         <td class="col-xs-1">
                             <form method="post" name="goals">
+                                {% if not past %}
                                 <button type="submit" class="btn btn-xs btn-info btn-square" value={{ id }} name="goal">+</button>
+                                {% endif %}
                             </form>
                         </td>
                         <td>
@@ -51,14 +53,16 @@ $("#affirmationButton").click(function(){
             </div>
 
             <div class="col-md-6">
-                <h2>Focus <a href="{{ url_for('focus_add') }}">(+)</a></h2>
+                <h2>Focus {% if not past %}<a href="{{ url_for('focus_add') }}">(+)</a>{% endif %}</h2>
                                 <table class="table borderless">
                     {% for id, user_id, text, points, created_at in focus %}
                     <tr>
                         <td class="col-xs-1">
+                            {% if not past %}
                             <form method="post" name="focus">
                                 <button type="submit" class="btn btn-xs btn-warning btn-square" value={{ id }} name="focus">+</button>
                             </form>
+                            {% endif %}
                         </td>
                         <td>
                             {{ text }}
@@ -146,7 +150,7 @@ $("#affirmationButton").click(function(){
 
              <h3>{{ message }}</h3>
 
-             <h4>Notes <a href="{{ url_for('note_add', date=days["today"]) }}">(+)</a></h4>
+             <h4>Notes {% if not past %}<a href="{{ url_for('note_add', date=days["today"]) }}">(+)</a>{% endif %}</h4>
 
             <table class="table borderless">
                 {% for id, user_id, text, isTimed, time, date in tnotes %}
@@ -174,7 +178,7 @@ $("#affirmationButton").click(function(){
         </table>
 
 
-        <h4>Todos <a href="{{ url_for('todo_add', date=days["today"]) }}">(+)</a></h4>
+        <h4>Todos {% if not past %}<a href="{{ url_for('todo_add', date=days["today"]) }}">(+)</a>{% endif %}</h4>
          <form method="post">
 
          <table class="table borderless">
@@ -198,7 +202,7 @@ $("#affirmationButton").click(function(){
          </div>
     </div>
 
-    <h4>Daily affirmation: <a href="#affirmationButton" id="affirmationButton">(+)</a></h4>
+    <h4>Daily affirmation: {% if not past %}<a href="#affirmationButton" id="affirmationButton">(+)</a>{% endif %}</h4>
 
     <table class="table borderless">
     {% for id, user_id, created_at, text in affirmations %}
