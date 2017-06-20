@@ -1,0 +1,10 @@
+drop table if exists User;
+drop table if exists Note;
+drop table if exists Todo;
+drop table if exists Goal;
+drop table if exists Focus;
+drop table if exists Focus_Tag;
+drop table if exists Groups;
+drop table if exists User_in_Group;
+drop table if exists GroupDiscussion;
+drop table if exists Affirmation;

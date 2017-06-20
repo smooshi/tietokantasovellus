@@ -1,0 +1,99 @@
+create table User(
+id integer primary key autoincrement,
+email text not null,
+name text not null unique,
+salt text not null,
+authenticated bool default 0,
+created_at DATETIME not null,
+edited_at DATETIME not null,
+todos integer default 0,
+goals integer default 0,
+focus integer default 0
+);
+
+create table Note(
+id integer primary key autoincrement,
+user_id integer not null,
+text text not null,
+isTimed bool default 0,
+time TIME,
+date DATE not null,
+FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE
+);
+
+create table Todo(
+id integer PRIMARY key autoincrement,
+user_id integer not null,
+text text not null,
+isComplete bool default 0,
+date DATE not null,
+FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE
+);
+
+create table Goal(
+id integer PRIMARY key autoincrement,
+user_id integer not null,
+text text not null,
+points integer default 0,
+isActive bool default 1,
+created_at DATETIME not null,
+edited_at DATETIME not null,
+end_date DATETIME,
+FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE
+);
+
+create table Focus(
+id integer PRIMARY key autoincrement,
+user_id integer not null,
+text text not null,
+points integer default 0,
+created_at DATETIME not null,
+FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE
+);
+
+
+create table Focus_Tag(
+id integer PRIMARY key autoincrement,
+todo_id integer not null,
+focus_id integer not null,
+FOREIGN KEY(todo_id) REFERENCES Todo(id) ON DELETE CASCADE,
+FOREIGN KEY(focus_id) REFERENCES Focus(id) ON DELETE CASCADE
+);
+
+create table Groups(
+id integer PRIMARY key autoincrement,
+name text not null UNIQUE,
+description text not null,
+created_at DATETIME not null,
+edited_at DATETIME not null
+);
+
+create table User_in_Group(
+id integer PRIMARY key autoincrement,
+user_id integer not null,
+group_id integer not null,
+isAdmin bool not null default 0,
+FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE,
+FOREIGN KEY (group_id) REFERENCES Groups(id) ON DELETE CASCADE
+);
+
+create table GroupDiscussion(
+id integer PRIMARY key autoincrement,
+user_id integer not null,
+group_id integer not null,
+title text not null,
+text text not null,
+created_at DATETIME not null,
+edited_at DATETIME not null,
+FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE,
+FOREIGN KEY (group_id) REFERENCES Groups(id) ON DELETE CASCADE
+);
+
+
+create table Affirmation(
+id integer PRIMARY key autoincrement,
+user_id integer not null,
+date DATE not null,
+text text not null,
+FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE
+);
