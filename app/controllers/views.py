@@ -21,7 +21,7 @@ from app.affirmations import *
 def before_request():
 	g.user = current_user
 
-#aplikaation paasivu
+#aplikaation paasivu ja paakontolleri
 @app.route('/main', methods=['GET', 'POST'])
 @login_required
 def main():
@@ -92,7 +92,8 @@ def timetravel(date):
 
 	notes = select_note_by_user_id_and_date(g.user.id, days["today"])
 	timed, notTimed = sort_notes(notes)
-	todos = select_todo_by_user_id_and_date(g.user.id, days["today"])
+	todot = select_todo_by_user_id_and_date(g.user.id, days["today"])
+	todos = sorted(todot, key=itemgetter(3))
 	goals = select_current_goal_by_user_id(g.user.id)
 	focus = select_focus_by_user_id(g.user.id)
 	groups = select_groups_by_user_id(g.user.id)
@@ -101,11 +102,14 @@ def timetravel(date):
 	aForm.date.data = days["today"]
 	affirmations = select_affirmation_by_user_id_and_date(user.id, days["today"])
 
+	todo_focus = get_todo_focus(todot)
+
+
 	if request.method == 'POST':
 		#Todo complete estetty
 		flash("That's currently disabled.")
 
-	return render_template('main.html', title='To Do App', user=user, tnotes= timed, notes=notTimed, days=days, todos=todos, goals=goals, groups=groups, focus=focus, latest=latest, aForm=aForm, affirmations=affirmations)
+	return render_template('main.html', title='To Do App', user=user, tnotes= timed, notes=notTimed, days=days, todos=todos, goals=goals, groups=groups, focus=focus, latest=latest, aForm=aForm, affirmations=affirmations, todo_focus=todo_focus)
 
 #affirmaatioiden lisays paasivulta
 @login_required
