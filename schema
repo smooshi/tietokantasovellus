@@ -68,7 +68,7 @@ FOREIGN KEY(focus_id) REFERENCES Focus(id) ON DELETE CASCADE
 drop table if exists Groups;
 create table Groups(
 id integer PRIMARY key autoincrement,
-name text not null,
+name text not null UNIQUE,
 description text not null,
 created_at DATETIME not null,
 edited_at DATETIME not null

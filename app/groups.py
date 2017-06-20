@@ -25,6 +25,16 @@ def select_group_by_id(id):
         result = cur.execute(com, (id,)).fetchall()
     return result
 
+def select_group_by_name(name):
+    with sql.connect("database.db") as con:
+        cur = con.cursor()
+        com = "SELECT Groups.name FROM Groups WHERE name=?;"
+        result = cur.execute(com, (name,)).fetchall()
+        if len(result) > 0:
+            return result
+        else:
+            return None
+
 def update_group(name, description, id):
     with sql.connect("database.db") as con:
         cur = con.cursor()

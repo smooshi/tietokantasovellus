@@ -47,6 +47,12 @@ def group_add():
     user = g.user
     form=GroupAddForm()
     if form.validate_on_submit():
+
+        check = select_group_by_name(form.name.data)
+        if check != None:  # tarkista onko jo ryhma jolla on tama nimi koska nimi == UNIQUE
+            flash('Group name already exists')
+            return render_template('/group/add.html', user=user, form=form)
+
         group_id = insert_group(form.name.data, form.description.data)
         insert_user_in_group_admin(g.user.id, group_id)
         flash("New group created!")
@@ -96,7 +102,7 @@ def group_edit(id):
         return redirect(url_for('groups'))
 
     if form.validate_on_submit():
-        update_group(form.name.data, form.description.data, id) 
+        update_group(form.name.data, form.description.data, id)
         flash("Edited group details!")
         return redirect(url_for('group', id=id))
 
